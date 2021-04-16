@@ -8,7 +8,8 @@ import org.springframework.context.event.EventListener;
 import org.springframework.web.bind.annotation.*;
 
 
-@CrossOrigin(origins = "http://localhost:8080")
+
+@CrossOrigin
 @RestController
 public class ReviewService {
 
@@ -26,7 +27,7 @@ public class ReviewService {
         reviewRepo.save(new Review("Pectacular, alta peli pero muy larga! ", 4));
     }
 
-    @GetMapping("/")
+    @GetMapping("/apiReviews")
     public Iterable<Review> getAllReviews() {
         return reviewRepo.findAll();
     }
