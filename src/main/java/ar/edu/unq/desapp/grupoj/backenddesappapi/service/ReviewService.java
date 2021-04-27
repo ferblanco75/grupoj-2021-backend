@@ -49,18 +49,18 @@ public class ReviewService {
         //reviewRepo.save(new ReviewPremium(3, new Source("Netflix"),"Pectacular, alta peli pero muy larga!","Increibles efecto especiales",3,false,"userAnonimo@gmail.com","pepe", new Location("Argentina","Buenos Aires"),new Language("Spanish")));
     }
 
-    @GetMapping("/apiReviews")
+    @GetMapping("/Review")
     public Iterable<Review> getAllReviews() {
         return reviewRepo.findAll();
     }
 
-    @GetMapping("/apiReviews/{idMovie}")
+    @GetMapping("/Review/{idMovie}")
     public Iterable <Review> getReviewPorId(@PathVariable(value = "idMovie") Integer idMovie) throws ResourceNotFoundException{
         return reviewRepo.findAllByIdMovie(idMovie);
     }
 
 
-    @PostMapping("/review")
+    @PutMapping("/review")
     public void saveReview(@RequestBody ReviewAdapter aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
 
         reviewRepo.save(aReview.toModel(sourceRepo,locationRepo,languageRepo));
