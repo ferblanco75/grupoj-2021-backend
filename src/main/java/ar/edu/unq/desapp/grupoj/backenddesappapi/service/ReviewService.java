@@ -67,16 +67,16 @@ public class ReviewService {
     }
   
     @PostMapping("/review/{idReview}/RateUp")
-    public ReviewRate rateUp(@PathVariable(value = "idReview") Integer idReview) throws ResourceNotFoundException{
-        Review r= reviewRepo.findById(idReview).orElseThrow(() -> new ResourceNotFoundException("TODO PCambiar esta excepcion"));
+    public ReviewRate rateUp(@PathVariable(value = "idReview") Integer idReview) throws NonExistentReviewException{
+        Review r= reviewRepo.findById(idReview).orElseThrow(() -> new NonExistentReviewException(idReview));
         r.getReviewRate().rateUp();
         reviewRepo.save(r);
         return r.getReviewRate();
     }
 
     @PostMapping("/review/{idReview}/RateDown")
-    public ReviewRate rateDown(@PathVariable(value = "idReview") Integer idReview) throws ResourceNotFoundException{
-        Review r= reviewRepo.findById(idReview).orElseThrow(() -> new ResourceNotFoundException("TODO PCambiar esta excepcion"));
+    public ReviewRate rateDown(@PathVariable(value = "idReview") Integer idReview) throws NonExistentReviewException{
+        Review r= reviewRepo.findById(idReview).orElseThrow(() -> new NonExistentReviewException(idReview));
         r.getReviewRate().rateDown();
         reviewRepo.save(r);
         return r.getReviewRate();
