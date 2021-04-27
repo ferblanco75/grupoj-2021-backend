@@ -24,7 +24,7 @@ public class Review {
     @ManyToOne(cascade = CascadeType.ALL)
     protected Location location;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.ALL})
     protected Source source;
 
     @ManyToOne(cascade = CascadeType.ALL)
