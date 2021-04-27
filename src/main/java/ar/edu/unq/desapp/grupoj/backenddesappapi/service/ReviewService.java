@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 
 @CrossOrigin
@@ -42,6 +43,22 @@ public class ReviewService {
     @GetMapping("/apiReviews/{idMovie}")
     public Iterable <Review> getReviewPorId(@PathVariable(value = "idMovie") Integer idMovie) throws ResourceNotFoundException{
         return reviewRepo.findAllByIdMovie(idMovie);
+    }
+
+    @PostMapping("/review/{idReview}/RateUp")
+    public ReviewRate rateUp(@PathVariable(value = "idReview") Integer idReview) throws ResourceNotFoundException{
+        Review r= reviewRepo.findById(idReview).orElseThrow(() -> new ResourceNotFoundException("TODO PCambiar esta excepcion"));
+        r.getReviewRate().rateUp();
+        reviewRepo.save(r);
+        return r.getReviewRate();
+    }
+
+    @PostMapping("/review/{idReview}/RateDown")
+    public ReviewRate rateDown(@PathVariable(value = "idReview") Integer idReview) throws ResourceNotFoundException{
+        Review r= reviewRepo.findById(idReview).orElseThrow(() -> new ResourceNotFoundException("TODO PCambiar esta excepcion"));
+        r.getReviewRate().rateDown();
+        reviewRepo.save(r);
+        return r.getReviewRate();
     }
 
 
