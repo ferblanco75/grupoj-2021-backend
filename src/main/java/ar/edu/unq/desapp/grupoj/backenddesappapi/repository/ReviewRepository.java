@@ -3,6 +3,8 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.repository;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.Optional;
+
 public interface ReviewRepository extends CrudRepository<Review, Integer> {
     Iterable<Review> findAll();
 
@@ -10,6 +12,7 @@ public interface ReviewRepository extends CrudRepository<Review, Integer> {
 
     Iterable <Review> findAllByIdMovie(Integer idMovie);
 
+    Optional<Review> findById(Integer integer);
 }
 
 
