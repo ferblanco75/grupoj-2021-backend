@@ -1,7 +1,5 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.Date;
@@ -31,6 +29,9 @@ public class Review {
     protected Language language;
 
     protected ReviewType type=ReviewType.NORMAL;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    protected ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewRate ReviewRate = new ReviewRate();
 
     protected Review() {
     }
@@ -95,5 +96,9 @@ public class Review {
 
     public Language getLanguage() {
         return language;
+    }
+
+    public ReviewRate getReviewRate() {
+        return ReviewRate;
     }
 }
