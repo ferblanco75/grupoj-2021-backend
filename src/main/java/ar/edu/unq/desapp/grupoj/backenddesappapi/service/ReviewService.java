@@ -22,18 +22,25 @@ import java.util.Optional;
 @RestController
 public class ReviewService {
 
-    private final ReviewRepository reviewRepo;
-    private final SourceRepository sourceRepo;
-    private final LocationRepository locationRepo;
-    private final LanguageRepository languageRepo;
+    @Autowired
+    private  ReviewRepository reviewRepo;
+    @Autowired
+    private  SourceRepository sourceRepo;
+    @Autowired
+    private  LocationRepository locationRepo;
+    @Autowired
+    private  LanguageRepository languageRepo;
 
+    public ReviewService(){
+
+    }/*
     @Autowired
     public ReviewService(ReviewRepository unRepository, SourceRepository sourceRepository,LocationRepository locationRepository, LanguageRepository languageRepository) {
         this.reviewRepo = unRepository;
         this.sourceRepo = sourceRepository;
         this.locationRepo = locationRepository;
         this.languageRepo = languageRepository;
-    }
+    }*/
 
     @EventListener
     public void appReady(ApplicationReadyEvent event) {
@@ -49,12 +56,12 @@ public class ReviewService {
         //reviewRepo.save(new ReviewPremium(3, new Source("Netflix"),"Pectacular, alta peli pero muy larga!","Increibles efecto especiales",3,false,"userAnonimo@gmail.com","pepe", new Location("Argentina","Buenos Aires"),new Language("Spanish")));
     }
 
-    @GetMapping("/Review")
+    @GetMapping("/review")
     public Iterable<Review> getAllReviews() {
         return reviewRepo.findAll();
     }
 
-    @GetMapping("/Review/{idMovie}")
+    @GetMapping("/review/{idMovie}")
     public Iterable <Review> getReviewPorId(@PathVariable(value = "idMovie") Integer idMovie) throws ResourceNotFoundException{
         return reviewRepo.findAllByIdMovie(idMovie);
     }
