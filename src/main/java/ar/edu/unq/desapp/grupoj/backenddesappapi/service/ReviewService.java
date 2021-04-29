@@ -56,39 +56,32 @@ public class ReviewService {
         //reviewRepo.save(new ReviewPremium(3, new Source("Netflix"),"Pectacular, alta peli pero muy larga!","Increibles efecto especiales",3,false,"userAnonimo@gmail.com","pepe", new Location("Argentina","Buenos Aires"),new Language("Spanish")));
     }
 
-    @GetMapping("/review")
-    public Iterable<Review> getAllReviews() {
+    public Iterable<Review> findAll() {
         return reviewRepo.findAll();
     }
 
-    @GetMapping("/review/{idMovie}")
-    public Iterable <Review> getReviewPorId(@PathVariable(value = "idMovie") Integer idMovie) throws ResourceNotFoundException{
+    public Iterable<Review> findAllByIdMovie(Integer idMovie) {
         return reviewRepo.findAllByIdMovie(idMovie);
     }
 
 
-    @PutMapping("/review")
-    public void saveReview(@RequestBody ReviewAdapter aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
-
+    public void save(ReviewAdapter aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
         reviewRepo.save(aReview.toModel(sourceRepo,locationRepo,languageRepo));
     }
-  
-    @PostMapping("/review/{idReview}/RateUp")
-    public ReviewRate rateUp(@PathVariable(value = "idReview") Integer idReview) throws NonExistentReviewException{
+
+    public ReviewRate rateUp( Integer idReview) throws NonExistentReviewException{
         Review r= reviewRepo.findById(idReview).orElseThrow(() -> new NonExistentReviewException(idReview));
         r.getReviewRate().rateUp();
         reviewRepo.save(r);
         return r.getReviewRate();
     }
 
-    @PostMapping("/review/{idReview}/RateDown")
-    public ReviewRate rateDown(@PathVariable(value = "idReview") Integer idReview) throws NonExistentReviewException{
+
+
+    public ReviewRate rateDown(Integer idReview) throws NonExistentReviewException{
         Review r= reviewRepo.findById(idReview).orElseThrow(() -> new NonExistentReviewException(idReview));
         r.getReviewRate().rateDown();
         reviewRepo.save(r);
         return r.getReviewRate();
     }
-
-
-
 }
