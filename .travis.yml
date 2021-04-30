@@ -6,4 +6,6 @@ services:
 
 before_install:
   - mysql -e 'CREATE DATABASE tpdapp;'
+  - chmod +x gradlew
+
 
