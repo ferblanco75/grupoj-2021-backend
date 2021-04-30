@@ -15,6 +15,8 @@ public interface ReviewRepository extends CrudRepository<Review, Integer> {
     Iterable <Review> findAllByIdMovie(Integer idMovie);
 
     Optional<Review> findById(Integer integer);
+
+
 }
 
 

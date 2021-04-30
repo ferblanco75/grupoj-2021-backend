@@ -1,52 +1,56 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.Date;
 
 @Entity
+@Table(
+        name = "review",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"idMovie","user_id"})}
+)
 public class Review {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name= "idMovie")
     private Integer idMovie;
+
     private String text;
     private String textExtended;
     private Integer rating;
     private Boolean spoilerAlert=false;
     private Date date=Date.from(Instant.now());
-    private String userId;
-    private String userNick;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    protected Location location;
+    @ManyToOne(fetch = FetchType.LAZY)
+        protected User user;
+
 
     @ManyToOne(cascade = {CascadeType.ALL})
     protected Source source;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    protected Language language;
-
     protected ReviewType type=ReviewType.NORMAL;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    protected ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewRate ReviewRate = new ReviewRate();
+    @OneToOne(mappedBy = "review", cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER, optional = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    protected ReviewRate reviewRate = new ReviewRate();
 
     protected Review() {
     }
 
-    public Review(Integer movieId, Source source, String text, String textExtended, Integer rating, Boolean haveSpoiler,String userId,String userNick,Location location, Language lang){
+    public Review(Integer movieId, Source source, String text, String textExtended, Integer rating, Boolean haveSpoiler){
         this.text=text;
         this.rating = rating;
         this.textExtended= textExtended;
         this.idMovie=movieId;
         this.spoilerAlert=haveSpoiler;
-        this.userId=userId;
-        this.userNick=userNick;
         this.source=source;
-        this.location=location;
-        this.language=lang;
 
     }
 
@@ -70,13 +74,6 @@ public class Review {
         return date;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public String getUserNick() {
-        return userNick;
-    }
 
     public Integer getId() {
         return id;
@@ -86,19 +83,13 @@ public class Review {
         return source;
     }
 
-    public Location getLocation() {
-        return location;
-    }
-
     public ReviewType getType() {
         return type;
     }
 
-    public Language getLanguage() {
-        return language;
+    public ReviewRate getReviewRate() {
+        return reviewRate;
     }
 
-    public ReviewRate getReviewRate() {
-        return ReviewRate;
-    }
+
 }
