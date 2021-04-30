@@ -4,5 +4,5 @@ services:
   - mysql
 
 before_install:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS tpdapp;'
+  - mysql -e 'CREATE DATABASE tpdapp;'
 
