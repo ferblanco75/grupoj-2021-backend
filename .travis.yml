@@ -1,6 +1,4 @@
 language: java
-sudo: true
-jdk: oraclejdk11
 
 services:
   - mysql
