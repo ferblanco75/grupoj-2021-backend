@@ -29,9 +29,7 @@ public class LanguageService {
         repository.save(new Language("Ingles"));
     }
 
-    @GetMapping("/languages")
-    public Iterable<Language> getAll() {
+    public Iterable<Language> findAll() {
         return repository.findAll();
     }
-
 }

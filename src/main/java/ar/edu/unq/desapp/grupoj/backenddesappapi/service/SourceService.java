@@ -1,12 +1,15 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.ResourceNotFoundException;
+
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.ReviewRepository;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.SourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 
 @CrossOrigin
@@ -30,13 +33,11 @@ public class SourceService {
 
     }
 
-    @GetMapping("/sources")
-    public Iterable<Source> getAll() {
-        return sourceRepo.findAll();
+    public Optional<Source> getById(Integer id) {
+        return this.sourceRepo.getById(id);
     }
 
-    @GetMapping("/sources/{id}")
-    public Source getById(@PathVariable(value = "id") Integer id) throws NonExistentSourceException{
-        return sourceRepo.getById(id).orElseThrow(() -> new NonExistentSourceException(id));
+    public Iterable<Source> findAll() {
+        return this.sourceRepo.findAll();
     }
 }

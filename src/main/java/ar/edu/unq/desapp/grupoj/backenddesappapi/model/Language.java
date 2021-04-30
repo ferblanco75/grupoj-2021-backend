@@ -25,4 +25,8 @@ public class Language {
     public String getValue() {
         return value;
     }
+
+    public Integer getId() {
+        return id;
+    }
 }

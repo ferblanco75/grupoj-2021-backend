@@ -1,15 +1,17 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class ReviewRate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name= "idReview")
     private Integer id;
+
+    @OneToOne()
+    @JoinColumn(name = "idReview")
+    private Review review;
 
     private Integer ratingUp = 0;
     private Integer ratingDown = 0;

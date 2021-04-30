@@ -35,9 +35,8 @@ public class ReviewAdapter {
 
     public Review toModel(SourceRepository sourceRepository, LocationRepository locationRepository, LanguageRepository languageRepository) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
         Source source= sourceRepository.getById(sourceId).orElseThrow(() -> new NonExistentSourceException(sourceId));
-        Location location= locationRepository.getById(locationId).orElseThrow(() -> new NonExistentLocationException(locationId));
-        Language language= languageRepository.getById(languageId).orElseThrow(() -> new NonExistentLanguageException(languageId));
-        return new Review(idMovie, source, text, textExtended, rating, spoilerAlert, userId, userNick,location,language);
+
+        return new Review(idMovie, source, text, textExtended, rating, spoilerAlert);
 
     }
 
