@@ -91,7 +91,7 @@ public class ReviewService {
 
     }
 
-    public ReviewRate rateUp( Integer idReview) throws NonExistentReviewException{
+    /*public ReviewRate rateUp( Integer idReview) throws NonExistentReviewException{
         Review r= reviewRepo.findById(idReview).orElseThrow(() -> new NonExistentReviewException(idReview));
         r.getReviewRate().rateUp();
         reviewRepo.save(r);
@@ -105,5 +105,29 @@ public class ReviewService {
         r.getReviewRate().rateDown();
         reviewRepo.save(r);
         return r.getReviewRate();
+    }*/
+
+    @Transactional
+    public ReviewRate rateUpPlus(RateDTO rateDto) throws NonExistentLocationException, NonExistentReviewException {
+        Review r= reviewRepo.findById(rateDto.reviewId).orElseThrow(() -> new NonExistentReviewException(rateDto.reviewId));
+        User user;
+        try {
+            user = userRepository.findByUserIdAndUserNick(rateDto.user.userId, rateDto.user.userNick).orElseThrow(() -> new NonExistentReviewException(rateDto.reviewId));
+        }catch (Exception e){
+
+            user = rateDto.user.toModel(locationRepo);
+
+        }
+        r.addRate(new ReviewRatePlus (rateDto.rateType,user));
+
+
+        //TODO Hacer la excepcion de User
+
+        //Quiero grabar usuario y actualizar location?
+        //userRepository.save(user);
+        reviewRepo.save(r);
+        return r.getReviewRate();
+
+
     }
 }

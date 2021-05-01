@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(
@@ -34,16 +37,18 @@ public class Review {
     protected Language language;
 
 
-
     @ManyToOne(cascade = {CascadeType.ALL})
     protected Source source;
 
     protected ReviewType type=ReviewType.NORMAL;
 
-    @OneToOne(mappedBy = "review", cascade = CascadeType.ALL,
+    /*@OneToOne(mappedBy = "review", cascade = CascadeType.ALL,
             fetch = FetchType.EAGER, optional = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     protected ReviewRate reviewRate = new ReviewRate();
+*/
+    @OneToMany(targetEntity=ReviewRatePlus.class, cascade = CascadeType.ALL)
+    protected List<ReviewRatePlus> reviewRatePlus = new ArrayList<>();
 
     protected Review() {
     }
@@ -92,11 +97,20 @@ public class Review {
         return type;
     }
 
-    public ReviewRate getReviewRate() {
+    /*public ReviewRate getReviewRate() {
         return reviewRate;
+    }*/
+    public ReviewRate getReviewRate() {
+        ReviewRate rate = new ReviewRate();
+        rate.ratingUp=reviewRatePlus.stream().filter(i -> i.getType()==RateType.UP).count();
+        rate.ratingDown=reviewRatePlus.stream().filter(i -> i.getType()==RateType.DOWN).count();
+        return rate;
     }
 
     public Language getLanguage() {
         return language;
+    }
+    public void addRate(ReviewRatePlus reviewRate){
+        reviewRatePlus.add(reviewRate);
     }
 }

@@ -34,7 +34,7 @@ public class ReviewController {
         service.savePremium(aReview);
     }
 
-    @PostMapping("/review/{idReview}/RateUp")
+    /*@PostMapping("/review/{idReview}/RateUp")
     public ReviewRate rateUp(@PathVariable(value = "idReview") Integer idReview) throws NonExistentReviewException{
         return service.rateUp(idReview);
     }
@@ -43,6 +43,10 @@ public class ReviewController {
     public ReviewRate rateDown(@PathVariable(value = "idReview") Integer idReview) throws NonExistentReviewException{
         return service.rateDown(idReview);
     }
-
+*/
+    @PostMapping("/review/RateUpPlus")
+    public ReviewRate rateUpPlus(@RequestBody RateDTO rateDto) throws NonExistentReviewException, NonExistentLocationException {
+        return service.rateUpPlus(rateDto);
+    }
 
 }
