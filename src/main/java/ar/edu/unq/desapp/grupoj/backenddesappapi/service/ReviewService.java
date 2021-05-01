@@ -65,7 +65,7 @@ public class ReviewService {
     }
 
     @Transactional
-    public void save(ReviewDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
+    public void save(ReviewDTO aReview) throws NonExistentSourceException, NonExistentLocationException{
         //Deberia guardar o actualizar el usuario
         Location location= locationRepo.getById(aReview.locationId).orElseThrow(() -> new NonExistentLocationException(aReview.locationId));
         Review review = aReview.toModel(sourceRepo,languageRepo);
@@ -78,7 +78,7 @@ public class ReviewService {
     }
 
     @Transactional
-    public void savePremium(ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
+    public void savePremium(ReviewPremiumDTO aReview) throws NonExistentSourceException {
 
         ReviewPremium review = aReview.toModel(sourceRepo,languageRepo);
 
@@ -91,21 +91,6 @@ public class ReviewService {
 
     }
 
-    /*public ReviewRate rateUp( Integer idReview) throws NonExistentReviewException{
-        Review r= reviewRepo.findById(idReview).orElseThrow(() -> new NonExistentReviewException(idReview));
-        r.getReviewRate().rateUp();
-        reviewRepo.save(r);
-        return r.getReviewRate();
-    }
-
-
-
-    public ReviewRate rateDown(Integer idReview) throws NonExistentReviewException{
-        Review r= reviewRepo.findById(idReview).orElseThrow(() -> new NonExistentReviewException(idReview));
-        r.getReviewRate().rateDown();
-        reviewRepo.save(r);
-        return r.getReviewRate();
-    }*/
 
     @Transactional
     public ReviewRate rateUpPlus(RateDTO rateDto) throws NonExistentLocationException, NonExistentReviewException {
