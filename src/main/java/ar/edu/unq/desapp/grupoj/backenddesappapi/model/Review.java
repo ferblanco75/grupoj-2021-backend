@@ -30,6 +30,10 @@ public class Review {
     @ManyToOne(fetch = FetchType.LAZY)
         protected User user;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    protected Language language;
+
+
 
     @ManyToOne(cascade = {CascadeType.ALL})
     protected Source source;
@@ -44,13 +48,14 @@ public class Review {
     protected Review() {
     }
 
-    public Review(Integer movieId, Source source, String text, String textExtended, Integer rating, Boolean haveSpoiler){
+    public Review(Integer movieId, Source source, String text, String textExtended, Integer rating, Boolean haveSpoiler, Language language){
         this.text=text;
         this.rating = rating;
         this.textExtended= textExtended;
         this.idMovie=movieId;
         this.spoilerAlert=haveSpoiler;
         this.source=source;
+        this.language=language;
 
     }
 
@@ -91,5 +96,7 @@ public class Review {
         return reviewRate;
     }
 
-
+    public Language getLanguage() {
+        return language;
+    }
 }

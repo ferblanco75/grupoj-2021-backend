@@ -10,13 +10,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class BackendDesappApiApplicationTests {
 
 	@Test
-	void ratingSevenInReviewReturnsSeven() {
+	void ratingThreeInReviewReturnsThree() {
 		User user = new User("fernando.test@gmail.com",
 							"fer",
-							new Language("Spanish"),
 							new Location("Ecuador","Quito"));
+		Language lang = new Language("Spanish");
 		Review review = new Review(1, new Source("Netflix"),"Maso, para un domingo zafa",
-				"pochoclera",3,true);
+				"pochoclera",3,true, lang);
 		assertEquals(3, review.getRating());
 	}
 

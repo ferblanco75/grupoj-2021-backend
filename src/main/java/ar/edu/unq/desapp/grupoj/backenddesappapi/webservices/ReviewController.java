@@ -25,8 +25,13 @@ public class ReviewController {
     }
 
     @PutMapping("/review")
-    public void saveReview(@RequestBody ReviewAdapter aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
+    public void saveReview(@RequestBody ReviewDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
         service.save(aReview);
+    }
+
+    @PutMapping("/review/premium")
+    public void savePremiumReview(@RequestBody ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
+        service.savePremium(aReview);
     }
 
     @PostMapping("/review/{idReview}/RateUp")

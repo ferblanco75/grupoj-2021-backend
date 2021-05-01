@@ -9,10 +9,10 @@ import java.util.List;
 
 @Entity
 @Table(
-        name = "user",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"userId","userNick"})}
+        name = "critic",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"userId"})}
 )
-public class User {
+public class Critic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,33 +22,16 @@ public class User {
     private String userId;
 
 
-    @Column(name="userNick")
-    private String userNick;
-
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    protected Location location;
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id")
     protected List<Review> reviews = new ArrayList<Review>();
 
-    protected User(){}
+    protected Critic(){}
 
-    public User (String userId,String userNick,Location location){
+    public Critic(String userId){
         this.userId=userId;
-        this.userNick=userNick;
-        this.location = location;
     }
 
-
-    public String getUserNick() {
-        return userNick;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
 
     public String getUserId() {
         return userId;
