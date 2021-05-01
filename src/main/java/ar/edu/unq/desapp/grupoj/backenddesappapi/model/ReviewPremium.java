@@ -6,8 +6,8 @@ import javax.persistence.*;
 @Entity
 public class ReviewPremium extends Review{
 
-    public ReviewPremium(Integer movieId, Source source, String text, String textExtended, Integer rating, Boolean haveSpoiler,String userId,String userNick,Location location, Language language){
-        super(movieId,source,text,textExtended,rating,haveSpoiler,userId,userNick,location,language);
+    public ReviewPremium(Integer movieId, Source source, String text, String textExtended, Integer rating, Boolean haveSpoiler,Language language){
+        super(movieId,source,text,textExtended,rating,haveSpoiler, language);
         super.type= ReviewType.PREMIUM;
     }
 

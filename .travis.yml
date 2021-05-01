@@ -1,2 +1,11 @@
 language: java
+sudo: true
+
+services:
+  - mysql
+
+before_install:
+  - mysql -e 'CREATE DATABASE tpdapp;'
+  - chmod +x gradlew
+
 

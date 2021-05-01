@@ -12,7 +12,7 @@ public class Language {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer id;
 
     private String value;
 
@@ -24,5 +24,9 @@ public class Language {
 
     public String getValue() {
         return value;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

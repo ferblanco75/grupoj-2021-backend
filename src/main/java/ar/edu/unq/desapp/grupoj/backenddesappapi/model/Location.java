@@ -28,4 +28,8 @@ public class Location {
     public String getCountry() {
         return country;
     }
+
+    public Integer getId() {
+        return id;
+    }
 }
