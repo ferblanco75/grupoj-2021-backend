@@ -22,10 +22,11 @@ public class LocationService {
 
     @EventListener
     public void appReady(ApplicationReadyEvent event) {
-        locationRepo.save(new Location("argentina","bsas"));
-        locationRepo.save(new Location("argentina","Mar del plata"));
-        locationRepo.save(new Location("argentina","Rauch"));
+        locationRepo.save(new Location("Argentina","Buenos Aires"));
+        locationRepo.save(new Location("Argentina","Mar del Plata"));
+        locationRepo.save(new Location("Argentina","Rosario"));
         locationRepo.save(new Location("Brasil","Rio de Janeiro"));
+        locationRepo.save(new Location("Chile","Valparaiso"));
 
     }
 

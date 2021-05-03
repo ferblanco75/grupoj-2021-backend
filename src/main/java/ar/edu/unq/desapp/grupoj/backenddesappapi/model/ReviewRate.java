@@ -1,32 +1,19 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
-import javax.persistence.*;
 
-@Entity
 public class ReviewRate {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "idReview")
     private Integer id;
-
-    @OneToOne()
-    @JoinColumn(name = "idReview")
     private Review review;
 
-    private Integer ratingUp = 0;
-    private Integer ratingDown = 0;
+    public Long ratingUp ;
+    public Long ratingDown;
 
     protected ReviewRate(){}
 
-
-    public void rateUp(){this.ratingUp++;}
-    public void rateDown(){this.ratingDown++;}
-
-    public Integer getRatingDown() {
+    public Long getRatingDown() {
         return ratingDown;
     }
-
-    public Integer getRatingUp() {
+    public Long getRatingUp() {
         return ratingUp;
     }
 }
