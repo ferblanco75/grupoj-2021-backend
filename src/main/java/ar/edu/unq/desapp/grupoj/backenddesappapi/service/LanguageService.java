@@ -27,6 +27,8 @@ public class LanguageService {
     public void appReady(ApplicationReadyEvent event) {
         repository.save(new Language("Español"));
         repository.save(new Language("Ingles"));
+        repository.save(new Language("Portugues"));
+        repository.save(new Language("Frances"));
     }
 
     public Iterable<Language> findAll() {

@@ -43,17 +43,22 @@ public class ReviewService {
     public void appReady(ApplicationReadyEvent event) {
 
         Source source =new Source("Netflix");
+        //sourceRepo.save(source);
         Location location = new Location("Ecuador","Quito");
         Language language = new Language("Spanish");
         User user = new User ("fernando.test@gmail.com","Fernando",location);
         user.addReview(new Review(1, source,"Maso, para un domingo zafa","pochoclera",3,true,language));
+
+        user.addReview(new Review(2, source,"Maso, para un domingo zafa","pochoclera",3,true,language));
+
+        user.addReview(new Review(3, source,"Muy mala pelicula","No la entendi",1,true,language));
+        user.addReview(new Review(4, source,"Excelente, me conmovio! jaaaa","Un plato",5,false,language));
+        user.addReview(new Review(5, source,"Pectacular, alta peli pero muy larga!","Increibles efecto especiales",3,false,language));
+
+        Critic critic = new Critic("criticoEspecialista@yahoo.com");
+        critic.addReview(new ReviewPremium(3, source,"Pectacular, alta peli pero muy larga!","Increibles efecto especiales",3,false,language));
+        critic.addReview(new ReviewPremium(1, source,"Pectacular, alta peli pero muy larga!","Increibles efecto especiales",5,true, language));
         userRepository.save(user);
-        //reviewRepo.save(new Review(1, source,"Maso, para un domingo zafa","pochoclera",3,true));
-        //reviewRepo.save(new Review(1, source,"Muy mala pelicula","No la entendi",1,true,"alonso.em@gmail.com","quique", new Location("Argentina","Buenos Aires"),new Language("Spanish")));
-        //reviewRepo.save(new Review(2, source,"Excelente, me conmovio! jaaaa","Un plato",5,false,"alonso.em@gmail.com","rodolfo", new Location("Argentina","Buenos Aires"),new Language("Spanish")));
-        //reviewRepo.save(new Review(3, new Source("Netflix"),"Pectacular, alta peli pero muy larga!","Increibles efecto especiales",3,false,"userAnonimo@gmail.com","pepe", new Location("Argentina","Buenos Aires"),new Language("Spanish")));
-        //reviewRepo.save(new ReviewPremium(3, new Source("Netflix"),"Pectacular, alta peli pero muy larga!","Increibles efecto especiales",3,false,"userAnonimo@gmail.com","pepe", new Location("Argentina","Buenos Aires"),new Language("Spanish")));
-        //reviewRepo.save(new ReviewPremium(3, new Source("Netflix"),"Pectacular, alta peli pero muy larga!","Increibles efecto especiales",3,false,"userAnonimo@gmail.com","pepe", new Location("Argentina","Buenos Aires"),new Language("Spanish")));
     }
 
     public Iterable<Review> findAll() {
@@ -65,7 +70,7 @@ public class ReviewService {
     }
 
     @Transactional
-    public void save(ReviewDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
+    public void save(ReviewDTO aReview) throws NonExistentSourceException, NonExistentLocationException{
         //Deberia guardar o actualizar el usuario
         Location location= locationRepo.getById(aReview.locationId).orElseThrow(() -> new NonExistentLocationException(aReview.locationId));
         Review review = aReview.toModel(sourceRepo,languageRepo);
@@ -78,7 +83,7 @@ public class ReviewService {
     }
 
     @Transactional
-    public void savePremium(ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
+    public void savePremium(ReviewPremiumDTO aReview) throws NonExistentSourceException {
 
         ReviewPremium review = aReview.toModel(sourceRepo,languageRepo);
 
@@ -91,19 +96,28 @@ public class ReviewService {
 
     }
 
-    public ReviewRate rateUp( Integer idReview) throws NonExistentReviewException{
-        Review r= reviewRepo.findById(idReview).orElseThrow(() -> new NonExistentReviewException(idReview));
-        r.getReviewRate().rateUp();
+
+    @Transactional
+    public ReviewRate rateUpPlus(RateDTO rateDto) throws NonExistentLocationException, NonExistentReviewException {
+        Review r= reviewRepo.findById(rateDto.reviewId).orElseThrow(() -> new NonExistentReviewException(rateDto.reviewId));
+        User user;
+        try {
+            user = userRepository.findByUserIdAndUserNick(rateDto.user.userId, rateDto.user.userNick).orElseThrow(() -> new NonExistentReviewException(rateDto.reviewId));
+        }catch (Exception e){
+
+            user = rateDto.user.toModel(locationRepo);
+
+        }
+        r.addRate(new ReviewRatePlus (rateDto.rateType,user,r));
+
+
+        //TODO Hacer la excepcion de User
+
+        //Quiero grabar usuario y actualizar location?
+        //userRepository.save(user);
         reviewRepo.save(r);
         return r.getReviewRate();
-    }
 
 
-
-    public ReviewRate rateDown(Integer idReview) throws NonExistentReviewException{
-        Review r= reviewRepo.findById(idReview).orElseThrow(() -> new NonExistentReviewException(idReview));
-        r.getReviewRate().rateDown();
-        reviewRepo.save(r);
-        return r.getReviewRate();
     }
 }
