@@ -43,17 +43,22 @@ public class ReviewService {
     public void appReady(ApplicationReadyEvent event) {
 
         Source source =new Source("Netflix");
+        //sourceRepo.save(source);
         Location location = new Location("Ecuador","Quito");
         Language language = new Language("Spanish");
         User user = new User ("fernando.test@gmail.com","Fernando",location);
         user.addReview(new Review(1, source,"Maso, para un domingo zafa","pochoclera",3,true,language));
+
+        user.addReview(new Review(2, source,"Maso, para un domingo zafa","pochoclera",3,true,language));
+
+        user.addReview(new Review(3, source,"Muy mala pelicula","No la entendi",1,true,language));
+        user.addReview(new Review(4, source,"Excelente, me conmovio! jaaaa","Un plato",5,false,language));
+        user.addReview(new Review(5, source,"Pectacular, alta peli pero muy larga!","Increibles efecto especiales",3,false,language));
+
+        Critic critic = new Critic("criticoEspecialista@yahoo.com");
+        critic.addReview(new ReviewPremium(3, source,"Pectacular, alta peli pero muy larga!","Increibles efecto especiales",3,false,language));
+        critic.addReview(new ReviewPremium(1, source,"Pectacular, alta peli pero muy larga!","Increibles efecto especiales",5,true, language));
         userRepository.save(user);
-        //reviewRepo.save(new Review(1, source,"Maso, para un domingo zafa","pochoclera",3,true));
-        //reviewRepo.save(new Review(1, source,"Muy mala pelicula","No la entendi",1,true,"alonso.em@gmail.com","quique", new Location("Argentina","Buenos Aires"),new Language("Spanish")));
-        //reviewRepo.save(new Review(2, source,"Excelente, me conmovio! jaaaa","Un plato",5,false,"alonso.em@gmail.com","rodolfo", new Location("Argentina","Buenos Aires"),new Language("Spanish")));
-        //reviewRepo.save(new Review(3, new Source("Netflix"),"Pectacular, alta peli pero muy larga!","Increibles efecto especiales",3,false,"userAnonimo@gmail.com","pepe", new Location("Argentina","Buenos Aires"),new Language("Spanish")));
-        //reviewRepo.save(new ReviewPremium(3, new Source("Netflix"),"Pectacular, alta peli pero muy larga!","Increibles efecto especiales",3,false,"userAnonimo@gmail.com","pepe", new Location("Argentina","Buenos Aires"),new Language("Spanish")));
-        //reviewRepo.save(new ReviewPremium(3, new Source("Netflix"),"Pectacular, alta peli pero muy larga!","Increibles efecto especiales",3,false,"userAnonimo@gmail.com","pepe", new Location("Argentina","Buenos Aires"),new Language("Spanish")));
     }
 
     public Iterable<Review> findAll() {
@@ -103,7 +108,7 @@ public class ReviewService {
             user = rateDto.user.toModel(locationRepo);
 
         }
-        r.addRate(new ReviewRatePlus (rateDto.rateType,user));
+        r.addRate(new ReviewRatePlus (rateDto.rateType,user,r));
 
 
         //TODO Hacer la excepcion de User

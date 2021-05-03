@@ -19,14 +19,14 @@ public class ReviewController {
         return service.findAll();
     }
 
-    @GetMapping("/review/{idMovie}")
-    public Iterable <Review> getReviewPorId(@PathVariable(value = "idMovie") Integer idMovie) throws ResourceNotFoundException {
-        return service.findAllByIdMovie(idMovie);
-    }
-
     @PutMapping("/review")
     public void saveReview(@RequestBody ReviewDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
         service.save(aReview);
+    }
+
+    @GetMapping("/review/{idMovie}")
+    public Iterable <Review> getReviewPorId(@PathVariable(value = "idMovie") Integer idMovie) throws ResourceNotFoundException {
+        return service.findAllByIdMovie(idMovie);
     }
 
     @PutMapping("/review/premium")
@@ -34,17 +34,7 @@ public class ReviewController {
         service.savePremium(aReview);
     }
 
-    /*@PostMapping("/review/{idReview}/RateUp")
-    public ReviewRate rateUp(@PathVariable(value = "idReview") Integer idReview) throws NonExistentReviewException{
-        return service.rateUp(idReview);
-    }
-
-    @PostMapping("/review/{idReview}/RateDown")
-    public ReviewRate rateDown(@PathVariable(value = "idReview") Integer idReview) throws NonExistentReviewException{
-        return service.rateDown(idReview);
-    }
-*/
-    @PostMapping("/review/RateUpPlus")
+    @PostMapping("/review/rate")
     public ReviewRate rateUpPlus(@RequestBody RateDTO rateDto) throws NonExistentReviewException, NonExistentLocationException {
         return service.rateUpPlus(rateDto);
     }

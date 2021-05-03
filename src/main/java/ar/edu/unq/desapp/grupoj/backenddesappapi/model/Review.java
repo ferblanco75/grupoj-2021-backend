@@ -1,6 +1,7 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jdk.jfr.Name;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(
-        name = "review",
+        name = "reviews",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"idMovie","user_id"})}
 )
 public class Review {
@@ -31,7 +32,7 @@ public class Review {
     private Date date=Date.from(Instant.now());
 
     @ManyToOne(fetch = FetchType.LAZY)
-        protected User user;
+    protected User user;
 
     @ManyToOne(cascade = CascadeType.ALL)
     protected Language language;
@@ -48,6 +49,8 @@ public class Review {
     protected ReviewRate reviewRate = new ReviewRate();
 */
     @OneToMany(targetEntity=ReviewRatePlus.class, cascade = CascadeType.ALL)
+    @Name("reviewRates")
+
     protected List<ReviewRatePlus> reviewRatePlus = new ArrayList<>();
 
     protected Review() {
@@ -110,6 +113,7 @@ public class Review {
     public Language getLanguage() {
         return language;
     }
+
     public void addRate(ReviewRatePlus reviewRate){
         reviewRatePlus.add(reviewRate);
     }
