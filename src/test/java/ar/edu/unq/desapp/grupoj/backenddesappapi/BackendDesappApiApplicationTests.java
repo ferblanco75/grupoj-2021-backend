@@ -36,16 +36,6 @@ class BackendDesappApiApplicationTests {
 		assertEquals("Joe", critic.getUserId());
 	}
 
-	@Test
-	void addingAReviewToAnEmptyReviewListReturnsASizeOneList(){
-		Language lang = new Language("French");
-		Review review2 = new Review(4, new Source("YouTube"),"excelente",
-				"buena peli",3,false, lang);
-		List<Review> reviews = new ArrayList<Review>();
-		Critic critic = new Critic("Pepe");
-		critic.addReview(review2);
-		assertEquals(1,reviews.size());
-	}
 
 	@Test
 	void EspanolLanguageReturnsValueEspanol(){
