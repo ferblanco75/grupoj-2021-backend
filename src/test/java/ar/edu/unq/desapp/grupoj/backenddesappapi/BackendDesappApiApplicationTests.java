@@ -17,14 +17,14 @@ class BackendDesappApiApplicationTests {
 	@Test
 	void ratingThreeInReviewReturnsThree() {
 		Language lang = new Language("Spanish");
-		Review review = new Review(1, new Source("Netflix"),"Maso, para un domingo zafa",
+		Review review = new Review(1, "Maso, para un domingo zafa",
 				"pochoclera",3,true, lang);
 		assertEquals(3, review.getRating());
 	}
 
 	@Test
 	void getUserCriticNamedJoeReturnsJoe(){
-		Critic critic = new Critic("Joe");
+		Critic critic = new Critic(1,"Joe");
 		assertEquals("Joe", critic.getUserId());
 	}
 
@@ -48,7 +48,7 @@ class BackendDesappApiApplicationTests {
 	}
 	@Test
 	void RateDtoReviewId123Returns123(){
-		UserDTO user = new UserDTO("pepe.test@gmail.com",
+		UserDTO user = new UserDTO(1,"pepe.test@gmail.com",
 				"pepito10",123);
 		RateType rateType = RateType.UP;
 		RateDTO rateDTO = new RateDTO(user,123, rateType);
