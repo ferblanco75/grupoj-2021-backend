@@ -10,13 +10,17 @@ import java.util.List;
 @Entity
 @Table(
         name = "user",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"userId","userNick"})}
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"userSource","userId","userNick"})}
 )
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
+
+    @Column(name="userSource")
+    private Integer sourceId;
+
 
     @Column(name="userId")
     private String userId;
@@ -35,7 +39,8 @@ public class User {
 
     protected User(){}
 
-    public User (String userId,String userNick,Location location){
+    public User (Integer sourceId, String userId,String userNick,Location location){
+        this.sourceId=sourceId;
         this.userId=userId;
         this.userNick=userNick;
         this.location = location;
