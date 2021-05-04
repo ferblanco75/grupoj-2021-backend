@@ -20,11 +20,11 @@ public class ReviewPremiumDTO {
     public Integer rating;
     public Boolean spoilerAlert=false;
     public Date date=Date.from(Instant.now());
-    public Integer sourceId;
+
     public Integer languageId;
     public ReviewType type=ReviewType.PREMIUM;
 
-    public String userId;
+    public CriticDTO critic;
 
     public ReviewPremiumDTO() {
     }
@@ -32,10 +32,9 @@ public class ReviewPremiumDTO {
 
 
 
-    public ReviewPremium toModel(SourceRepository sourceRepository, LanguageRepository languageRepository) throws NonExistentSourceException {
-        Source source= sourceRepository.getById(sourceId).orElseThrow(() -> new NonExistentSourceException(sourceId));
+    public ReviewPremium toModel(LanguageRepository languageRepository) throws NonExistentSourceException {
         Language language= languageRepository.getById(languageId).orElseThrow(() -> new NonExistentSourceException(languageId));
-        return new ReviewPremium(titleId, source, text, textExtended, rating, spoilerAlert,language);
+        return new ReviewPremium(titleId, text, textExtended, rating, spoilerAlert,language);
     }
 
 }

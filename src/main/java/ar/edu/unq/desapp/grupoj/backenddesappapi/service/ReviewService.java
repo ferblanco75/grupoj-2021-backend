@@ -47,17 +47,18 @@ public class ReviewService {
         Location location = new Location("Ecuador","Quito");
         Language language = new Language("Spanish");
 
-        User user = new User ("fernando.test@gmail.com","Fernando",location);
-        user.addReview(new Review(1, source,"Maso, para un domingo zafa","pochoclera",3,true,language));
-
-        user.addReview(new Review(3, source,"Muy mala pelicula","No la entendi",1,true,language));
-        user.addReview(new Review(4, source,"Excelente, me conmovio! jaaaa","Un plato",5,false,language));
-        user.addReview(new Review(5, source,"Pectacular, alta peli pero muy larga!","Increibles efecto especiales",3,false,language));
-
-        Critic critic = new Critic("criticoEspecialista@yahoo.com");
-        critic.addReview(new ReviewPremium(3, source,"Pectacular, alta peli pero muy larga!","Increibles efecto especiales",3,false,language));
-        critic.addReview(new ReviewPremium(1, source,"Pectacular, alta peli pero muy larga!","Increibles efecto especiales",5,true, language));
+        User user = new User (1,"fernando.test@gmail.com","Fernando",location);
+        user.addReview(new Review(1, "Maso, para un domingo zafa","pochoclera",3,true,language));
+        user.addReview(new Review(3, "Muy mala pelicula","No la entendi",1,true,language));
+        user.addReview(new Review(5, "Pectacular, alta peli pero muy larga!","Increibles efecto especiales",3,false,language));
         userRepository.save(user);
+
+
+        Language language2 = new Language("English");
+        Critic critic = new Critic(3,"criticoEspecialista@yahoo.com");
+        critic.addReview(new ReviewPremium(4, "La mas pior!","Terriblemente aburrida.",5,true, language2));
+        criticRepository.save(critic);
+
     }
 
     public Iterable<Review> findAll() {
@@ -71,11 +72,11 @@ public class ReviewService {
 
     @Transactional
     public Review save(ReviewDTO aReview) throws NonExistentSourceException, NonExistentLocationException {
-        Location location= locationRepo.getById(aReview.locationId).orElseThrow(() -> new NonExistentLocationException(aReview.locationId));
+        Location location= locationRepo.getById(aReview.user.locationId).orElseThrow(() -> new NonExistentLocationException(aReview.user.locationId));
         Review review = aReview.toModel(sourceRepo,languageRepo);
 
-        User user=userRepository.findByUserIdAndUserNick(aReview.userId, aReview.userNick)
-                .orElse(new User(aReview.userId,aReview.userNick,location));
+        User user=userRepository.findBySourceIdAndUserIdAndUserNick(aReview.user.sourceId,aReview.user.userId, aReview.user.userNick)
+                .orElse(new User(aReview.user.sourceId, aReview.user.userId,aReview.user.userNick,location));
 
         user.addReview(review);
         userRepository.save(user);
@@ -85,10 +86,10 @@ public class ReviewService {
     @Transactional
     public Review  savePremium(ReviewPremiumDTO aReview) throws NonExistentSourceException {
 
-        ReviewPremium review = aReview.toModel(sourceRepo,languageRepo);
+        ReviewPremium review = aReview.toModel(languageRepo);
 
-        Critic critic=criticRepository.findByUserId(aReview.userId)
-                .orElse(new Critic(aReview.userId));
+        Critic critic=criticRepository.findBySourceIdAndUserId(aReview.critic.sourceId,aReview.critic.userId)
+                .orElse(new Critic(aReview.critic.sourceId,aReview.critic.userId));
 
         critic.addReview(review);
 
@@ -103,7 +104,7 @@ public class ReviewService {
         Review aReview= reviewRepo.findById(rateDto.reviewId).orElseThrow(() -> new NonExistentReviewException(rateDto.reviewId));
         User user;
         try {
-            user = userRepository.findByUserIdAndUserNick(rateDto.user.userId, rateDto.user.userNick).orElseThrow(() -> new NonExistentReviewException(rateDto.reviewId));
+            user = userRepository.findBySourceIdAndUserIdAndUserNick(rateDto.user.sourceId ,rateDto.user.userId, rateDto.user.userNick).orElseThrow(() -> new NonExistentReviewException(rateDto.reviewId));
         }catch (Exception e){
 
             user = rateDto.user.toModel(locationRepo);

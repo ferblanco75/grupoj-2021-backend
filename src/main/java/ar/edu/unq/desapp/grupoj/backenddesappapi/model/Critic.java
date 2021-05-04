@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Table(
         name = "critic",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"userId"})}
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"sourceId","critic_id"})}
 )
 public class Critic {
 
@@ -18,17 +18,22 @@ public class Critic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
 
-    @Column(name="userId")
+
+    @Column(name="sourceId")
+    private Integer sourceId;
+
+    @Column(name="critic_id")
     private String userId;
 
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="critic_id")
     protected List<Review> reviews = new ArrayList<Review>();
 
     protected Critic(){}
 
-    public Critic(String userId){
+    public Critic(Integer sourceId, String userId){
+        this.sourceId=sourceId;
         this.userId=userId;
     }
 

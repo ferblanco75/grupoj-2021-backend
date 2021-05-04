@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface CriticRepository extends CrudRepository<Critic, Integer> {
     Iterable<Critic> findAll();
-    Optional<Critic> findByUserId(String userId);
+    Optional<Critic> findBySourceIdAndUserId(Integer sourceId, String userId);
 
 }
 

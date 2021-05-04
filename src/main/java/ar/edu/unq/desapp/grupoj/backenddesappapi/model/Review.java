@@ -36,9 +36,6 @@ public class Review {
     protected Language language;
 
 
-    @ManyToOne(cascade = {CascadeType.ALL})
-    protected Source source;
-
     protected ReviewType type=ReviewType.NORMAL;
 
     @OneToMany(targetEntity= ReviewRate.class, cascade = CascadeType.ALL)
@@ -48,13 +45,13 @@ public class Review {
     protected Review() {
     }
 
-    public Review(Integer titleId, Source source, String text, String textExtended, Integer rating, Boolean haveSpoiler, Language language){
+    public Review(Integer titleId, String text, String textExtended, Integer rating, Boolean haveSpoiler, Language language){
         this.text=text;
         this.rating = rating;
         this.textExtended= textExtended;
         this.titleId=titleId;
         this.spoilerAlert=haveSpoiler;
-        this.source=source;
+
         this.language=language;
 
     }
@@ -84,9 +81,6 @@ public class Review {
         return id;
     }
 
-    public Source getSource() {
-        return source;
-    }
 
     public ReviewType getType() {
         return type;
