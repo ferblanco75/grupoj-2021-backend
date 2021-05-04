@@ -25,7 +25,6 @@ public class SourceService {
 
     @EventListener
     public void appReady(ApplicationReadyEvent event) {
-        sourceRepo.save(new Source("Netflix"));
         sourceRepo.save(new Source("Disney+"));
         sourceRepo.save(new Source("Amazon Prime Video"));
         sourceRepo.save(new Source("Paramount"));

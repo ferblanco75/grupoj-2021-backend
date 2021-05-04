@@ -70,7 +70,7 @@ public class ReviewService {
     }
 
     @Transactional
-    public void save(ReviewDTO aReview) throws NonExistentSourceException, NonExistentLocationException {
+    public Review save(ReviewDTO aReview) throws NonExistentSourceException, NonExistentLocationException {
         Location location= locationRepo.getById(aReview.locationId).orElseThrow(() -> new NonExistentLocationException(aReview.locationId));
         Review review = aReview.toModel(sourceRepo,languageRepo);
 
@@ -79,10 +79,11 @@ public class ReviewService {
 
         user.addReview(review);
         userRepository.save(user);
+        return review;
     }
 
     @Transactional
-    public void savePremium(ReviewPremiumDTO aReview) throws NonExistentSourceException {
+    public Review  savePremium(ReviewPremiumDTO aReview) throws NonExistentSourceException {
 
         ReviewPremium review = aReview.toModel(sourceRepo,languageRepo);
 
@@ -92,13 +93,14 @@ public class ReviewService {
         critic.addReview(review);
 
         criticRepository.save(critic);
+        return review;
 
     }
 
 
     @Transactional
-    public ReviewRate rate(RateDTO rateDto) throws NonExistentLocationException, NonExistentReviewException {
-        Review r= reviewRepo.findById(rateDto.reviewId).orElseThrow(() -> new NonExistentReviewException(rateDto.reviewId));
+    public Rates rate(RateDTO rateDto) throws NonExistentLocationException, NonExistentReviewException {
+        Review aReview= reviewRepo.findById(rateDto.reviewId).orElseThrow(() -> new NonExistentReviewException(rateDto.reviewId));
         User user;
         try {
             user = userRepository.findByUserIdAndUserNick(rateDto.user.userId, rateDto.user.userNick).orElseThrow(() -> new NonExistentReviewException(rateDto.reviewId));
@@ -107,10 +109,10 @@ public class ReviewService {
             user = rateDto.user.toModel(locationRepo);
 
         }
-        r.addRate(new ReviewRatePlus (rateDto.rateType,user,r));
+        aReview.addRate(new ReviewRate(rateDto.rateType,user,aReview));
 
-        reviewRepo.save(r);
-        return r.getReviewRate();
+        reviewRepo.save(aReview);
+        return aReview.getReviewRate();
 
 
     }

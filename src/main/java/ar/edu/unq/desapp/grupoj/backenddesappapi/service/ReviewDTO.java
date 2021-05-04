@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class ReviewDTO {
 
-    public Integer idTitle;
+    public Integer titleId;
     public String text;
     public String textExtended;
     public Integer rating;
@@ -35,7 +35,7 @@ public class ReviewDTO {
     public Review toModel(SourceRepository sourceRepository, LanguageRepository languageRepository) throws NonExistentSourceException {
         Source source= sourceRepository.getById(sourceId).orElseThrow(() -> new NonExistentSourceException(sourceId));
         Language language= languageRepository.getById(languageId).orElseThrow(() -> new NonExistentSourceException(languageId));
-        return new Review(idTitle, source, text, textExtended, rating, spoilerAlert,language);
+        return new Review(titleId, source, text, textExtended, rating, spoilerAlert,language);
     }
 
 }

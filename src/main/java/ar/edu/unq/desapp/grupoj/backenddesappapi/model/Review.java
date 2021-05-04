@@ -1,6 +1,5 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
 import jdk.jfr.Name;
 
 import javax.persistence.*;
@@ -43,10 +42,9 @@ public class Review {
 
     protected ReviewType type=ReviewType.NORMAL;
 
-    @OneToMany(targetEntity=ReviewRatePlus.class, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity= ReviewRate.class, cascade = CascadeType.ALL)
     @Name("reviewRates")
-
-    protected List<ReviewRatePlus> reviewRatePlus = new ArrayList<>();
+    protected List<ReviewRate> reviewRates = new ArrayList<>();
 
     protected Review() {
     }
@@ -95,10 +93,10 @@ public class Review {
         return type;
     }
 
-    public ReviewRate getReviewRate() {
-        ReviewRate rate = new ReviewRate();
-        rate.ratingUp=reviewRatePlus.stream().filter(i -> i.getType()==RateType.UP).count();
-        rate.ratingDown=reviewRatePlus.stream().filter(i -> i.getType()==RateType.DOWN).count();
+    public Rates getReviewRate() {
+        Rates rate = new Rates();
+        rate.ratingUp= reviewRates.stream().filter(i -> i.getType()==RateType.UP).count();
+        rate.ratingDown= reviewRates.stream().filter(i -> i.getType()==RateType.DOWN).count();
         return rate;
     }
 
@@ -106,7 +104,7 @@ public class Review {
         return language;
     }
 
-    public void addRate(ReviewRatePlus reviewRate){
-        reviewRatePlus.add(reviewRate);
+    public void addRate(ReviewRate reviewRate){
+        reviewRates.add(reviewRate);
     }
 }

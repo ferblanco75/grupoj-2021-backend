@@ -23,8 +23,8 @@ public class ReviewController {
     }
 
     @PostMapping("/review")
-    public void saveReview(@RequestBody ReviewDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
-        service.save(aReview);
+    public Review saveReview(@RequestBody ReviewDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
+        return service.save(aReview);
     }
 
     @GetMapping("/review/{idTitle}")
@@ -33,12 +33,12 @@ public class ReviewController {
     }
 
     @PostMapping("/review/premium")
-    public void savePremiumReview(@RequestBody ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
-        service.savePremium(aReview);
+    public Review savePremiumReview(@RequestBody ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
+        return service.savePremium(aReview);
     }
 
     @PutMapping("/review/rate")
-    public ReviewRate rate(@RequestBody RateDTO rateDto) throws NonExistentReviewException, NonExistentLocationException {
+    public Rates rate(@RequestBody RateDTO rateDto) throws NonExistentReviewException, NonExistentLocationException {
         return service.rate(rateDto);
     }
 
