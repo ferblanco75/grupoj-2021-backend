@@ -10,13 +10,10 @@ import java.util.Optional;
 public interface ReviewRepository extends CrudRepository<Review, Integer> {
     Iterable<Review> findAll();
 
-    Iterable<Review> getAllByIdGreaterThanEqual(Integer rating);
-
-    Iterable <Review> findAllByIdMovie(Integer idMovie);
-
     Optional<Review> findById(Integer integer);
 
 
+    Iterable<Review> findAllByTitleId(Integer idTitle);
 }
 
 

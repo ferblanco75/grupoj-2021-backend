@@ -1,19 +1,19 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
 import jdk.jfr.Name;
 
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(
         name = "reviews",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"idMovie","user_id"})}
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"titleId","user_id"})}
 )
 public class Review {
 
@@ -22,8 +22,8 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name= "idMovie")
-    private Integer idMovie;
+
+    private Integer titleId;
 
     private String text;
     private String textExtended;
@@ -43,11 +43,6 @@ public class Review {
 
     protected ReviewType type=ReviewType.NORMAL;
 
-    /*@OneToOne(mappedBy = "review", cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER, optional = false)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    protected ReviewRate reviewRate = new ReviewRate();
-*/
     @OneToMany(targetEntity=ReviewRatePlus.class, cascade = CascadeType.ALL)
     @Name("reviewRates")
 
@@ -56,11 +51,11 @@ public class Review {
     protected Review() {
     }
 
-    public Review(Integer movieId, Source source, String text, String textExtended, Integer rating, Boolean haveSpoiler, Language language){
+    public Review(Integer titleId, Source source, String text, String textExtended, Integer rating, Boolean haveSpoiler, Language language){
         this.text=text;
         this.rating = rating;
         this.textExtended= textExtended;
-        this.idMovie=movieId;
+        this.titleId=titleId;
         this.spoilerAlert=haveSpoiler;
         this.source=source;
         this.language=language;
@@ -75,8 +70,8 @@ public class Review {
     }
     public String getTextExtended() {return textExtended;}
 
-    public Integer getIdMovie() {
-        return idMovie;
+    public Integer getTitleId() {
+        return titleId;
     }
 
     public Boolean getSpoilerAlert() {
@@ -100,9 +95,6 @@ public class Review {
         return type;
     }
 
-    /*public ReviewRate getReviewRate() {
-        return reviewRate;
-    }*/
     public ReviewRate getReviewRate() {
         ReviewRate rate = new ReviewRate();
         rate.ratingUp=reviewRatePlus.stream().filter(i -> i.getType()==RateType.UP).count();

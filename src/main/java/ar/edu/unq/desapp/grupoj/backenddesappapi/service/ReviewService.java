@@ -1,6 +1,9 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.ResourceNotFoundException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.*;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.TitlesRepository.TitleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -28,6 +31,9 @@ public class ReviewService {
     @Autowired
     private CriticRepository criticRepository;
 
+    @Autowired
+    private TitleRepository titleRepo;
+
     public ReviewService(){
 
     }/*
@@ -43,13 +49,14 @@ public class ReviewService {
     public void appReady(ApplicationReadyEvent event) {
 
         Source source =new Source("Netflix");
-        //sourceRepo.save(source);
+
         Location location = new Location("Ecuador","Quito");
         Language language = new Language("Spanish");
+
         User user = new User ("fernando.test@gmail.com","Fernando",location);
         user.addReview(new Review(1, source,"Maso, para un domingo zafa","pochoclera",3,true,language));
 
-        user.addReview(new Review(2, source,"Maso, para un domingo zafa","pochoclera",3,true,language));
+
 
         user.addReview(new Review(3, source,"Muy mala pelicula","No la entendi",1,true,language));
         user.addReview(new Review(4, source,"Excelente, me conmovio! jaaaa","Un plato",5,false,language));
@@ -65,21 +72,21 @@ public class ReviewService {
         return reviewRepo.findAll();
     }
 
-    public Iterable<Review> findAllByIdMovie(Integer idMovie) {
-        return reviewRepo.findAllByIdMovie(idMovie);
+    public Iterable<Review> findAllByIdTitle(Integer idTitle) throws ResourceNotFoundException {
+        Title title = titleRepo.getByTitleId(idTitle).orElseThrow(() -> new ResourceNotFoundException("Non existent Title."));;
+        return reviewRepo.findAllByTitleId(title.getTitleId());
     }
 
     @Transactional
     public void save(ReviewDTO aReview) throws NonExistentSourceException, NonExistentLocationException{
-        //Deberia guardar o actualizar el usuario
         Location location= locationRepo.getById(aReview.locationId).orElseThrow(() -> new NonExistentLocationException(aReview.locationId));
         Review review = aReview.toModel(sourceRepo,languageRepo);
 
-        Optional<User> user=userRepository.findByUserIdAndUserNick(aReview.userId, aReview.userNick);
+        User user=userRepository.findByUserIdAndUserNick(aReview.userId, aReview.userNick)
+                .orElse(new User(aReview.userId,aReview.userNick,location));
 
-        User u = user.orElse(new User(aReview.userId,aReview.userNick,location));
-        u.addReview(review);
-        userRepository.save(u);
+        user.addReview(review);
+        userRepository.save(user);
     }
 
     @Transactional
@@ -87,12 +94,12 @@ public class ReviewService {
 
         ReviewPremium review = aReview.toModel(sourceRepo,languageRepo);
 
-        Optional<Critic> user=criticRepository.findByUserId(aReview.userId);
+        Critic critic=criticRepository.findByUserId(aReview.userId)
+                .orElse(new Critic(aReview.userId));
 
-        Critic c = user.orElse(new Critic(aReview.userId));
-        c.addReview(review);
+        critic.addReview(review);
 
-        criticRepository.save(c);
+        criticRepository.save(critic);
 
     }
 

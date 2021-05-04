@@ -1,7 +1,9 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.LanguageRepository;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.SourceRepository;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.TitlesRepository.TitleRepository;
 
 import java.time.Instant;
 import java.util.Date;
@@ -9,7 +11,7 @@ import java.util.Date;
 
 public class ReviewPremiumDTO {
 
-    public Integer idMovie;
+    public Integer titleId;
     public String text;
     public String textExtended;
     public Integer rating;
@@ -30,7 +32,7 @@ public class ReviewPremiumDTO {
     public ReviewPremium toModel(SourceRepository sourceRepository, LanguageRepository languageRepository) throws NonExistentSourceException{
         Source source= sourceRepository.getById(sourceId).orElseThrow(() -> new NonExistentSourceException(sourceId));
         Language language= languageRepository.getById(languageId).orElseThrow(() -> new NonExistentSourceException(languageId));
-        return new ReviewPremium(idMovie, source, text, textExtended, rating, spoilerAlert,language);
+        return new ReviewPremium(titleId, source, text, textExtended, rating, spoilerAlert,language);
     }
 
 }
