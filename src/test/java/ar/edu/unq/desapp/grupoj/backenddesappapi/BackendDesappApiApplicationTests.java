@@ -1,29 +1,21 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.LanguageRepository;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class BackendDesappApiApplicationTests {
 
 	public LanguageRepository repository;
-	public LanguageService languageService = new LanguageService(repository);
+
 
 	@Test
 	void ratingThreeInReviewReturnsThree() {
-		User user = new User("fernando.test@gmail.com",
-							"fer",
-							new Location("Ecuador","Quito"));
 		Language lang = new Language("Spanish");
 		Review review = new Review(1, new Source("Netflix"),"Maso, para un domingo zafa",
 				"pochoclera",3,true, lang);
