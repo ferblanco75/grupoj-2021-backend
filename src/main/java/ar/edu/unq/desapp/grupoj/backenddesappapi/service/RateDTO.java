@@ -1,4 +1,6 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
+
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.RateType;
 
 public class RateDTO {
 

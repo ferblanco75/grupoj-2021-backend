@@ -1,4 +1,4 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.exception;
 
 
 public class NonExistentLanguageException extends Exception {

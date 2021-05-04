@@ -1,8 +1,11 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.webservices;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.ResourceNotFoundException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.ReviewService;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.RateDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.ReviewDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.ReviewPremiumDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
@@ -19,24 +22,24 @@ public class ReviewController {
         return service.findAll();
     }
 
-    @PutMapping("/review")
-    public void saveReview(@RequestBody ReviewDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
-        service.save(aReview);
+    @PostMapping("/review")
+    public Review saveReview(@RequestBody ReviewDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
+        return service.save(aReview);
     }
 
-    @GetMapping("/review/{idMovie}")
-    public Iterable <Review> getReviewPorId(@PathVariable(value = "idMovie") Integer idMovie) throws ResourceNotFoundException {
-        return service.findAllByIdMovie(idMovie);
+    @GetMapping("/review/{idTitle}")
+    public Iterable <Review> getReviewPorId(@PathVariable(value = "idTitle") Integer idTitle) throws ResourceNotFoundException {
+        return service.findAllByIdTitle(idTitle);
     }
 
-    @PutMapping("/review/premium")
-    public void savePremiumReview(@RequestBody ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
-        service.savePremium(aReview);
+    @PostMapping("/review/premium")
+    public Review savePremiumReview(@RequestBody ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
+        return service.savePremium(aReview);
     }
 
-    @PostMapping("/review/rate")
-    public ReviewRate rateUpPlus(@RequestBody RateDTO rateDto) throws NonExistentReviewException, NonExistentLocationException {
-        return service.rateUpPlus(rateDto);
+    @PutMapping("/review/rate")
+    public Rates rate(@RequestBody RateDTO rateDto) throws NonExistentReviewException, NonExistentLocationException {
+        return service.rate(rateDto);
     }
 
 }

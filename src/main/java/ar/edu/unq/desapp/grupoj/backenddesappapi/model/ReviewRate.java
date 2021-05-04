@@ -1,19 +1,40 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
+import jdk.jfr.Name;
+
+import javax.persistence.*;
+
+@Entity
+@Table (name = "review_rates",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id","review_id"})}
+)
 
 public class ReviewRate {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Name("idReviewRate")
+
     private Integer id;
+
+    private RateType type;
+
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private Review review;
 
-    public Long ratingUp ;
-    public Long ratingDown;
 
+    public ReviewRate(RateType type, User user, Review review){
+        this.type=type;
+        this.user=user;
+        this.review=review;
+
+    }
     protected ReviewRate(){}
 
-    public Long getRatingDown() {
-        return ratingDown;
-    }
-    public Long getRatingUp() {
-        return ratingUp;
+    public RateType getType() {
+        return type;
     }
 }

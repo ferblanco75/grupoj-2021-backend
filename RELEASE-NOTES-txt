@@ -1,0 +1,26 @@
+====== RELEASE NOTE  ==========
+---------------------------------------------------------------------
+TAG 1.0
+---------------------------------------------------------------------
+NEW FEATURES
+
+Todos los servicios disponibles permiten:
+* Agregar una review Publica
+* Agregar una review Premium
+* Valorar una review de cualquier tipo
+* Obtener listados auxiliares como:
+        * Sources (Netflix, Amazon Prime Video, etc)
+        * Locations (por pais y ciudad)
+        * Languages (idiomas)
+* Listar las reviews de una pelicula dada
+* Obtener una review por Id
+* Listar todos los titulos
+* Obtener un titulo por Id
+
+
+NOTES
+* Las excepciones podrian ser mas claras.
+
+KNOWN ISSUES
+* tiene problemas en la persistencia. Faltaria un objeto de sesion que permita la persistencia en mas de una entidad.
+
