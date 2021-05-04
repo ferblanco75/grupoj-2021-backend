@@ -8,4 +8,6 @@ before_install:
   - mysql -e 'CREATE DATABASE tpdapp;'
   - chmod +x gradlew
 
-
+before_script:
+- mysql -u root -e "CREATE USER 'tpdapp_user'@'localhost' IDENTIFIED BY 'tpdapp_user';"
+- mysql -u root -e "GRANT ALL ON tpdapp.* TO 'tpdapp'@'localhost';"

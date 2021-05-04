@@ -15,8 +15,6 @@ import java.util.List;
         uniqueConstraints = {@UniqueConstraint(columnNames = {"titleId","user_id"})}
 )
 public class Review {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
