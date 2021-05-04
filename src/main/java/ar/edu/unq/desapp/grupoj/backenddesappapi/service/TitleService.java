@@ -33,14 +33,9 @@ public class TitleService {
         ArrayList<Genre> genres= new ArrayList<>();
         genres.add(Genre.ACTION);
         genres.add(Genre.DRAMA);
-
         titleRepo.save(new Title(1,TitleType.MOVIE,"PREDATOR",false,new Date("01/01/2010"),new Date("01/01/2010"),100,genres));
         titleRepo.save(new Title(2,TitleType.TVSERIES,"LOST",false,new Date("01/01/2010"),new Date("01/01/2010"),40,genres));
-
         titleRepo.save(new Title(21,TitleType.TVEPISODE,"LOST: Chapter 1 'Pilot'",false,new Date("01/01/2010"),new Date("01/01/2010"),40,genres));
-
-
-
     }
     public Optional<Title> getByTitleId(Integer id) {
         return this.titleRepo.getByTitleId(id);

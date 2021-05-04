@@ -1,16 +1,19 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.NonExistentLocationException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.NonExistentReviewException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.NonExistentSourceException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.ResourceNotFoundException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.TitlesRepository.TitleRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
-import java.util.Optional;
 
 
 @CrossOrigin
@@ -34,16 +37,7 @@ public class ReviewService {
     @Autowired
     private TitleRepository titleRepo;
 
-    public ReviewService(){
-
-    }/*
-    @Autowired
-    public ReviewService(ReviewRepository unRepository, SourceRepository sourceRepository,LocationRepository locationRepository, LanguageRepository languageRepository) {
-        this.reviewRepo = unRepository;
-        this.sourceRepo = sourceRepository;
-        this.locationRepo = locationRepository;
-        this.languageRepo = languageRepository;
-    }*/
+    public ReviewService(){ }
 
     @EventListener
     public void appReady(ApplicationReadyEvent event) {
@@ -55,8 +49,6 @@ public class ReviewService {
 
         User user = new User ("fernando.test@gmail.com","Fernando",location);
         user.addReview(new Review(1, source,"Maso, para un domingo zafa","pochoclera",3,true,language));
-
-
 
         user.addReview(new Review(3, source,"Muy mala pelicula","No la entendi",1,true,language));
         user.addReview(new Review(4, source,"Excelente, me conmovio! jaaaa","Un plato",5,false,language));
@@ -78,7 +70,7 @@ public class ReviewService {
     }
 
     @Transactional
-    public void save(ReviewDTO aReview) throws NonExistentSourceException, NonExistentLocationException{
+    public void save(ReviewDTO aReview) throws NonExistentSourceException, NonExistentLocationException {
         Location location= locationRepo.getById(aReview.locationId).orElseThrow(() -> new NonExistentLocationException(aReview.locationId));
         Review review = aReview.toModel(sourceRepo,languageRepo);
 
@@ -105,7 +97,7 @@ public class ReviewService {
 
 
     @Transactional
-    public ReviewRate rateUpPlus(RateDTO rateDto) throws NonExistentLocationException, NonExistentReviewException {
+    public ReviewRate rate(RateDTO rateDto) throws NonExistentLocationException, NonExistentReviewException {
         Review r= reviewRepo.findById(rateDto.reviewId).orElseThrow(() -> new NonExistentReviewException(rateDto.reviewId));
         User user;
         try {
@@ -117,11 +109,6 @@ public class ReviewService {
         }
         r.addRate(new ReviewRatePlus (rateDto.rateType,user,r));
 
-
-        //TODO Hacer la excepcion de User
-
-        //Quiero grabar usuario y actualizar location?
-        //userRepository.save(user);
         reviewRepo.save(r);
         return r.getReviewRate();
 

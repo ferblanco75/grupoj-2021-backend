@@ -1,5 +1,8 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
 
+import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.NonExistentLocationException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Location;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.User;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.LocationRepository;
 
 public class UserDTO {
