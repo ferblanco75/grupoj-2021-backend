@@ -21,7 +21,6 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
     private Integer titleId;
 
     private String text;

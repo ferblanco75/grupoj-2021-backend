@@ -1,7 +1,5 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
-
 import javax.persistence.*;
 
 
