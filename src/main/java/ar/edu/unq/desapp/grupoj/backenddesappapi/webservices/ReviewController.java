@@ -24,9 +24,9 @@ public class ReviewController {
         service.save(aReview);
     }
 
-    @GetMapping("/review/{idMovie}")
-    public Iterable <Review> getReviewPorId(@PathVariable(value = "idMovie") Integer idMovie) throws ResourceNotFoundException {
-        return service.findAllByIdMovie(idMovie);
+    @GetMapping("/review/{idTitle}")
+    public Iterable <Review> getReviewPorId(@PathVariable(value = "idTitle") Integer idTitle) throws ResourceNotFoundException {
+        return service.findAllByIdTitle(idTitle);
     }
 
     @PutMapping("/review/premium")
