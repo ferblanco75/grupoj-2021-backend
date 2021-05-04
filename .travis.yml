@@ -10,4 +10,4 @@ before_install:
 
 before_script:
 - mysql -u root -e "CREATE USER 'tpdapp_user'@'localhost' IDENTIFIED BY 'tpdapp_user';"
-- mysql -u root -e "GRANT ALL ON tpdapp.* TO 'tpdapp'@'localhost';"
+- mysql -u root -e "GRANT ALL ON tpdapp.* TO 'tpdapp_user'@'localhost';"
