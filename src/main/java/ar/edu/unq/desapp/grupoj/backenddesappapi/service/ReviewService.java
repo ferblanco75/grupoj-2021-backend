@@ -1,8 +1,5 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.NonExistentLocationException;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.NonExistentReviewException;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.NonExistentSourceException;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.ResourceNotFoundException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.*;
@@ -71,9 +68,10 @@ public class ReviewService {
     }
 
     @Transactional
-    public Review save(ReviewDTO aReview) throws NonExistentSourceException, NonExistentLocationException {
+    public Review save(ReviewDTO aReview) throws NonExistentLocationException, NonExistentLanguageException, NonExistentSourceException {
         Location location= locationRepo.getById(aReview.user.locationId).orElseThrow(() -> new NonExistentLocationException(aReview.user.locationId));
-        Review review = aReview.toModel(sourceRepo,languageRepo);
+        sourceRepo.getById(aReview.user.sourceId).orElseThrow(() -> new NonExistentSourceException(aReview.user.sourceId));
+        Review review = aReview.toModel(languageRepo);
 
         User user=userRepository.findBySourceIdAndUserIdAndUserNick(aReview.user.sourceId,aReview.user.userId, aReview.user.userNick)
                 .orElse(new User(aReview.user.sourceId, aReview.user.userId,aReview.user.userNick,location));
@@ -85,7 +83,7 @@ public class ReviewService {
 
     @Transactional
     public Review  savePremium(ReviewPremiumDTO aReview) throws NonExistentSourceException {
-
+        sourceRepo.getById(aReview.critic.sourceId).orElseThrow(() -> new NonExistentSourceException(aReview.critic.sourceId));
         ReviewPremium review = aReview.toModel(languageRepo);
 
         Critic critic=criticRepository.findBySourceIdAndUserId(aReview.critic.sourceId,aReview.critic.userId)
