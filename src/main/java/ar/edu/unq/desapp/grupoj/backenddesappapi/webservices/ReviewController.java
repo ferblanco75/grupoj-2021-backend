@@ -38,7 +38,7 @@ public class ReviewController {
     }
 
     @PutMapping("/review/rate")
-    public Rates rate(@RequestBody RateDTO rateDto) throws NonExistentReviewException, NonExistentLocationException {
+    public Rates rate(@RequestBody RateDTO rateDto) throws NonExistentReviewException, NonExistentLocationException, NonExistentSourceException {
         return service.rate(rateDto);
     }
 

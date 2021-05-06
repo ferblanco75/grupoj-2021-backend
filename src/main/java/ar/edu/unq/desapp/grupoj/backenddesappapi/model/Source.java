@@ -17,9 +17,11 @@ public class Source {
     public Source(String platformName){
         this.name=platformName;
     }
+
     public Integer getId() {
         return this.id;
     }
+
     public String getName(){
         return this.name;
     }

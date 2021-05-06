@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Table(
         name = "critic",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"sourceId","critic_id"})}
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"critic_id"})}
 )
 public class Critic {
 
@@ -19,8 +19,10 @@ public class Critic {
     private Integer Id;
 
 
-    @Column(name="sourceId")
-    private Integer sourceId;
+    //@Column(name="sourcePlatform")
+    @ManyToOne
+    @JoinColumn(name="source_id")
+    private Source source;
 
     @Column(name="critic_id")
     private String userId;
@@ -32,8 +34,8 @@ public class Critic {
 
     protected Critic(){}
 
-    public Critic(Integer sourceId, String userId){
-        this.sourceId=sourceId;
+    public Critic(Source source, String userId){
+        this.source=source;
         this.userId=userId;
     }
 

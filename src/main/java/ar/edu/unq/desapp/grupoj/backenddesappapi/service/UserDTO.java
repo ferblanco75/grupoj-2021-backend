@@ -22,8 +22,5 @@ public class UserDTO {
         this.locationId=locationId;
     }
 
-    public User toModel(LocationRepository locationRepo) throws NonExistentLocationException {
-        Location location=locationRepo.findById(locationId).orElseThrow(() -> new NonExistentLocationException(locationId));
-        return new User(sourceId,userId,userNick,location);
-    }
+
 }

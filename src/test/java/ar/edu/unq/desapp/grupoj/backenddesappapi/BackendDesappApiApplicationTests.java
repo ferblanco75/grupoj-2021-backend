@@ -24,7 +24,8 @@ class BackendDesappApiApplicationTests {
 
 	@Test
 	void getUserCriticNamedJoeReturnsJoe(){
-		Critic critic = new Critic(1,"Joe");
+		Source source = new Source("NETFLIX");
+		Critic critic = new Critic(source,"Joe");
 		assertEquals("Joe", critic.getUserId());
 	}
 

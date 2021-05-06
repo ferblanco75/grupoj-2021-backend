@@ -14,8 +14,6 @@ public class CriticDTO {
         this.userId=userId;
     }
 
-    public Critic toModel()  {
-        return new Critic(sourceId,userId);
-    }
+
 
 }

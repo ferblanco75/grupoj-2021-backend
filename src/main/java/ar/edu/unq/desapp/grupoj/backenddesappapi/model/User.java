@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Table(
         name = "user",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"userSource","userId","userNick"})}
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"userId","userNick"})}
 )
 public class User {
 
@@ -18,8 +18,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
 
-    @Column(name="userSource")
-    private Integer sourceId;
+    //@Column(name="userSource")
+    @ManyToOne
+    @JoinColumn(name="source_id")
+    private Source source;
 
 
     @Column(name="userId")
@@ -39,8 +41,8 @@ public class User {
 
     protected User(){}
 
-    public User (Integer sourceId, String userId,String userNick,Location location){
-        this.sourceId=sourceId;
+    public User (Source source, String userId,String userNick,Location location){
+        this.source=source;
         this.userId=userId;
         this.userNick=userNick;
         this.location = location;
