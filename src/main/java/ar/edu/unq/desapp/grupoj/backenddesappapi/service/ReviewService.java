@@ -39,7 +39,7 @@ public class ReviewService {
     @EventListener
     public void appReady(ApplicationReadyEvent event) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
 
-        save(new ReviewDTO());
+        //save(new ReviewDTO());
         //User user = new User (source,"fernando.test@gmail.com","Fernando",location);
         //user.addReview(new Review(1, "Maso, para un domingo zafa","pochoclera",3,true,language));
         /*
