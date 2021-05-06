@@ -5,10 +5,12 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.service.RateDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.UserDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
+
 class BackendDesappApiApplicationTests {
 
 	public LanguageRepository repository;
