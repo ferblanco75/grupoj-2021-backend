@@ -19,7 +19,7 @@ public class User {
     private Integer Id;
 
     //@Column(name="userSource")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="source_id")
     private Source source;
 

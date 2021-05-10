@@ -27,7 +27,7 @@ public class Review {
     private Boolean spoilerAlert=false;
     private Date date=Date.from(Instant.now());
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     protected User user;
 
     @ManyToOne(cascade = CascadeType.ALL)

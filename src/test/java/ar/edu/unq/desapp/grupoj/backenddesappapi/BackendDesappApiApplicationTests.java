@@ -1,9 +1,14 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.helper.TestService;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.LanguageRepository;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.RateDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.UserDTO;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -13,8 +18,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BackendDesappApiApplicationTests {
 
-	public LanguageRepository repository;
+	@Autowired
+	public TestService testService;
 
+	@BeforeEach
+	void setupInicial(){
+		testService.crearDatosIniciales();
+	}
+
+	@AfterEach
+	void setupFinal(){
+		testService.eliminarTodo();
+	}
 
 	@Test
 	void ratingThreeInReviewReturnsThree() {
@@ -23,6 +38,7 @@ class BackendDesappApiApplicationTests {
 				"pochoclera",3,true, lang);
 		assertEquals(3, review.getRating());
 	}
+
 
 	@Test
 	void getUserCriticNamedJoeReturnsJoe(){
