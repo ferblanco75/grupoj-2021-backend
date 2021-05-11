@@ -6,16 +6,16 @@ import javax.persistence.*;
 @Entity
 @Table(
         name = "frontusers",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"email","password"})}
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})}
 )
 
 public class FrontUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
-    private String email;
-    private String password;
+    public String name;
+    public String email;
+    public String password;
 
     public FrontUser(Integer id, String name, String email, String password) {
         this.id = id;
@@ -23,4 +23,6 @@ public class FrontUser {
         this.email = email;
         this.password = password;
     }
+
+    protected FrontUser(){}
 }
