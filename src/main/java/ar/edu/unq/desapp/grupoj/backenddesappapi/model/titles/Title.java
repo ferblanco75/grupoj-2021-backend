@@ -1,5 +1,7 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles;
 
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +28,10 @@ public class Title {
     @Column(name = "generos")
     private List<Genre> genres;
 
+    @OneToMany
+    private List<Review> reviews;
+
+
     public Title(Integer id,TitleType type, String title, Boolean isAdult, Date startYear,Date endYear,Integer duration, List<Genre> genres){
         this.titleId=id;
         this.titleType=type;
@@ -39,6 +45,10 @@ public class Title {
     }
 
     public Title(){}
+
+    public void addReview(Review review){
+        reviews.add(review);
+    }
 
 
     public Integer getTitleId() {

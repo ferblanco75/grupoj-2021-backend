@@ -1,5 +1,7 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
+
 public class ReviewReport {
 
     private Review review;

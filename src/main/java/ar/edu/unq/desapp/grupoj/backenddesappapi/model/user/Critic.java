@@ -1,6 +1,8 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.model.user;
 
 
+
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ import java.util.List;
 @Entity
 @Table(
         name = "critic",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"critic_id"})}
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"source","critic_id"})}
 )
 public class Critic {
 
@@ -18,19 +20,12 @@ public class Critic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
 
-
-    //@Column(name="sourcePlatform")
     @ManyToOne
-    @JoinColumn(name="source_id")
+    @JoinColumn(name="source")
     private Source source;
 
     @Column(name="critic_id")
     private String userId;
-
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="critic_id")
-    protected List<Review> reviews = new ArrayList<Review>();
 
     protected Critic(){}
 
@@ -39,12 +34,16 @@ public class Critic {
         this.userId=userId;
     }
 
+    public Source getSource() {
+        return source;
+    }
 
     public String getUserId() {
         return userId;
     }
 
-    public void addReview(Review review){
-        reviews.add(review);
+    public String getUniqueIdString(){
+        return this.getSource().getName() + " " + getUserId();
     }
+
 }

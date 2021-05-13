@@ -1,5 +1,6 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
 import jdk.jfr.Name;
 
 import javax.persistence.*;
@@ -27,8 +28,8 @@ public class Review {
     private Boolean spoilerAlert=false;
     private Date date=Date.from(Instant.now());
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    protected User user;
+    @OneToOne
+    protected Critic user;
 
     @ManyToOne(cascade = CascadeType.ALL)
     protected Language language;
@@ -43,7 +44,8 @@ public class Review {
     protected Review() {
     }
 
-    public Review(Integer titleId, String text, String textExtended, Integer rating, Boolean haveSpoiler, Language language){
+    public Review(Integer titleId, Critic criticOrUser, String text, String textExtended, Integer rating, Boolean haveSpoiler, Language language){
+        this.user=criticOrUser;
         this.text=text;
         this.rating = rating;
         this.textExtended= textExtended;

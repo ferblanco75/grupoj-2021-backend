@@ -1,7 +1,5 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Critic;
-
 public class CriticDTO {
     public Integer sourceId;
     public String userId;
