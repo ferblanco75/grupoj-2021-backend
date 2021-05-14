@@ -1,13 +1,9 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.NonExistentLanguageException;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.NonExistentSourceException;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Language;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewType;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.LanguageRepository;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.SourceRepository;
 
 import java.time.Instant;
 import java.util.Date;
@@ -31,9 +27,8 @@ public class ReviewDTO {
     }
 
 
-    public Review toModel(LanguageRepository languageRepository) throws NonExistentLanguageException {
-        Language language= languageRepository.getById(languageId).orElseThrow(() -> new NonExistentLanguageException(languageId));
-        return new Review(titleId, text, textExtended, rating, spoilerAlert,language);
+    public Review toModel(Language language, User user) {
+        return new Review(titleId, user, text, textExtended, rating, spoilerAlert,language);
     }
 
 }

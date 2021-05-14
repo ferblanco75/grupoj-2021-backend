@@ -1,22 +1,25 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
 
+import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.NonExistentTitleException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.*;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.TitlesRepository.EpisodeRepository;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.TitlesRepository.TitleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
 
-
-@CrossOrigin
-@RestController
+@Service
 public class TitleService {
 
     private TitleRepository titleRepo;
@@ -45,7 +48,11 @@ public class TitleService {
         return this.titleRepo.findAll();
     }
 
-
+    public void addReviewToTitle(Review review, Integer titleId) throws NonExistentTitleException {
+        Title title = getByTitleId(titleId).orElseThrow(() -> new NonExistentTitleException(titleId));
+        title.addReview(review);
+        titleRepo.save(title);
+    }
 
 
 }

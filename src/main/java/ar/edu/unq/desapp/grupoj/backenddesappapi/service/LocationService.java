@@ -5,12 +5,12 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@CrossOrigin
-@RestController
+@Service
 public class LocationService {
 
     private final LocationRepository locationRepo;

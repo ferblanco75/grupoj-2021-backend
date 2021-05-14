@@ -5,14 +5,14 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.SourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
 
-@CrossOrigin
-@RestController
+@Service
 public class SourceService {
 
     private final SourceRepository sourceRepo;

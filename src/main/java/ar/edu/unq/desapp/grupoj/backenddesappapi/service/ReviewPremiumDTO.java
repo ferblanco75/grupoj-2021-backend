@@ -1,12 +1,9 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.NonExistentSourceException;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Language;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewPremium;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewType;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.LanguageRepository;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.SourceRepository;
 
 import java.time.Instant;
 import java.util.Date;
@@ -32,9 +29,8 @@ public class ReviewPremiumDTO {
 
 
 
-    public ReviewPremium toModel(LanguageRepository languageRepository) throws NonExistentSourceException {
-        Language language= languageRepository.getById(languageId).orElseThrow(() -> new NonExistentSourceException(languageId));
-        return new ReviewPremium(titleId, text, textExtended, rating, spoilerAlert,language);
+    public ReviewPremium toModel(Language language, Critic critic){
+        return new ReviewPremium(titleId, critic, text, textExtended, rating, spoilerAlert,language);
     }
 
 }

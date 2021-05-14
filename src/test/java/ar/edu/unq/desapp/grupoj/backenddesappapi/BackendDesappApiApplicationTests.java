@@ -1,11 +1,14 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.LanguageRepository;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.RateDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.UserDTO;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -18,8 +21,9 @@ class BackendDesappApiApplicationTests {
 
 	@Test
 	void ratingThreeInReviewReturnsThree() {
+		User user = Mockito.mock(User.class);
 		Language lang = new Language("Spanish");
-		Review review = new Review(1, "Maso, para un domingo zafa",
+		Review review = new Review(1, user,"Maso, para un domingo zafa",
 				"pochoclera",3,true, lang);
 		assertEquals(3, review.getRating());
 	}

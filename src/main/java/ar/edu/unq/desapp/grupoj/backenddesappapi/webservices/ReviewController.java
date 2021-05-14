@@ -2,10 +2,7 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.webservices;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.ReviewService;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.RateDTO;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.ReviewDTO;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.ReviewPremiumDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +20,7 @@ public class ReviewController {
     }
 
     @PostMapping("/review")
-    public Review saveReview(@RequestBody ReviewDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
+    public Review saveReview(@RequestBody ReviewDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException, NonExistentTitleException, UserAlreadyReviewTitle {
         return service.save(aReview);
     }
 
@@ -33,12 +30,12 @@ public class ReviewController {
     }
 
     @PostMapping("/review/premium")
-    public Review savePremiumReview(@RequestBody ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
+    public Review savePremiumReview(@RequestBody ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException, NonExistentTitleException, UserAlreadyReviewTitle {
         return service.savePremium(aReview);
     }
 
     @PutMapping("/review/rate")
-    public Rates rate(@RequestBody RateDTO rateDto) throws NonExistentReviewException, NonExistentLocationException, NonExistentSourceException {
+    public Rates rate(@RequestBody RateDTO rateDto) throws NonExistentReviewException, NonExistentLocationException, NonExistentSourceException, NonExistentUserException {
         return service.rate(rateDto);
     }
 
