@@ -39,4 +39,10 @@ public class ReviewController {
         return service.rate(rateDto);
     }
 
+    @PutMapping("/review/report")
+    public ReviewReport rate(@RequestBody ReportDTO jsonReport) throws NonExistentReviewException, NonExistentLocationException, NonExistentSourceException, NonExistentUserException {
+        return service.report(jsonReport);
+    }
+
+
 }

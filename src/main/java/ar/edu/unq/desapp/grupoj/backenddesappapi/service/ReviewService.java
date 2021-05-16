@@ -31,6 +31,8 @@ public class ReviewService {
     @Autowired
     private CriticService criticService;
 
+    @Autowired
+    private ReportRepository reportRepo;
 
     public ReviewService(){ }
 
@@ -122,8 +124,21 @@ public class ReviewService {
 
     }
 
+
     private Language checkLanguage(Integer languageId) throws NonExistentLanguageException {
         return languageRepo.getById(languageId).orElseThrow(() -> new NonExistentLanguageException(languageId));
+    }
+
+    @Transactional
+    public ReviewReport report(ReportDTO reportDto) throws NonExistentReviewException, NonExistentLocationException, NonExistentSourceException {
+        Review aReview= reviewRepo.findById(reportDto.reviewId).orElseThrow(() -> new NonExistentReviewException(reportDto.reviewId));
+        User user= userService.getBySourceAndUserIdAndNickId(reportDto.user.sourceId, reportDto.user.userId, reportDto.user.userNick,reportDto.user.locationId);
+        ReviewReport report= new ReviewReport(reportDto.reason,user);
+        reportRepo.save(report);
+
+        aReview.addReport(report);
+        reviewRepo.save(aReview);
+        return report;
     }
 
 }
