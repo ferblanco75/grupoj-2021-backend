@@ -15,7 +15,6 @@ public class ReviewRate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Name("idReviewRate")
-
     private Integer id;
 
     private RateType type;
