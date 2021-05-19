@@ -41,6 +41,10 @@ public class Review {
     @Name("reviewRates")
     protected List<ReviewRate> reviewRates = new ArrayList<>();
 
+    @OneToMany(targetEntity= ReviewReport.class, cascade = CascadeType.ALL)
+    @Name("reviewReports")
+    protected List<ReviewReport> reviewReports= new ArrayList<>();
+
     protected Review() {
     }
 
@@ -100,4 +104,9 @@ public class Review {
     public void addRate(ReviewRate reviewRate){
         reviewRates.add(reviewRate);
     }
+
+    public void addReport(ReviewReport reviewReport) {
+        reviewReports.add(reviewReport);
+    }
+
 }
