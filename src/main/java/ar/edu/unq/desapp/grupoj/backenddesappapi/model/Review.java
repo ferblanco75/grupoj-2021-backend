@@ -2,6 +2,7 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
 import jdk.jfr.Name;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -27,6 +28,8 @@ public class Review {
     private Integer rating;
     private Boolean spoilerAlert=false;
     private Date date=Date.from(Instant.now());
+    private Long ratedUp=(long) 0;
+    private Long ratedDown= (long) 0;
 
     @OneToOne
     protected Critic user;
@@ -92,9 +95,13 @@ public class Review {
 
     public Rates getReviewRate() {
         Rates rate = new Rates();
-        rate.ratingUp= reviewRates.stream().filter(i -> i.getType()==RateType.UP).count();
-        rate.ratingDown= reviewRates.stream().filter(i -> i.getType()==RateType.DOWN).count();
+        rate.ratingUp= this.ratedUp;
+        rate.ratingDown=this.ratedDown;
         return rate;
+    }
+
+    public Long getReviewRateInt(){
+        return this.ratedUp-this.ratedDown;
     }
 
     public Language getLanguage() {
@@ -103,10 +110,18 @@ public class Review {
 
     public void addRate(ReviewRate reviewRate){
         reviewRates.add(reviewRate);
+        calculateRates();
+
     }
 
     public void addReport(ReviewReport reviewReport) {
         reviewReports.add(reviewReport);
+
+    }
+
+    private void calculateRates(){
+        this.ratedUp=  reviewRates.stream().filter(i -> i.getType() == RateType.UP).count();
+        this.ratedDown= reviewRates.stream().filter(i -> i.getType()==RateType.DOWN).count();
     }
 
 }

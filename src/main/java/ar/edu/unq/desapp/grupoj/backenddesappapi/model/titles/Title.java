@@ -1,5 +1,6 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles;
 
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.RateType;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
 
 import javax.persistence.*;
@@ -17,8 +18,8 @@ public class Title {
     private TitleType titleType;
     private String title;
     private Boolean isAdult;
-    private Date startYear;
-    private Date endYear;
+    private Integer startYear;
+    private Integer endYear;
     private Integer duration;
 
 
@@ -32,7 +33,7 @@ public class Title {
     private List<Review> reviews;
 
 
-    public Title(Integer id,TitleType type, String title, Boolean isAdult, Date startYear,Date endYear,Integer duration, List<Genre> genres){
+    public Title(Integer id,TitleType type, String title, Boolean isAdult, Integer startYear,Integer endYear,Integer duration, List<Genre> genres){
         this.titleId=id;
         this.titleType=type;
         this.title=title;
@@ -75,11 +76,14 @@ public class Title {
         return duration;
     }
 
-    public Date getEndYear() {
+    public Integer getEndYear() {
         return endYear;
     }
 
-    public Date getStartYear() {
+    public Integer getStartYear() {
         return startYear;
     }
+
+
+
 }

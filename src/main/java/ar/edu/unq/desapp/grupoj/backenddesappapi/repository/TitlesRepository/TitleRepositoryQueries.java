@@ -1,0 +1,91 @@
+package ar.edu.unq.desapp.grupoj.backenddesappapi.repository.TitlesRepository;
+
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Decade;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Genre;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.webservices.InverseReq;
+import org.springframework.stereotype.Repository;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
+import java.util.List;
+
+@Repository
+public class TitleRepositoryQueries {
+
+    @PersistenceContext
+    EntityManager em;
+
+
+    public List<Title> inverseQuery(InverseReq req, List<Decade> decades)
+    {
+
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Title> cq = cb.createQuery(Title.class);
+
+
+        Root<Title> title = cq.from(Title.class);
+        Join<Title,Review> joinTitleReviews= title.join("reviews");
+
+        //Filter by conjunction of isMember over genres
+        Expression<List<Genre>> genreProperty = title.get("genres");
+        Predicate predicateConjunction = cb.conjunction();
+        for(Genre oneGenre: req.genres){
+            predicateConjunction = cb.and(predicateConjunction, cb.isMember(oneGenre, genreProperty));
+        }
+
+        //Filter by conjunction of isMember over Decades
+        Expression<Integer> startYear= title.get("startYear");
+        Expression<Integer> endYear= title.get("endYear");
+        Predicate predicateOr= cb.disjunction();
+
+
+        for(Decade oneDecade: decades){
+            predicateOr= cb.or(predicateOr, cb.and(cb.greaterThanOrEqualTo(startYear,oneDecade.getFrom()),
+                                                    cb.lessThanOrEqualTo(startYear,oneDecade.getTo())));
+
+            predicateOr= cb.or(predicateOr, cb.and(cb.greaterThanOrEqualTo(endYear,oneDecade.getFrom()),
+                                                    cb.lessThanOrEqualTo(endYear,oneDecade.getTo())));
+
+        }
+
+
+
+
+
+        //SubQuery para filtrar los titulos tiene reviews con menos estrellas de las deseadas
+        Subquery<Long> subquery = cq.subquery(Long.class);
+        Root<Title> subRoot = subquery.from(Title.class);
+        Join<Review, Title> join = subRoot.join("reviews");
+        Path<Long> idPath = join.get("titleId");
+        Expression<Long> idCountExp = cb.count(join.get("id"));
+        subquery.select(idPath)
+                .where(cb.lt(join.get("rating"),req.minStars))
+                .groupBy(idPath)
+                .having(cb.gt(idCountExp, 0));
+
+        Subquery<Long> subquery2 = cq.subquery(Long.class);
+        Root<Title> subRoot2 = subquery2.from(Title.class);
+        Join<Review, Title> join2 = subRoot2.join("reviews");
+        Path<Long> idPath2 = join2.get("titleId");
+        Expression<Long> rateDiff = cb.diff(join2.get("ratedUp"),join2.get("ratedDown"));
+        Predicate predicate = cb.lessThan(rateDiff,(long) 0);
+        subquery2.select(idPath2)
+                .where(predicate)
+                .groupBy(idPath2);
+
+        cq.where(predicateOr,predicateConjunction ,cb.not(title.get("titleId").in(subquery)),cb.not(title.get("titleId").in(subquery2)));
+        TypedQuery<Title> query = em.createQuery(cq);
+        return query.getResultList();
+        // Expression<Collection<Review>> review = title.get("reviews");
+        // cb.count(review);
+
+    }
+
+
+}
+
+
