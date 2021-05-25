@@ -1,10 +1,13 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.RateType;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast.Cast;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast.Job;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast.Person;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
+import org.springframework.boot.autoconfigure.batch.BatchProperties;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -32,6 +35,9 @@ public class Title {
     @OneToMany
     private List<Review> reviews;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Cast> cast= new ArrayList<Cast>();
+
 
     public Title(Integer id,TitleType type, String title, Boolean isAdult, Integer startYear,Integer endYear,Integer duration, List<Genre> genres){
         this.titleId=id;
@@ -49,6 +55,9 @@ public class Title {
 
     public void addReview(Review review){
         reviews.add(review);
+    }
+    public void addCast(Person person, Job job){
+        cast.add(new Cast(person,job));
     }
 
 

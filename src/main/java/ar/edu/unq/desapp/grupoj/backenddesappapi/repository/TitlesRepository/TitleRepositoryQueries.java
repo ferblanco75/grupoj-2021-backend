@@ -53,9 +53,6 @@ public class TitleRepositoryQueries {
         }
 
 
-
-
-
         //SubQuery para filtrar los titulos tiene reviews con menos estrellas de las deseadas
         Subquery<Long> subquery = cq.subquery(Long.class);
         Root<Title> subRoot = subquery.from(Title.class);
@@ -80,8 +77,6 @@ public class TitleRepositoryQueries {
         cq.where(predicateOr,predicateConjunction ,cb.not(title.get("titleId").in(subquery)),cb.not(title.get("titleId").in(subquery2)));
         TypedQuery<Title> query = em.createQuery(cq);
         return query.getResultList();
-        // Expression<Collection<Review>> review = title.get("reviews");
-        // cb.count(review);
 
     }
 

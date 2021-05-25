@@ -1,10 +1,12 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.NonExistentTitleException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast.Job;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast.Person;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast.Cast;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Decade;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.*;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.DecadeRepository;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.TitlesRepository.EpisodeRepository;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.TitlesRepository.TitleRepository;
@@ -14,9 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RestController;
+
 
 import java.util.*;
 
@@ -51,7 +51,12 @@ public class TitleService {
 
         ArrayList<Genre> genres3= new ArrayList<>();
         genres3.add(Genre.COMEDY);
-        titleRepo.save(new Title(21,TitleType.TVEPISODE,"LOST: Chapter 1 'Pilot'",false,2014,2015,40,genres3));
+        Title title3= new Title(21,TitleType.TVEPISODE,"LOST: Chapter 1 'Pilot'",false,2014,2015,40,genres3);
+        title3.addCast(new Person("Quique"), Job.DIRECTOR);
+        title3.addCast(new Person("Pepe"), Job.ACTOR);
+
+        titleRepo.save(title3);
+
     }
     public Optional<Title> getByTitleId(Integer id) {
         return this.titleRepo.getByTitleId(id);
