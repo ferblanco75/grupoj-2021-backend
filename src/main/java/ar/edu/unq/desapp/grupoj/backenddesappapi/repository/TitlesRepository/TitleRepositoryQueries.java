@@ -79,7 +79,7 @@ public class TitleRepositoryQueries {
                 .groupBy(idPathToTitle)
                 .having(cb.gt(idCount, 0));
 
-        
+
         //SubQuery para filtrar los titulos tiene reviews con menos estrellas de las deseadas
         Subquery<Long> subquery = cq.subquery(Long.class);
         Root<Title> subRoot = subquery.from(Title.class);
