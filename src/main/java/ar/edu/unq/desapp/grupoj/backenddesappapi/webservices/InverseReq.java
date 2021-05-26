@@ -11,7 +11,7 @@ public class InverseReq {
     public List<String> decade;
     public RateType rating;
     public Integer minStars;
-    public List<Integer> actors;
+    public List<String> actors;
     public List<Genre> genres;
 
 }

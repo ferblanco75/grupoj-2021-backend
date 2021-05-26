@@ -1,5 +1,7 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.repository.TitlesRepository;
 
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast.Cast;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast.Person;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Decade;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Genre;
@@ -26,9 +28,13 @@ public class TitleRepositoryQueries {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Title> cq = cb.createQuery(Title.class);
 
+//        req.actors
+
 
         Root<Title> title = cq.from(Title.class);
         Join<Title,Review> joinTitleReviews= title.join("reviews");
+
+
 
         //Filter by conjunction of isMember over genres
         Expression<List<Genre>> genreProperty = title.get("genres");
@@ -53,6 +59,27 @@ public class TitleRepositoryQueries {
         }
 
 
+        //SubQuery para filtrar los titulos que no tienen a los actores que se solicitan
+        Subquery<Long> subquery3 = cq.subquery(Long.class);
+        Root<Title> subRootTitle = subquery3.from(Title.class);
+        Join<Title, Cast> joinCast= subRootTitle.join("cast");
+        Join<Cast, Person> joinPerson= joinCast.join("person");
+
+        Path<Long> idPathToTitle = subRootTitle.get("titleId");
+        Expression<String> nameProp = joinPerson.get("name");
+
+        Predicate predicateD = cb.disjunction();
+        for(String oneName: req.actors){
+            predicateD= cb.or(predicateD, cb.like(nameProp,oneName));
+        }
+
+        Expression<Long> idCount = cb.count(joinPerson.get("name"));
+        subquery3.select(idPathToTitle)
+                .where(predicateD)
+                .groupBy(idPathToTitle)
+                .having(cb.gt(idCount, 0));
+
+        
         //SubQuery para filtrar los titulos tiene reviews con menos estrellas de las deseadas
         Subquery<Long> subquery = cq.subquery(Long.class);
         Root<Title> subRoot = subquery.from(Title.class);
@@ -74,7 +101,12 @@ public class TitleRepositoryQueries {
                 .where(predicate)
                 .groupBy(idPath2);
 
-        cq.where(predicateOr,predicateConjunction ,cb.not(title.get("titleId").in(subquery)),cb.not(title.get("titleId").in(subquery2)));
+        cq.where(predicateOr,
+                predicateConjunction,
+                cb.not(title.get("titleId").in(subquery)),
+                cb.not(title.get("titleId").in(subquery2)),
+                title.get("titleId").in(subquery3)
+        );
         TypedQuery<Title> query = em.createQuery(cq);
         return query.getResultList();
 
