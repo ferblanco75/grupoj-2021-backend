@@ -10,6 +10,7 @@ import java.util.Optional;
 public interface LanguageRepository extends CrudRepository<Language, Integer> {
     Iterable<Language> findAll();
     Optional<Language> getById(Integer id);
+    Optional<Language> findByValue(String value);
 
 }
 

@@ -129,6 +129,12 @@ public class ReviewService {
         return languageRepo.getById(languageId).orElseThrow(() -> new NonExistentLanguageException(languageId));
     }
 
+    private Language getLanguageByName(String languageName) throws NonExistentLanguageNameException {
+        return languageRepo.findByValue(languageName).orElseThrow(() -> new NonExistentLanguageNameException(languageName));
+    }
+
+
+
     @Transactional
     public ReviewReport report(ReportDTO reportDto) throws NonExistentReviewException, NonExistentLocationException, NonExistentSourceException {
         Review aReview= reviewRepo.findById(reportDto.reviewId).orElseThrow(() -> new NonExistentReviewException(reportDto.reviewId));
@@ -141,4 +147,12 @@ public class ReviewService {
         return report;
     }
 
+    public Iterable<Review> findAllBySpoilerAlert(boolean spoilerAlert) throws NonExistentReviewException {
+        return  reviewRepo.findAllBySpoilerAlert(spoilerAlert);
+    }
+
+    public Iterable<Review> findAllByLanguage(String language) throws NonExistentReviewException, NonExistentLanguageException, NonExistentLanguageNameException {
+        Language lang = getLanguageByName(language);
+        return  reviewRepo.findAllByLanguage(lang);
+    }
 }

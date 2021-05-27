@@ -6,4 +6,8 @@ public class NonExistentLanguageException extends Exception {
         super("There is no Language with ID " + languageId.toString());
     }
 
+
+
+
+
 }

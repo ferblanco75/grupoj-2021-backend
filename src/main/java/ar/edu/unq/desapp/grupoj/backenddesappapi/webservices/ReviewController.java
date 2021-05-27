@@ -44,5 +44,15 @@ public class ReviewController {
         return service.report(jsonReport);
     }
 
+    @GetMapping("/reviewBySpoiler/{hasSpoiler}")
+    public Iterable <Review> getReviewPorSpoilerAlert(@PathVariable(value = "hasSpoiler") boolean spoilerAlert) throws ResourceNotFoundException, NonExistentReviewException {
+        return service.findAllBySpoilerAlert(spoilerAlert);
+    }
+
+    @GetMapping("/reviewBylanguage/{language}")
+    public Iterable <Review> getReviewByLanguage(@PathVariable(value = "language") String language) throws ResourceNotFoundException, NonExistentReviewException, NonExistentLanguageException, NonExistentLanguageNameException {
+        return service.findAllByLanguage(language);
+    }
+
 
 }
