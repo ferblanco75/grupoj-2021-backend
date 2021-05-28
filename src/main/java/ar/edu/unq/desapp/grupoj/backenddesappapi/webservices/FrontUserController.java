@@ -1,8 +1,8 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.webservices;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions.NonExistentLanguageException;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions.NonExistentLocationException;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions.NonExistentSourceException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentLanguageException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentLocationException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentSourceException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.FrontUser;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.FrontUserService;
 import org.springframework.beans.factory.annotation.Autowired;

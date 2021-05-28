@@ -1,4 +1,4 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.service.DTOs;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos;
 
 public class UserDTO {
 

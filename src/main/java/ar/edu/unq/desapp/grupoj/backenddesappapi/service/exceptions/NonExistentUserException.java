@@ -1,6 +1,6 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.DTOs.UserDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.UserDTO;
 
 public class NonExistentUserException extends Exception {
     public NonExistentUserException(UserDTO user) {

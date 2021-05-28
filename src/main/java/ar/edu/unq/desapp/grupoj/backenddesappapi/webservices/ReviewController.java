@@ -2,11 +2,11 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.webservices;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.*;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.DTOs.RateDTO;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.DTOs.ReportDTO;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.DTOs.ReviewDTO;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.DTOs.ReviewPremiumDTO;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions.*;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.RateDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReportDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReviewDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReviewPremiumDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;

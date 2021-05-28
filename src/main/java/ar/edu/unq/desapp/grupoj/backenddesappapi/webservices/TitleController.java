@@ -1,9 +1,9 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.webservices;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.DTOs.InverseReq;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions.NonExistentSourceException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.InverseReq;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentSourceException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.DTOs.TitleDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.TitleDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.TitleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

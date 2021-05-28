@@ -5,8 +5,8 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.*;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.DTOs.*;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions.*;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.*;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;

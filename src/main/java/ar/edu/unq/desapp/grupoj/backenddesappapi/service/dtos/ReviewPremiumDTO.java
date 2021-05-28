@@ -1,8 +1,7 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.service.DTOs;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.DTOs.CriticDTO;
 
 import java.time.Instant;
 import java.util.Date;

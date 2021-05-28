@@ -1,23 +1,12 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.LanguageRepository;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.UserRepository;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.*;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.DTOs.RateDTO;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.DTOs.UserDTO;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions.NonExistentLanguageException;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions.NonExistentLocationException;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions.NonExistentSourceException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentLanguageException;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 

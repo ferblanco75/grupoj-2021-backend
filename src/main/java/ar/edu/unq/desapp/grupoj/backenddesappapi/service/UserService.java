@@ -1,11 +1,10 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions.NonExistentLocationException;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions.NonExistentSourceException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentLocationException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentSourceException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Location;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.LocationRepository;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.SourceRepository;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

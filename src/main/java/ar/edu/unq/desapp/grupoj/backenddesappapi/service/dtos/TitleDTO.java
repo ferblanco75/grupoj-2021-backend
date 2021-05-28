@@ -1,7 +1,5 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.service.DTOs;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Genre;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.TitleType;
 
 

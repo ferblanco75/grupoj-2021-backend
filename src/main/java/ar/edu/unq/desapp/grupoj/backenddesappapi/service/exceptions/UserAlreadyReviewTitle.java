@@ -1,4 +1,4 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions;
 
 public class UserAlreadyReviewTitle extends Exception {
     public UserAlreadyReviewTitle(Integer titleId, String uniqueIdString) {

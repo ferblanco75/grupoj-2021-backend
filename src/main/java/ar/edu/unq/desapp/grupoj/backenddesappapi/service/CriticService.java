@@ -1,6 +1,6 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions.NonExistentSourceException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentSourceException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.CriticRepository;
