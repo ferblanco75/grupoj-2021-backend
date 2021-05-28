@@ -26,7 +26,7 @@ class BackendDesappApiAuxiliarTests {
 
 
 	@Test
-	void RetrieveAllLanguagesFromService() {
+	void retrieveAllLanguagesFromService() {
 		List<Language> languages = langSrvc.findAll();
 		assertEquals(4, languages.size());
 		List<String> langValues = languages.stream().map(i->i.getValue()).collect(Collectors.toList());
@@ -38,13 +38,13 @@ class BackendDesappApiAuxiliarTests {
 	}
 
 	@Test
-	void RetrieveOneLanguageFromServiceById() throws NonExistentLanguageException {
+	void retrieveOneLanguageFromServiceById() throws NonExistentLanguageException {
 		Language lang= langSrvc.getById(1);
 		assertEquals("Español",lang.getValue());
 	}
 
 	@Test
-	void RetrieveOneNonExistentLanguageFromServiceById() throws NonExistentLanguageException {
+	void retrieveOneNonExistentLanguageFromServiceById() throws NonExistentLanguageException {
 		Exception exception = assertThrows(NonExistentLanguageException.class, () -> {
 			langSrvc.getById(999);
 		});
@@ -58,7 +58,7 @@ class BackendDesappApiAuxiliarTests {
 	}
 
 	@Test
-	void RetrieveAllLocationsFromService() {
+	void retrieveAllLocationsFromService() {
 		List<Location> locations = locationSrvc.findAll();
 		assertEquals(5, locations.size());
 		List<String> cities = locations.stream().map(i->i.getCity()).collect(Collectors.toList());

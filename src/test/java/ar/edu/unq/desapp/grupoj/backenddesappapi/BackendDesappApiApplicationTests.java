@@ -59,24 +59,24 @@ class BackendDesappApiApplicationTests {
 
 
 	@Test
-	void EspanolLanguageReturnsValueEspanol(){
+	void espanolLanguageReturnsValueEspanol(){
 		Language spanish = new Language("Español");
 		assertEquals("Español",spanish.getValue());
 	}
 
 	@Test
-	void LocationCOuntryItalyReturnsItaly(){
+	void locationCOuntryItalyReturnsItaly(){
 		Location location = new Location("italy","Parma");
 		assertEquals("italy",location.getCountry());
 	}
 
 	@Test
-	void LocationCityParmaReturnsParma(){
+	void locationCityParmaReturnsParma(){
 		Location location = new Location("italy","Parma");
 		assertEquals("Parma",location.getCity());
 	}
 	@Test
-	void RateDtoReviewId123Returns123(){
+	void rateDtoReviewId123Returns123(){
 		UserDTO user = new UserDTO(1,"pepe.test@gmail.com",
 				"pepito10",123);
 		RateType rateType = RateType.UP;
@@ -86,7 +86,7 @@ class BackendDesappApiApplicationTests {
 	//RateDTO(UserDTO user, Integer reviewId,RateType rateType)
 
 	@Test
-	void UserServiceTest1() throws NonExistentLocationException, NonExistentSourceException {
+	void userServiceTest1() throws NonExistentLocationException, NonExistentSourceException {
 		Source source = Mockito.mock(Source.class);
 		Location location = Mockito.mock(Location.class);
 		User user = new User(source,"testUser","test1",location);
@@ -98,7 +98,7 @@ class BackendDesappApiApplicationTests {
 
 
 	@Test
-	void GetOneForCriticService() throws NonExistentSourceException {
+	void getOneForCriticService() throws NonExistentSourceException {
 
 		Critic retrievedCritic= criticSrvc.getBySourceAndCriticId(1,"ventura");
 		assertEquals("Netflix-2", retrievedCritic.getSource().getName());
@@ -108,7 +108,7 @@ class BackendDesappApiApplicationTests {
 	}
 
 	@Test
-	void RetrieveOneUserFromService() throws NonExistentLocationException, NonExistentSourceException {
+	void retrieveOneUserFromService() throws NonExistentLocationException, NonExistentSourceException {
 
 		Source sourceRetrieved = sourceSrvc.getById(1).get();
 		assertEquals("Netflix-2", sourceRetrieved.getName());
@@ -116,7 +116,7 @@ class BackendDesappApiApplicationTests {
 	}
 
 	@Test
-	void RetrieveCriticWithUnknownSourceFromServiceAndGetSourceException() {
+	void retrieveCriticWithUnknownSourceFromServiceAndGetSourceException() {
 		Exception exception = assertThrows(NonExistentSourceException.class, () -> {
 			criticSrvc.getBySourceAndCriticId(999,"pepe");
 		});
@@ -128,7 +128,7 @@ class BackendDesappApiApplicationTests {
 	}
 
 	@Test
-	void RetrieveUserWithUnknownSourceFromServiceAndGetLocationException() {
+	void retrieveUserWithUnknownSourceFromServiceAndGetLocationException() {
 		Exception exception = assertThrows(NonExistentLocationException.class, () -> {
 			userSrvc.getBySourceAndUserIdAndNickId(1,"pepe","pepe",999);
 		});
@@ -140,7 +140,7 @@ class BackendDesappApiApplicationTests {
 	}
 
 	@Test
-	void RetrieveAllUsersFromService() throws NonExistentLocationException, NonExistentSourceException {
+	void retrieveAllUsersFromService() throws NonExistentLocationException, NonExistentSourceException {
 
 		List<String> sources =new ArrayList<>();
 
@@ -161,14 +161,14 @@ class BackendDesappApiApplicationTests {
 	}
 
 	@Test
-	void RetrieveOneDecadeFromService() {
+	void retrieveOneDecadeFromService() {
 		Decade decadeRetrieved = decadeSrvc.getById("D80").get();
 		assertEquals(1980, decadeRetrieved.getFrom());
 		assertEquals(1989, decadeRetrieved.getTo());
 	}
 
 	@Test
-	void RetrieveAllDecadeFromService() {
+	void retrieveAllDecadeFromService() {
 
 		List<Decade> decades =new ArrayList<>();
 

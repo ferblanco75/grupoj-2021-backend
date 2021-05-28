@@ -29,15 +29,10 @@ public class TitleService {
     @Autowired
     private TitleRepositoryQueries titleRepoQ;
 
-
-    private TitleRepository titleRepo;
-    private EpisodeRepository episodeRepo;
-
     @Autowired
-    public TitleService(TitleRepository aRepository, EpisodeRepository episodeRepo) {
-        this.titleRepo = aRepository;
-        this.episodeRepo= episodeRepo;
-    }
+    private TitleRepository titleRepo;
+
+
 
     @EventListener
     public void appReady(ApplicationReadyEvent event) {
