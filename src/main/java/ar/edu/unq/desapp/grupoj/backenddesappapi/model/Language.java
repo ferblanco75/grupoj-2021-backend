@@ -16,10 +16,11 @@ public class Language {
 
     private String value;
 
-    protected Language(){}
+    protected Language() {
+    }
 
-    public Language(String languageName){
-        this.value=languageName;
+    public Language(String languageName) {
+        this.value = languageName;
     }
 
     public String getValue() {

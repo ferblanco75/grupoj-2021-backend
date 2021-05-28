@@ -25,12 +25,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BackendDesappApiApplicationTests {
 
-	public LanguageRepository repository;
-
 	@Autowired
 	private UserService userSrvc;
-	@Autowired
-	private UserRepository userRepo;
+
 	@Autowired
 	private SourceService sourceSrvc;
 	@Autowired
@@ -180,6 +177,8 @@ class BackendDesappApiApplicationTests {
 
 
 	}
+
+
 
 
 }

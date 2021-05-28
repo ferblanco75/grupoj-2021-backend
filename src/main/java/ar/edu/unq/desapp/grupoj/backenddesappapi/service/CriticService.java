@@ -5,7 +5,6 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.CriticRepository;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.SourceRepository;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions.NonExistentUserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;

@@ -23,12 +23,12 @@ public class UserService {
     private SourceRepository sourceRepo;
 
     @Autowired
-    private LocationRepository locationRepo;
+    private LocationService locationSrvc;
 
     @Transactional
     public User getBySourceAndUserIdAndNickId(Integer sourceId, String userId,String userNick, Integer locationId) throws NonExistentSourceException, NonExistentLocationException {
 
-        Location location= locationRepo.getById(locationId).orElseThrow(() -> new NonExistentLocationException(locationId));
+        Location location= locationSrvc.getById(locationId);
 
         Source source = sourceRepo.getById(sourceId).orElseThrow(() -> new NonExistentSourceException(sourceId));
 

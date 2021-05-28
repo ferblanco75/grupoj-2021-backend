@@ -21,7 +21,7 @@ public class ReviewService {
     private  ReviewRepository reviewRepo;
 
     @Autowired
-    private  LanguageRepository languageRepo;
+    private  LanguageService languageSrvc;
 
     @Autowired
     private TitleService titleService;
@@ -127,7 +127,7 @@ public class ReviewService {
 
 
     private Language checkLanguage(Integer languageId) throws NonExistentLanguageException {
-        return languageRepo.getById(languageId).orElseThrow(() -> new NonExistentLanguageException(languageId));
+        return languageSrvc.getById(languageId);
     }
 
     @Transactional
