@@ -1,4 +1,4 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.service.DTOs;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;

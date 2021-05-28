@@ -1,11 +1,9 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.webservices;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.NonExistentSourceException;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions.NonExistentSourceException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.TitleDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.DTOs.TitleDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.TitleService;
-import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;

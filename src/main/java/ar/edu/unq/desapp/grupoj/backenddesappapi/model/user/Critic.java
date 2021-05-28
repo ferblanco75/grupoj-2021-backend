@@ -20,7 +20,7 @@ public class Critic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="source")
     private Source source;
 

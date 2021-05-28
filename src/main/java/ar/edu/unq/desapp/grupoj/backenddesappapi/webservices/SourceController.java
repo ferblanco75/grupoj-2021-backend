@@ -1,6 +1,6 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.webservices;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.NonExistentSourceException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions.NonExistentSourceException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.SourceService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,14 +1,16 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.NonExistentLocationException;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.NonExistentSourceException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions.NonExistentLocationException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions.NonExistentSourceException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.LanguageRepository;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.UserRepository;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.*;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.DTOs.RateDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.DTOs.UserDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions.NonExistentUserException;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,8 +19,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 
@@ -34,6 +35,9 @@ class BackendDesappApiApplicationTests {
 	private SourceService sourceSrvc;
 	@Autowired
 	private DecadeService decadeSrvc;
+
+	@Autowired
+	private CriticService criticSrvc;
 
 	@Test
 	void ratingThreeInReviewReturnsThree() {
@@ -92,11 +96,45 @@ class BackendDesappApiApplicationTests {
 
 
 	@Test
+	void GetOneForCriticService() throws NonExistentSourceException {
+
+		Critic retrievedCritic= criticSrvc.getBySourceAndCriticId(1,"ventura");
+		assertEquals("Netflix-2", retrievedCritic.getSource().getName());
+		assertEquals("ventura", retrievedCritic.getUserId());
+
+
+	}
+
+	@Test
 	void RetrieveOneUserFromService() throws NonExistentLocationException, NonExistentSourceException {
 
 		Source sourceRetrieved = sourceSrvc.getById(1).get();
-		assertEquals("Netflix", sourceRetrieved.getName());
+		assertEquals("Netflix-2", sourceRetrieved.getName());
 		assertEquals(1, sourceRetrieved.getId());
+	}
+
+	@Test
+	void RetrieveCriticWithUnknownSourceFromServiceAndGetSourceException() {
+		Exception exception = assertThrows(NonExistentSourceException.class, () -> {
+			criticSrvc.getBySourceAndCriticId(999,"pepe");
+		});
+
+		String expectedMessage = "There is no source with ID 999";
+		String actualMessage = exception.getMessage();
+
+		assertTrue(actualMessage.contains(expectedMessage));
+	}
+
+	@Test
+	void RetrieveUserWithUnknownSourceFromServiceAndGetLocationException() {
+		Exception exception = assertThrows(NonExistentLocationException.class, () -> {
+			userSrvc.getBySourceAndUserIdAndNickId(1,"pepe","pepe",999);
+		});
+
+		String expectedMessage = "There is no Location with ID 999";
+		String actualMessage = exception.getMessage();
+
+		assertTrue(actualMessage.contains(expectedMessage));
 	}
 
 	@Test
@@ -110,12 +148,13 @@ class BackendDesappApiApplicationTests {
 			sources.add(source.getName());
 		}
 
-		assertEquals(5, sources.size());
+		assertEquals(6, sources.size());
 		assertTrue(sources.contains("Netflix"));
 		assertTrue(sources.contains("Disney+"));
 		assertTrue(sources.contains("Amazon Prime Video"));
 		assertTrue(sources.contains("Paramount"));
 		assertTrue(sources.contains("HBO Go"));
+		assertTrue(sources.contains("Netflix-2"));
 
 	}
 

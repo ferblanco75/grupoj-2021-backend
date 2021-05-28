@@ -1,11 +1,12 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.*;
 
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.DTOs.*;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -118,7 +119,7 @@ public class ReviewService {
         return aReview.getReviewRate();
     }
 
-    public void rateReview(Review review, UserDTO user,RateType rateType) throws NonExistentLocationException, NonExistentSourceException {
+    public void rateReview(Review review, UserDTO user, RateType rateType) throws NonExistentLocationException, NonExistentSourceException {
         User rateUser = userService.getBySourceAndUserIdAndNickId(user.sourceId, user.userId, user.userNick,user.locationId);
         review.addRate(new ReviewRate(rateType,rateUser ,review));
 

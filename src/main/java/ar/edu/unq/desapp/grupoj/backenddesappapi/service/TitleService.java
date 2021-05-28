@@ -1,9 +1,8 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.NonExistentTitleException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions.NonExistentTitleException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast.Job;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast.Person;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast.Cast;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Decade;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.*;
