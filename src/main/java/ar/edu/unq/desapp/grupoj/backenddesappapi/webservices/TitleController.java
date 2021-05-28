@@ -1,5 +1,6 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.webservices;
 
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.DTOs.InverseReq;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.Exceptions.NonExistentSourceException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.DTOs.TitleDTO;
@@ -31,11 +32,6 @@ public class TitleController {
     @PostMapping("/title/inverse")
     public List<TitleDTO> getAllMatching(@RequestBody InverseReq req) {
 
-        //TODO Actores y decada la leo de las peliculas filtradas
-
-
-
-        //Las peliculas obtenidas de las reviews que tienen tales condiciones
         List<Title> t = titleService.inverseQuery(req);
 
         return t.stream().map(i ->

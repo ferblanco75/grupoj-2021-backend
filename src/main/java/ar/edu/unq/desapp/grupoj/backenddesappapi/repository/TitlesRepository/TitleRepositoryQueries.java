@@ -6,7 +6,7 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Decade;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Genre;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.webservices.InverseReq;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.DTOs.InverseReq;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
