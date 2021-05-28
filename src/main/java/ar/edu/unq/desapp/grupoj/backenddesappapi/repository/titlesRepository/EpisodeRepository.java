@@ -1,4 +1,4 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.repository.TitlesRepository;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.repository.titlesRepository;
 
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Episode;

@@ -1,15 +1,15 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentTitleException;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast.Job;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast.Person;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.cast.Job;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.cast.Person;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Decade;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.DecadeRepository;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.TitlesRepository.EpisodeRepository;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.TitlesRepository.TitleRepository;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.TitlesRepository.TitleRepositoryQueries;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.titlesRepository.EpisodeRepository;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.titlesRepository.TitleRepository;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.titlesRepository.TitleRepositoryQueries;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.InverseReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;

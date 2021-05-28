@@ -1,4 +1,4 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.model.cast;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,4 +1,4 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.model.cast;
 
 
 public enum Job {

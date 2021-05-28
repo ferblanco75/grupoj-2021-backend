@@ -1,7 +1,7 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.repository.TitlesRepository;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.repository.titlesRepository;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast.Cast;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast.Person;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.cast.Cast;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.cast.Person;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Decade;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Genre;
