@@ -17,7 +17,14 @@ public class Person {
     public Person (String name){
         this.name=name;
     }
+
     protected Person(){}
 
+    public String getName() {
+        return name;
+    }
 
+    public Integer getId() {
+        return id;
+    }
 }

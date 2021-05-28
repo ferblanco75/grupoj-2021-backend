@@ -45,4 +45,16 @@ public class ReviewRate {
     public RateType getType() {
         return type;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Review getReview() {
+        return review;
+    }
 }

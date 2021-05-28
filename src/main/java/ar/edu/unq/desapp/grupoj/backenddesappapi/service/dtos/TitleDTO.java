@@ -28,10 +28,31 @@ public class TitleDTO {
 
     protected TitleDTO(){}
 
+    public Integer getTitleId() {
+        return titleId;
+    }
 
+    public Integer getDuration() {
+        return duration;
+    }
 
+    public String getTitle() {
+        return title;
+    }
 
+    public Integer getEndYear() {
+        return endYear;
+    }
 
+    public Boolean getAdult() {
+        return isAdult;
+    }
 
+    public Integer getStartYear() {
+        return startYear;
+    }
 
+    public TitleType getType() {
+        return type;
+    }
 }

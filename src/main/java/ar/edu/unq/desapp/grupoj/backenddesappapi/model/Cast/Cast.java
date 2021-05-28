@@ -30,4 +30,16 @@ public class Cast {
         this.person=person;
         this.job=job;
     }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Job getJob() {
+        return job;
+    }
 }

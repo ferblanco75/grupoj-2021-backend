@@ -30,4 +30,20 @@ public class FrontUser {
     }
 
     protected FrontUser(){}
+
+    public String getName() {
+        return name;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }

@@ -79,4 +79,6 @@ public class TitleService {
         List<Decade> decades= decadeRepo.getAllByIdIn(req.decade);
         return titleRepoQ.inverseQuery(req,decades);
     }
+
+
 }
