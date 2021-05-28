@@ -1,11 +1,23 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewPremium;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Language;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewReport;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Rates;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewRate;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.RateType;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.*;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.ReviewRepository;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.ReportRepository;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.*;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReviewDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReviewPremiumDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReportDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.RateDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.UserDTO;
+
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -35,7 +47,6 @@ public class ReviewService {
     @Autowired
     private ReportRepository reportRepo;
 
-    public ReviewService(){ }
 
     @EventListener
     public void appReady(ApplicationReadyEvent event) {

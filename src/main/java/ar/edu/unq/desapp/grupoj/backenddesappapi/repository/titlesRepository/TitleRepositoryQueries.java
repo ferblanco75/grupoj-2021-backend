@@ -12,7 +12,15 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Subquery;
+import javax.persistence.criteria.Path;
+
 import java.util.List;
 
 @Repository
@@ -27,8 +35,6 @@ public class TitleRepositoryQueries {
 
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Title> cq = cb.createQuery(Title.class);
-
-//        req.actors
 
 
         Root<Title> title = cq.from(Title.class);

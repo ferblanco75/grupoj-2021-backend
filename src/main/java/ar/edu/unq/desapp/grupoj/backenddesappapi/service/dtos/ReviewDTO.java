@@ -1,6 +1,8 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Language;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewType;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
 
 import java.time.Instant;
@@ -21,11 +23,7 @@ public class ReviewDTO {
 
     public UserDTO user;
 
-    public ReviewDTO() {
-    }
-
-
-    public Review toModel(Language language, User user) {
+     public Review toModel(Language language, User user) {
         return new Review(titleId, user, text, textExtended, rating, spoilerAlert,language);
     }
 
