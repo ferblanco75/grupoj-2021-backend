@@ -1,7 +1,9 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.*;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Location;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Language;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.LanguageService;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.LocationService;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentLanguageException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
