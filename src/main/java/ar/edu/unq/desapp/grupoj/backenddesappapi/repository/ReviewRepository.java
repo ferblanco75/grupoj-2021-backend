@@ -2,8 +2,6 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.repository;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

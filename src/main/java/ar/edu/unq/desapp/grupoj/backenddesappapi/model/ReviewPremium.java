@@ -2,7 +2,7 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
 
 
 @Entity

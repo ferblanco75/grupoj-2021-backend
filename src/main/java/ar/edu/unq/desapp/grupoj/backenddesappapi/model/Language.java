@@ -1,7 +1,5 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

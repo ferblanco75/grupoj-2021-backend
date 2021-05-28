@@ -2,7 +2,6 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
 import jdk.jfr.Name;
-import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.time.Instant;

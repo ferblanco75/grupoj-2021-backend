@@ -1,6 +1,14 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.CascadeType;
+import javax.persistence.OneToOne;
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
+
 
 @Entity
 public class Cast {
