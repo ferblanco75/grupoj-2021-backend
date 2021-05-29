@@ -84,7 +84,7 @@ public class ReviewService {
 
         Review review = aReview.toModel(language,user);
         this.checkUniqueReviewer(review,user);
-        //reviewRepo.save(review);//TODO Es necesario grabar la review?
+        reviewRepo.save(review);
 
         titleService.addReviewToTitle(review,aReview.titleId);
 
@@ -107,7 +107,7 @@ public class ReviewService {
         //Guardo la review
         ReviewPremium review = aReview.toModel(language,critic);
         this.checkUniqueReviewer(review,critic);
-        //reviewRepo.save(review);
+        reviewRepo.save(review);
 
         //Actualizo titulo con la nueva Review
         titleService.addReviewToTitle(review,aReview.titleId);
@@ -118,7 +118,7 @@ public class ReviewService {
 
 
     @Transactional
-    public Rates rate(RateDTO rateDto) throws NonExistentReviewException, NonExistentSourceException, NonExistentLocationException, NonExistentUserException {
+    public Rates rate(RateDTO rateDto) throws NonExistentReviewException, NonExistentSourceException, NonExistentLocationException {
         Review aReview= reviewRepo.findById(rateDto.reviewId).orElseThrow(() -> new NonExistentReviewException(rateDto.reviewId));
         this.rateReview(aReview,rateDto.user,rateDto.rateType);
         reviewRepo.save(aReview);
@@ -126,7 +126,7 @@ public class ReviewService {
         return aReview.getReviewRate();
     }
 
-    public void rateReview(Review review, UserDTO user, RateType rateType) throws NonExistentLocationException, NonExistentSourceException, NonExistentUserException {
+    private void rateReview(Review review, UserDTO user, RateType rateType) throws NonExistentLocationException, NonExistentSourceException {
         User rateUser = userService.getBySourceAndUserIdAndNickId(user.sourceId,user.userId,user.userNick,user.locationId);
         review.addRate(new ReviewRate(rateType,rateUser,review));
     }
