@@ -31,7 +31,7 @@ public class Title {
     @Column(name = "generos")
     private List<Genre> genres;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Review> reviews;
 
     @ManyToMany(cascade = CascadeType.ALL)

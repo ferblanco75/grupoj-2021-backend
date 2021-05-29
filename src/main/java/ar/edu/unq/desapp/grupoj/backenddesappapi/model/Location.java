@@ -32,4 +32,5 @@ public class Location {
     public Integer getId() {
         return id;
     }
+
 }

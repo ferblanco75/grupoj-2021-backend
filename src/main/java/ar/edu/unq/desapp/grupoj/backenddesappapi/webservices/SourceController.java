@@ -21,7 +21,7 @@ public class SourceController {
 
     @GetMapping("/sources/{id}")
     public Source getById(@PathVariable(value = "id") Integer id) throws NonExistentSourceException {
-        return sourceService.getById(id).orElseThrow(() -> new NonExistentSourceException(id));
+        return sourceService.getById(id);
     }
 
 }

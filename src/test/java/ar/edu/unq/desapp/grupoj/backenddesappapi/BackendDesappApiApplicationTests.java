@@ -110,7 +110,7 @@ class BackendDesappApiApplicationTests {
 	@Test
 	void retrieveOneUserFromService() throws NonExistentLocationException, NonExistentSourceException {
 
-		Source sourceRetrieved = sourceSrvc.getById(1).get();
+		Source sourceRetrieved = sourceSrvc.getById(1);
 		assertEquals("Netflix-2", sourceRetrieved.getName());
 		assertEquals(1, sourceRetrieved.getId());
 	}

@@ -72,24 +72,20 @@ public class ReviewService {
         return reviewRepo.findAll();
     }
 
-    public Iterable<Review> findAllByIdTitle(Integer idTitle) throws ResourceNotFoundException {
-        Title title = titleService.getByTitleId(idTitle).orElseThrow(() -> new ResourceNotFoundException("Non existent Title."));
+    public Iterable<Review> findAllByIdTitle(Integer idTitle) throws NonExistentTitleException {
+        Title title = titleService.getByTitleId(idTitle);
         return reviewRepo.findAllByTitleId(title.getTitleId());
     }
 
     @Transactional
     public Review save(ReviewDTO aReview) throws NonExistentLocationException, NonExistentLanguageException, NonExistentSourceException, NonExistentTitleException, UserAlreadyReviewTitle {
         Language language= checkLanguage(aReview.languageId);
-
-        //Creo u obtengo el usuario
         User user = userService.getBySourceAndUserIdAndNickId(aReview.user.sourceId,aReview.user.userId, aReview.user.userNick,aReview.languageId);
 
-        //Guardo la review
         Review review = aReview.toModel(language,user);
         this.checkUniqueReviewer(review,user);
-        reviewRepo.save(review);
+        //reviewRepo.save(review);//TODO Es necesario grabar la review?
 
-        //Actualizo titulo con la nueva Review
         titleService.addReviewToTitle(review,aReview.titleId);
 
         return review;
@@ -111,7 +107,7 @@ public class ReviewService {
         //Guardo la review
         ReviewPremium review = aReview.toModel(language,critic);
         this.checkUniqueReviewer(review,critic);
-        reviewRepo.save(review);
+        //reviewRepo.save(review);
 
         //Actualizo titulo con la nueva Review
         titleService.addReviewToTitle(review,aReview.titleId);
@@ -122,7 +118,7 @@ public class ReviewService {
 
 
     @Transactional
-    public Rates rate(RateDTO rateDto) throws NonExistentReviewException, NonExistentSourceException, NonExistentLocationException {
+    public Rates rate(RateDTO rateDto) throws NonExistentReviewException, NonExistentSourceException, NonExistentLocationException, NonExistentUserException {
         Review aReview= reviewRepo.findById(rateDto.reviewId).orElseThrow(() -> new NonExistentReviewException(rateDto.reviewId));
         this.rateReview(aReview,rateDto.user,rateDto.rateType);
         reviewRepo.save(aReview);
@@ -130,12 +126,10 @@ public class ReviewService {
         return aReview.getReviewRate();
     }
 
-    public void rateReview(Review review, UserDTO user, RateType rateType) throws NonExistentLocationException, NonExistentSourceException {
-        User rateUser = userService.getBySourceAndUserIdAndNickId(user.sourceId, user.userId, user.userNick,user.locationId);
-        review.addRate(new ReviewRate(rateType,rateUser ,review));
-
+    public void rateReview(Review review, UserDTO user, RateType rateType) throws NonExistentLocationException, NonExistentSourceException, NonExistentUserException {
+        User rateUser = userService.getBySourceAndUserIdAndNickId(user.sourceId,user.userId,user.userNick,user.locationId);
+        review.addRate(new ReviewRate(rateType,rateUser,review));
     }
-
 
     private Language checkLanguage(Integer languageId) throws NonExistentLanguageException {
         return languageSrvc.getById(languageId);

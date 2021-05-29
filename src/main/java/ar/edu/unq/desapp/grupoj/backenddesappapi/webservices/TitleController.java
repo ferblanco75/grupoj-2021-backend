@@ -5,6 +5,7 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentS
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.TitleDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.TitleService;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentTitleException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,8 @@ public class TitleController {
     }
 
     @GetMapping("/title/{id}")
-    public Title getById(@PathVariable(value = "id") Integer id) throws NonExistentSourceException {
-        return titleService.getByTitleId(id).orElseThrow(() -> new NonExistentSourceException(id));
+    public Title getById(@PathVariable(value = "id") Integer id) throws NonExistentTitleException {
+        return titleService.getByTitleId(id);
     }
 
     @PostMapping("/title/inverse")
