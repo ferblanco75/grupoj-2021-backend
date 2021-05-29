@@ -18,12 +18,11 @@ public class FrontUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    public String name;
-    public String email;
-    public String password;
+    private String name;
+    private String email;
+    private String password;
 
-    public FrontUser(Integer id, String name, String email, String password) {
-        this.id = id;
+    public FrontUser(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;

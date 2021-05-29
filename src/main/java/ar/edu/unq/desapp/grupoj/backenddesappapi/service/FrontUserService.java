@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -17,12 +18,12 @@ public class FrontUserService {
     @Autowired
     private FrontUserRepository frontUserRepo;
 
-    public Iterable<FrontUser> findAll() {
+    public List<FrontUser> findAll() {
         return frontUserRepo.findAll();
     }
 
     @Transactional
-    public FrontUser save(FrontUser frontuser) throws NonExistentLocationException, NonExistentLanguageException, NonExistentSourceException {
+    public FrontUser save(FrontUser frontuser) {
         frontUserRepo.save(frontuser);
         return frontuser;
     }

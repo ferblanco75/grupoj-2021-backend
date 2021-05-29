@@ -58,11 +58,11 @@ public class TitleService {
         return this.titleRepo.getByTitleId(id).orElseThrow(() -> new NonExistentTitleException(id));
     }
 
-    public Iterable<Title> findAll() {
+    public List<Title> findAll() {
         return this.titleRepo.findAll();
     }
 
-    protected void addReviewToTitle(Review review, Integer titleId) throws NonExistentTitleException{
+    void addReviewToTitle(Review review, Integer titleId) throws NonExistentTitleException{
         Title title = getByTitleId(titleId);
         title.addReview(review);
         titleRepo.save(title);

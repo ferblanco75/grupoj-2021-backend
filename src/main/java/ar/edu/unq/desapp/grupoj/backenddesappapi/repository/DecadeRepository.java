@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface DecadeRepository extends CrudRepository<Decade, String> {
-    Iterable<Decade> findAll();
+    List<Decade> findAll();
     Optional<Decade> getById(String id);
     List<Decade> getAllByIdIn(List<String> ids);
 

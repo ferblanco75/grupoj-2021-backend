@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface TitleRepository extends CrudRepository<Title, Integer> {
-    Iterable<Title> findAll();
+    List<Title> findAll();
     Optional<Title> getByTitleId(Integer id);
 
     @Query("select t from Title t JOIN FETCH t.reviews as r group by t having r.rating>=3")

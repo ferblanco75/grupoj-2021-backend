@@ -8,6 +8,8 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SourceService {
 
@@ -27,7 +29,7 @@ public class SourceService {
         return sourceRepo.getById(id).orElseThrow(() -> new NonExistentSourceException(id));
     }
 
-    public Iterable<Source> findAll() {
+    public List<Source> findAll() {
         return this.sourceRepo.findAll();
     }
 }
