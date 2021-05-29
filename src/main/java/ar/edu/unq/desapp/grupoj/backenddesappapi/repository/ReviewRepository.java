@@ -2,7 +2,9 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.repository;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Language;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewType;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -24,6 +26,10 @@ public interface ReviewRepository extends CrudRepository<Review, Integer> {
     Iterable<Review> findAllBySpoilerAlert(boolean spoilerAlert);
 
     Iterable<Review> findAllByLanguage(Language language);
+
+    Iterable<Review> findAllByType(ReviewType type);
+
+    Iterable<Review> findAllByUser(User user);
 }
 
 

@@ -12,6 +12,8 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class ReviewService {
@@ -33,6 +35,16 @@ public class ReviewService {
 
     @Autowired
     private ReportRepository reportRepo;
+
+    @Autowired
+    private UserRepository userRepo;
+
+    @Autowired
+    private SourceRepository sourceRepo;
+
+    @Autowired
+    private LocationRepository locationRepo;
+
 
     public ReviewService(){ }
 
@@ -134,6 +146,23 @@ public class ReviewService {
     }
 
 
+    private Iterable<User> getAllUsersBySource(Source source) throws ResourceNotFoundException {
+        return userRepo.findAllBySource(source);
+    }
+
+    private Iterable<User> getAllUsersByLocation(Location location) throws ResourceNotFoundException {
+        return userRepo.findAllByLocation(location);
+    }
+
+    private Source getSourceByName(String sourceName) throws ResourceNotFoundException {
+        return sourceRepo.getByName(sourceName).orElseThrow(() -> new ResourceNotFoundException("not found review"));
+    }
+
+
+    private Iterable <Location> getLocationsByName(String country) throws ResourceNotFoundException {
+        return locationRepo.findAllByCountry(country);
+    }
+
 
     @Transactional
     public ReviewReport report(ReportDTO reportDto) throws NonExistentReviewException, NonExistentLocationException, NonExistentSourceException {
@@ -154,5 +183,38 @@ public class ReviewService {
     public Iterable<Review> findAllByLanguage(String language) throws NonExistentReviewException, NonExistentLanguageException, NonExistentLanguageNameException {
         Language lang = getLanguageByName(language);
         return  reviewRepo.findAllByLanguage(lang);
+    }
+
+    public Iterable<Review> findAllByTypeNormal(String type) throws ResourceNotFoundException {
+        ReviewType reviewType = ReviewType.NORMAL;
+        return  reviewRepo.findAllByType(reviewType);
+    }
+
+    public Iterable<Review> findAllByTypeCritic(String type) throws ResourceNotFoundException {
+        ReviewType reviewType = ReviewType.PREMIUM;
+        return  reviewRepo.findAllByType(reviewType);
+    }
+
+    public Iterable<Review> findAllByUserInSource(String sourceName) throws ResourceNotFoundException{
+        Source source = getSourceByName(sourceName);
+        Iterable <User> users = getAllUsersBySource(source);
+        Iterable<Review> reviews = new ArrayList<Review>();
+        for (User user:users ) {
+            reviews = reviewRepo.findAllByUser(user);
+        }
+        return reviews;
+    }
+
+    public Iterable<Review> findAllByUserInCountry(String country) throws ResourceNotFoundException{
+       Iterable <Location> locations = getLocationsByName(country);
+        Iterable <User> users = new ArrayList<User>();
+        for (Location location:locations){
+           users = userRepo.findAllByLocation(location);
+        }
+        Iterable<Review> reviews = new ArrayList<Review>();
+        for (User user:users ) {
+            reviews = reviewRepo.findAllByUser(user);
+        }
+        return reviews;
     }
 }

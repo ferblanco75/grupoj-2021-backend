@@ -11,6 +11,7 @@ public interface LocationRepository extends CrudRepository<Location, Integer> {
     Iterable<Location> findAll();
     Optional<Location> getById(Integer id);
 
+    Iterable<Location> findAllByCountry(String country);
 }
 
 

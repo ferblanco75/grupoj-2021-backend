@@ -44,15 +44,38 @@ public class ReviewController {
         return service.report(jsonReport);
     }
 
-    @GetMapping("/reviewBySpoiler/{hasSpoiler}")
+    @GetMapping("/review/spoiler/{hasSpoiler}")
     public Iterable <Review> getReviewPorSpoilerAlert(@PathVariable(value = "hasSpoiler") boolean spoilerAlert) throws ResourceNotFoundException, NonExistentReviewException {
         return service.findAllBySpoilerAlert(spoilerAlert);
     }
 
-    @GetMapping("/reviewBylanguage/{language}")
+    @GetMapping("/review/language/{language}")
     public Iterable <Review> getReviewByLanguage(@PathVariable(value = "language") String language) throws ResourceNotFoundException, NonExistentReviewException, NonExistentLanguageException, NonExistentLanguageNameException {
         return service.findAllByLanguage(language);
     }
+
+    @GetMapping("/review/typeNormal/{type}")
+    public Iterable <Review> getReviewByTypeNormal(@PathVariable(value = "type") String type) throws ResourceNotFoundException, NonExistentReviewException, NonExistentLanguageException, NonExistentLanguageNameException {
+        return service.findAllByTypeNormal(type);
+    }
+
+    @GetMapping("/review/typeCritic/{type}")
+    public Iterable <Review> getReviewByTypeCritic(@PathVariable(value = "type") String type) throws ResourceNotFoundException, NonExistentReviewException, NonExistentLanguageException, NonExistentLanguageNameException {
+        return service.findAllByTypeCritic(type);
+    }
+
+    @GetMapping("/review/source/{source}")
+    public Iterable <Review> getReviewBySource(@PathVariable(value = "source") String source) throws ResourceNotFoundException, NonExistentReviewException {
+        //busco las reviews de los usuarios que tienen el source llamado source
+        return service.findAllByUserInSource(source);
+    }
+
+    @GetMapping("/review/location/{country}")
+    public Iterable <Review> getReviewByCountry(@PathVariable(value = "country") String country) throws ResourceNotFoundException, NonExistentReviewException {
+        //busco las reviews de los usuarios que tienen el source llamado source
+        return service.findAllByUserInCountry(country);
+    }
+
 
 
 }
