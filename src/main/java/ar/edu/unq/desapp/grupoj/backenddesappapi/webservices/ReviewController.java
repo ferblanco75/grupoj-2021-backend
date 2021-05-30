@@ -29,12 +29,12 @@ public class ReviewController {
     }
 
     @GetMapping("/review/{idTitle}")
-    public Iterable <Review> getReviewPorId(@PathVariable(value = "idTitle") Integer idTitle) throws ResourceNotFoundException {
+    public Iterable <Review> getReviewPorId(@PathVariable(value = "idTitle") Integer idTitle) throws NonExistentTitleException {
         return service.findAllByIdTitle(idTitle);
     }
 
     @PostMapping("/review/premium")
-    public Review savePremiumReview(@RequestBody ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException, NonExistentTitleException, UserAlreadyReviewTitle {
+    public Review savePremiumReview(@RequestBody ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentLanguageException, NonExistentTitleException, UserAlreadyReviewTitle {
         return service.savePremium(aReview);
     }
 
@@ -44,7 +44,7 @@ public class ReviewController {
     }
 
     @PutMapping("/review/report")
-    public ReviewReport rate(@RequestBody ReportDTO jsonReport) throws NonExistentReviewException, NonExistentLocationException, NonExistentSourceException, NonExistentUserException {
+    public ReviewReport rate(@RequestBody ReportDTO jsonReport) throws NonExistentReviewException, NonExistentLocationException, NonExistentSourceException {
         return service.report(jsonReport);
     }
 

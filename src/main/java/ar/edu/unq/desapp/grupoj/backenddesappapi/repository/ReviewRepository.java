@@ -10,12 +10,11 @@ import java.util.Optional;
 
 @Repository
 public interface ReviewRepository extends CrudRepository<Review, Integer> {
-    Iterable<Review> findAll();
+    List<Review> findAll();
 
     Optional<Review> findById(Integer integer);
 
-
-    Iterable<Review> findAllByTitleId(Integer idTitle);
+    List<Review> findAllByTitleId(Integer idTitle);
 
     List<Review> findReviewsByTitleIdAndUser(Integer titleId, Critic user);
 

@@ -25,6 +25,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class ReviewService {
@@ -68,28 +69,24 @@ public class ReviewService {
 */
     }
 
-    public Iterable<Review> findAll() {
+    public List<Review> findAll() {
         return reviewRepo.findAll();
     }
 
-    public Iterable<Review> findAllByIdTitle(Integer idTitle) throws ResourceNotFoundException {
-        Title title = titleService.getByTitleId(idTitle).orElseThrow(() -> new ResourceNotFoundException("Non existent Title."));
+    public List<Review> findAllByIdTitle(Integer idTitle) throws NonExistentTitleException {
+        Title title = titleService.getByTitleId(idTitle);
         return reviewRepo.findAllByTitleId(title.getTitleId());
     }
 
     @Transactional
     public Review save(ReviewDTO aReview) throws NonExistentLocationException, NonExistentLanguageException, NonExistentSourceException, NonExistentTitleException, UserAlreadyReviewTitle {
         Language language= checkLanguage(aReview.languageId);
-
-        //Creo u obtengo el usuario
         User user = userService.getBySourceAndUserIdAndNickId(aReview.user.sourceId,aReview.user.userId, aReview.user.userNick,aReview.languageId);
 
-        //Guardo la review
         Review review = aReview.toModel(language,user);
         this.checkUniqueReviewer(review,user);
         reviewRepo.save(review);
 
-        //Actualizo titulo con la nueva Review
         titleService.addReviewToTitle(review,aReview.titleId);
 
         return review;
@@ -130,12 +127,10 @@ public class ReviewService {
         return aReview.getReviewRate();
     }
 
-    public void rateReview(Review review, UserDTO user, RateType rateType) throws NonExistentLocationException, NonExistentSourceException {
-        User rateUser = userService.getBySourceAndUserIdAndNickId(user.sourceId, user.userId, user.userNick,user.locationId);
-        review.addRate(new ReviewRate(rateType,rateUser ,review));
-
+    private void rateReview(Review review, UserDTO user, RateType rateType) throws NonExistentLocationException, NonExistentSourceException {
+        User rateUser = userService.getBySourceAndUserIdAndNickId(user.sourceId,user.userId,user.userNick,user.locationId);
+        review.addRate(new ReviewRate(rateType,rateUser,review));
     }
-
 
     private Language checkLanguage(Integer languageId) throws NonExistentLanguageException {
         return languageSrvc.getById(languageId);
