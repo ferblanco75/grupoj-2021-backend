@@ -31,10 +31,10 @@ public class TitleController {
 
     @PostMapping("/title/inverse")
     public List<TitleDTO> getAllMatching(@RequestBody InverseReq req) {
-        //TODO Falta que retorne titulos sin repetir
-        List<Title> t = titleService.inverseQuery(req);
+        //TODO Falta que retorne titulos sin repetir y tomar el parametro de type
+        List<Title> titles = titleService.inverseQuery(req);
 
-        return t.stream().map(i ->
+        return titles.stream().map(i ->
                 new TitleDTO(
                     i.getTitleId(),
                     i.getTitle(),

@@ -25,6 +25,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class ReviewService {
@@ -68,11 +69,11 @@ public class ReviewService {
 */
     }
 
-    public Iterable<Review> findAll() {
+    public List<Review> findAll() {
         return reviewRepo.findAll();
     }
 
-    public Iterable<Review> findAllByIdTitle(Integer idTitle) throws NonExistentTitleException {
+    public List<Review> findAllByIdTitle(Integer idTitle) throws NonExistentTitleException {
         Title title = titleService.getByTitleId(idTitle);
         return reviewRepo.findAllByTitleId(title.getTitleId());
     }
