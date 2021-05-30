@@ -1,10 +1,28 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewType;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Reason;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Language;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Rates;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.RateType;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewReport;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.ReviewService;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.*;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.*;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReviewPremiumDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReviewDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReportDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.RateDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.UserDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.CriticDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentLanguageException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentLocationException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentReviewException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentSourceException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentTitleException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.UserAlreadyReviewTitle;
+
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
