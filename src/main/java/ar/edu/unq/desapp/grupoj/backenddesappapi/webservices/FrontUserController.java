@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @EnableAutoConfiguration
 @CrossOrigin
@@ -18,10 +20,9 @@ public class FrontUserController {
     private FrontUserService service;
 
     @GetMapping("/frontusers")
-    public Iterable<FrontUser> getAllFrontUsers() {
+    public List<FrontUser> getAllFrontUsers() {
         return service.findAll();
     }
-
 
     @PostMapping("/register")
     public FrontUser saveUser(@RequestBody FrontUser frontuser) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {

@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @EnableAutoConfiguration
 public class ReviewController {
@@ -19,7 +21,7 @@ public class ReviewController {
     private ReviewService service;
 
     @GetMapping("/review")
-    public Iterable<Review> getAllReviews() {
+    public List<Review> getAllReviews() {
         return service.findAll();
     }
 
@@ -29,7 +31,7 @@ public class ReviewController {
     }
 
     @GetMapping("/review/{idTitle}")
-    public Iterable <Review> getReviewPorId(@PathVariable(value = "idTitle") Integer idTitle) throws NonExistentTitleException {
+    public List <Review> getReviewPorId(@PathVariable(value = "idTitle") Integer idTitle) throws NonExistentTitleException {
         return service.findAllByIdTitle(idTitle);
     }
 

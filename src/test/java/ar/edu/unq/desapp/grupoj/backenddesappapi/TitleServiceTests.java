@@ -59,19 +59,21 @@ class TitleServiceTests {
 //        List<Title> titles = titleService.inverseQuery(req);
   //      assertEquals(0,titles.size());
 
-
-        ReviewDTO reviewDTO = new ReviewDTO();
+        UserDTO user = new UserDTO(1,"Jose","bla",1);
+        ReviewDTO reviewDTO = new ReviewDTO(null,3,"text","text2",4,false,3,user);
+        /*
         reviewDTO.languageId=1;
         reviewDTO.rating=4;
         reviewDTO.spoilerAlert=false;
         reviewDTO.titleId=3;
         reviewDTO.type= ReviewType.NORMAL;
         reviewDTO.user=new UserDTO(1,"Jose","bla",1);
+        */
 
         Review review =reviewService.save(reviewDTO);
 
-        UserDTO user = new UserDTO(1,"Rogelio","pepe",1);
-        RateDTO rate = new RateDTO(user,review.getId(),RateType.UP);
+        UserDTO userDto = new UserDTO(1,"Rogelio","pepe",1);
+        RateDTO rate = new RateDTO(userDto,review.getId(),RateType.UP);
 
         Rates reviewRates = reviewService.rate(rate);
 

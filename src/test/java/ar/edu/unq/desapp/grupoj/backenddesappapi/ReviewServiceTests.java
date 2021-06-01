@@ -46,6 +46,9 @@ class ReviewServiceTests {
     }
     @Test
     void  addOneReviewAndThenGetAllReviews () throws NonExistentSourceException, UserAlreadyReviewTitle, NonExistentLanguageException, NonExistentLocationException, NonExistentTitleException {
+        UserDTO user = new UserDTO(3,"DummyUser","bla",1);
+        ReviewDTO reviewDTO = new ReviewDTO(null,1,"","",4,false,1,user);
+        /*
         ReviewDTO reviewDTO = new ReviewDTO();
         reviewDTO.languageId=1;
         reviewDTO.rating=4;
@@ -53,14 +56,14 @@ class ReviewServiceTests {
         reviewDTO.titleId=1;
         reviewDTO.type= ReviewType.NORMAL;
         reviewDTO.user=new UserDTO(3,"DummyUser","bla",1);
-
+        */
         reviewService.save(reviewDTO);
         List<Review> reviews = reviewService.findAllByIdTitle(1);
         assertEquals(3,reviews.size());
     }
 
     @Test
-    void  addOnePremiumReviewAndThenGetAllReviews () throws NonExistentSourceException, UserAlreadyReviewTitle, NonExistentLanguageException, NonExistentLocationException, NonExistentTitleException {
+    void  addOnePremiumReviewAndThenGetAllReviews () throws NonExistentSourceException, UserAlreadyReviewTitle, NonExistentLanguageException, NonExistentTitleException {
          ReviewPremiumDTO reviewDTO = new ReviewPremiumDTO();
         reviewDTO.languageId=1;
         reviewDTO.rating=4;
@@ -76,7 +79,7 @@ class ReviewServiceTests {
     }
 
     @Test
-    void  getAllReviewsNotJustTitleNumber1 () throws NonExistentSourceException, UserAlreadyReviewTitle, NonExistentLanguageException, NonExistentLocationException, NonExistentTitleException {
+    void  getAllReviewsNotJustTitleNumber1 () throws NonExistentSourceException, UserAlreadyReviewTitle, NonExistentLanguageException, NonExistentTitleException {
         Language language = Mockito.mock(Language.class);
         User user = Mockito.mock(User.class);
 
@@ -96,18 +99,20 @@ class ReviewServiceTests {
 
     @Test
     void  rateReviewAndGetEstatistics () throws NonExistentSourceException, NonExistentLocationException, NonExistentReviewException, NonExistentTitleException, UserAlreadyReviewTitle, NonExistentLanguageException {
-        ReviewDTO reviewDTO = new ReviewDTO();
+        UserDTO user = new UserDTO(1,"bla","bla",1);
+        ReviewDTO reviewDTO = new ReviewDTO(null,1,"","",4,false,1,user);
+        /*
         reviewDTO.languageId=1;
         reviewDTO.rating=4;
         reviewDTO.spoilerAlert=false;
         reviewDTO.titleId=1;
         reviewDTO.type= ReviewType.NORMAL;
         reviewDTO.user=new UserDTO(1,"bla","bla",1);
-
+        */
         Review review =reviewService.save(reviewDTO);
 
-        UserDTO user = new UserDTO(1,"quique","pepe",1);
-        RateDTO rate = new RateDTO(user,review.getId(),RateType.UP);
+        UserDTO userDto = new UserDTO(1,"quique","pepe",1);
+        RateDTO rate = new RateDTO(userDto,review.getId(),RateType.UP);
 
         Rates reviewRates = reviewService.rate(rate);
 
@@ -118,6 +123,9 @@ class ReviewServiceTests {
 
     @Test
     void  reportReviewAndMatch () throws NonExistentSourceException, NonExistentLocationException, NonExistentReviewException, NonExistentTitleException, UserAlreadyReviewTitle, NonExistentLanguageException {
+        UserDTO user = new UserDTO(1,"pipo","bla",1);
+        ReviewDTO reviewDTO = new ReviewDTO(null,1,"","",4,false,1,user);
+        /*
         ReviewDTO reviewDTO = new ReviewDTO();
         reviewDTO.languageId=1;
         reviewDTO.rating=4;
@@ -125,12 +133,12 @@ class ReviewServiceTests {
         reviewDTO.titleId=1;
         reviewDTO.type= ReviewType.NORMAL;
         reviewDTO.user=new UserDTO(1,"pipo","bla",1);
-
+        */
         reviewService.save(reviewDTO);
 
-        UserDTO user = new UserDTO(1,"quique","pepe",1);
+        UserDTO userDto = new UserDTO(1,"quique","pepe",1);
 
-        ReportDTO report= new ReportDTO(1,Reason.OFFENSIVE,"BLA BLA",user);
+        ReportDTO report= new ReportDTO(1,Reason.OFFENSIVE,"BLA BLA",userDto);
 
         ReviewReport reviewReport= reviewService.report(report);
 
