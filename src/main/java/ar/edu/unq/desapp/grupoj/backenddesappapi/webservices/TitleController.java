@@ -6,12 +6,14 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.TitleDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.TitleService;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentTitleException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@EnableAutoConfiguration
 public class TitleController {
 
     @Autowired
@@ -40,4 +42,7 @@ public class TitleController {
                 .collect(Collectors.toList());
     }
 
+    //return ResponseEntity.ok().body(resultado);
 }
+
+

@@ -14,8 +14,13 @@ import java.util.stream.Collectors;
 @EnableAutoConfiguration
 public class LanguageController {
 
-    @Autowired
+
     private LanguageService service;
+
+    @Autowired
+    public LanguageController(LanguageService language){
+        service=language;
+    }
 
     @GetMapping("/language")
     public List<LanguageDTO> getAll() {

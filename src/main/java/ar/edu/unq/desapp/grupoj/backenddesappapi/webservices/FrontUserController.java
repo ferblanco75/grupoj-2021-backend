@@ -25,7 +25,8 @@ public class FrontUserController {
     }
 
     @PostMapping("/register")
-    public FrontUser saveUser(@RequestBody FrontUser frontuser) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException {
-        return service.save(frontuser);
+    public FrontUser saveUser(@RequestBody FrontUser frontuser) {
+        FrontUser a = service.save(frontuser);
+        return a;
     }
 }
