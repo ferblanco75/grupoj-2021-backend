@@ -1,4 +1,5 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.converter.ReviewConverter;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
@@ -9,11 +10,15 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.Predicate;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Optional;
+import java.awt.print.Pageable;
+import java.util.*;
 
 @Service
 public class ReviewService {
@@ -45,6 +50,9 @@ public class ReviewService {
     @Autowired
     private LocationRepository locationRepo;
 
+    @Autowired
+    private  ReviewCriteriaRepository reviewCriteriaRepository;
+
 
     public ReviewService(){ }
 
@@ -69,7 +77,7 @@ public class ReviewService {
     }
 
     public Iterable<Review> findAll() {
-        return reviewRepo.findAll();
+        return reviewRepo.findAllByOrderByDateDesc();
     }
 
     public Iterable<Review> findAllByIdTitle(Integer idTitle) throws ResourceNotFoundException {
@@ -217,4 +225,26 @@ public class ReviewService {
         }
         return reviews;
     }
+
+
+    public Iterable<Review> getAllByIdOrderByDate(Integer id) throws ResourceNotFoundException {
+            return reviewRepo.findAllByIdOrderByDateDesc(id);
+    }
+
+
+
+
+    //ATENCION EL Service debe pasarle un DTO al controller
+    //hay que hacer una implementacion toDTO antes
+    //
+
+    public Page<Review> getReviews(ReviewPage reviewPage, ReviewSearchCriteria reviewSearchCriteria){
+        return reviewCriteriaRepository.FindAllWithFilters(reviewPage, reviewSearchCriteria);
+
+    }
 }
+
+
+
+
+

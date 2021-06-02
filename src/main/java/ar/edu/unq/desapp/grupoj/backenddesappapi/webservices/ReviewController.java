@@ -5,11 +5,20 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.awt.print.Pageable;
+import java.util.Date;
 
 @RestController
 @EnableAutoConfiguration
 public class ReviewController {
+
+    public final String datePattern = "yyyy/MM/dd";
 
     @Autowired
     private ReviewService service;
@@ -27,6 +36,7 @@ public class ReviewController {
     @GetMapping("/review/{idTitle}")
     public Iterable <Review> getReviewPorId(@PathVariable(value = "idTitle") Integer idTitle) throws ResourceNotFoundException {
         return service.findAllByIdTitle(idTitle);
+
     }
 
     @PostMapping("/review/premium")
@@ -75,6 +85,15 @@ public class ReviewController {
         //busco las reviews de los usuarios que tienen el source llamado source
         return service.findAllByUserInCountry(country);
     }
+
+    @GetMapping("/review2")
+    // public Iterable <ReviewDTO> getReviewsByCriteria
+    public ResponseEntity<Page<Review>> getReviews(ReviewPage reviewPage, ReviewSearchCriteria reviewSearchCriteria){
+
+        return new ResponseEntity<>(service.getReviews(reviewPage,reviewSearchCriteria),HttpStatus.OK);
+    }
+
+
 
 
 

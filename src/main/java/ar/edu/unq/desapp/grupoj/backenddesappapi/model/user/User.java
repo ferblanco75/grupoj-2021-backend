@@ -4,6 +4,7 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.model.user;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Location;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.UserDTO;
 
 import javax.persistence.*;
 
@@ -37,9 +38,16 @@ public class User extends Critic {
         return location;
     }
 
+    public Integer getSourceId(){ return super.getSourceId();}
+
     @Override
     public String getUniqueIdString(){
         return super.getUniqueIdString() + getUserNick();
+    }
+
+
+    public UserDTO toDTO(Integer sourceId, String userId, String userNick, Integer locationId) {
+        return new UserDTO(sourceId, userId, userNick, locationId);
     }
 
 }

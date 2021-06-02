@@ -46,4 +46,7 @@ public class Critic {
         return this.getSource().getName() + " " + getUserId();
     }
 
+    public Integer getSourceId() {
+        return this.source.getId();
+    }
 }
