@@ -1,12 +1,10 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Language;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Location;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.LanguageService;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.LocationService;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.webservices.LanguageController;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.webservices.LocationController;
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -40,7 +38,7 @@ public class LocationControllerTests {
     @Autowired
     private MockMvc mvc;
 
-    @Before
+    @BeforeEach
     public void setup(){
         MockitoAnnotations.initMocks(this);
     }
