@@ -1,18 +1,21 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Location;
+
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.LocationService;
+
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.SourceService;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.webservices.LocationController;
+
 import ar.edu.unq.desapp.grupoj.backenddesappapi.webservices.SourceController;
+
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;
+
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
@@ -38,7 +41,7 @@ public class SourceControllerTests {
     @Autowired
     private MockMvc mvc;
 
-    @Before
+    @BeforeEach
     public void setup(){
         MockitoAnnotations.initMocks(this);
     }
