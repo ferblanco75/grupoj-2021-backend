@@ -3,6 +3,7 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.repository;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewPage;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewSearchCriteria;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Repository;
@@ -53,28 +54,29 @@ public class ReviewCriteriaRepository {
 
     private Predicate getPredicate(ReviewSearchCriteria reviewSearchCriteria, Root<Review> reviewRoot) {
         List<Predicate> predicates = new ArrayList<>();
-
+        System.out.println(reviewSearchCriteria.isSpoilerAlert());
         if (Objects.nonNull(reviewSearchCriteria.isSpoilerAlert())) {
-
-
             predicates.add(
                     criteriaBuilder.equal(reviewRoot.get("spoilerAlert"), reviewSearchCriteria.isSpoilerAlert()
                             )
             );
-
         }
+
         if (Objects.nonNull(reviewSearchCriteria.getSource())) {
             predicates.add(
-                    criteriaBuilder.equal(reviewRoot.get("id"),  reviewSearchCriteria.getId()
-                   // criteriaBuilder.equal(reviewRoot.get("user.source.id"),  reviewSearchCriteria.getSource()
-                             )
+                    criteriaBuilder.equal(reviewRoot.get("user").get("source").get("id"),  reviewSearchCriteria.getSource()
+                    )
+            );
+        }
+
+        if (Objects.nonNull(reviewSearchCriteria.getLanguage())) {
+            predicates.add(
+                    criteriaBuilder.equal(reviewRoot.get("language").get("id"),  reviewSearchCriteria.getLanguage()
+                    )
             );
         }
 
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
-
-
-
     }
 
     //que orden si el reviewPage.getSortDirection es asc o desc ordena de diferente manera
