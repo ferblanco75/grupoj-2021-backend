@@ -1,4 +1,4 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.modelTest;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentDecadeException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentLocationException;
@@ -12,6 +12,7 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.service.CriticService;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.RateDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.UserDTO;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -168,6 +169,22 @@ class BackendDesappApiApplicationTests {
 
 	}
 
+
+	@Test
+	public void testReview9(){
+		User user = Mockito.mock(User.class);
+		Language language = Mockito.mock(Language.class);
+		Review review = new Review(9,user,"Prueba 1","texto extendido",3,true,language);
+
+		assertEquals(0,review.getReviewRateInt());
+		assertEquals(language,review.getLanguage());
+		assertEquals(user,review.getUser());
+		assertEquals(true,review.getSpoilerAlert());
+				//review.getDate() //Mock de date
+		assertEquals(ReviewType.NORMAL, review.getType());
+		assertEquals("Prueba 1",review.getText());
+		assertEquals("texto extendido",review.getTextExtended());
+	}
 
 
 

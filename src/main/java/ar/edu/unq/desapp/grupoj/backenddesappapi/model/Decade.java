@@ -19,10 +19,6 @@ public class Decade {
 
     protected Decade(){}
 
-    public boolean isIn(Integer year){
-        return year>=this.fromYear && year<=this.toYear;
-    }
-
     public Integer getFrom() {
         return fromYear;
     }

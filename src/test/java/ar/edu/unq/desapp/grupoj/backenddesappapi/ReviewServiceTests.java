@@ -30,7 +30,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest
@@ -59,7 +59,7 @@ class ReviewServiceTests {
         */
         reviewService.save(reviewDTO);
         List<Review> reviews = reviewService.findAllByIdTitle(1);
-        assertEquals(3,reviews.size());
+        assertEquals(4,reviews.size());
     }
 
     @Test
@@ -75,7 +75,7 @@ class ReviewServiceTests {
 
         reviewService.savePremium(reviewDTO);
         List<Review> reviews = reviewService.findAllByIdTitle(1);
-        assertEquals(4,reviews.size());
+        assertEquals(5,reviews.size());
     }
 
     @Test
@@ -145,5 +145,24 @@ class ReviewServiceTests {
         assertEquals(Reason.OFFENSIVE,reviewReport.getReason());
         assertEquals("pepe",reviewReport.getUser().getUserNick());
     }
+
+    @Test
+    void  addOneReviewWithExistentUserAndGetException () throws UserAlreadyReviewTitle, NonExistentSourceException, NonExistentLanguageException, NonExistentTitleException, NonExistentLocationException {
+        UserDTO user = new UserDTO(2,"RepeatedUser","nick",1);
+        ReviewDTO reviewDTO = new ReviewDTO(null,1,"","",4,false,1,user);
+        reviewService.save(reviewDTO);
+
+
+        Exception exception = assertThrows(UserAlreadyReviewTitle.class, () -> {
+            reviewService.save(reviewDTO);
+        });
+
+        String expectedMessage = "User already review titleId1(Netflix RepeatedUsernick)";
+        String actualMessage = exception.getMessage();
+
+        assertEquals(expectedMessage,actualMessage);
+
+    }
+
 
 }
