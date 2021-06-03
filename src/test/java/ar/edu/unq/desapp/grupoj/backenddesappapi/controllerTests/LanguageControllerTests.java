@@ -1,20 +1,15 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.controllerTests;
 
-
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
-
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.SourceService;
-
-import ar.edu.unq.desapp.grupoj.backenddesappapi.webservices.SourceController;
-
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Language;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.LanguageService;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.webservices.LanguageController;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,33 +24,32 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SourceControllerTests {
+public class LanguageControllerTests {
 
     @Mock
-    SourceService service ;
+    LanguageService service ;
 
     @InjectMocks
-    SourceController controller;
+    LanguageController controller;
 
     @Autowired
     private MockMvc mvc;
 
-    @BeforeEach
+    @Before
     public void setup(){
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void SourceControllerTest() throws Exception {
+    public void LanguagueControllerTest() throws Exception {
         mvc = MockMvcBuilders.standaloneSetup(controller).build();
-        List<Source> list= new ArrayList<>();
-        Source source= new Source("NetFlix");
-        list.add(source);
-        when(service.findAll()).thenReturn(list);
+        List<Language> langs= new ArrayList<>();
+        Language language = new Language("ARMENIO");
+        langs.add(language);
+        when(service.findAll()).thenReturn(langs);
+       MockHttpServletResponse response= mvc.perform(get("/language")).andExpect(status().isOk()).andReturn().getResponse();
 
-        MockHttpServletResponse response= mvc.perform(get("/sources")).andExpect(status().isOk()).andReturn().getResponse();
-
-        assertEquals("[{\"id\":null,\"name\":\"NetFlix\"}]",response.getContentAsString());
+       assertEquals("[{\"id\":null,\"name\":\"ARMENIO\"}]",response.getContentAsString());
     }
 
 }

@@ -1,9 +1,10 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.controllerTests;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Language;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.LanguageService;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.webservices.LanguageController;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Location;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.LocationService;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.webservices.LocationController;
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -20,36 +21,39 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
+;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+
 @RunWith(MockitoJUnitRunner.class)
-public class LanguageControllerTests {
+public class LocationControllerTests {
 
     @Mock
-    LanguageService service ;
+    LocationService service ;
 
     @InjectMocks
-    LanguageController controller;
+    LocationController controller;
 
     @Autowired
     private MockMvc mvc;
 
-    @Before
+    @BeforeEach
     public void setup(){
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void LanguagueControllerTest() throws Exception {
+    public void LocationControllerTest() throws Exception {
         mvc = MockMvcBuilders.standaloneSetup(controller).build();
-        List<Language> langs= new ArrayList<>();
-        Language language = new Language("ARMENIO");
-        langs.add(language);
-        when(service.findAll()).thenReturn(langs);
-       MockHttpServletResponse response= mvc.perform(get("/language")).andExpect(status().isOk()).andReturn().getResponse();
+        List<Location> list= new ArrayList<>();
+        Location location= new Location("Argentina","La Plata");
+        list.add(location);
+        when(service.findAll()).thenReturn(list);
 
-       assertEquals("[{\"id\":null,\"name\":\"ARMENIO\"}]",response.getContentAsString());
+        MockHttpServletResponse response= mvc.perform(get("/location")).andExpect(status().isOk()).andReturn().getResponse();
+
+        assertEquals("[{\"id\":null,\"country\":\"Argentina\",\"city\":\"La Plata\"}]",response.getContentAsString());
     }
 
 }

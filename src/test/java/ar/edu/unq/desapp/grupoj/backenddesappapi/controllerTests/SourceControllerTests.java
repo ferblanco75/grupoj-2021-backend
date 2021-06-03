@@ -1,16 +1,20 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.controllerTests;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Location;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.LocationService;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.webservices.LocationController;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
+
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
+
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.SourceService;
+
+import ar.edu.unq.desapp.grupoj.backenddesappapi.webservices.SourceController;
+
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;
+
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
@@ -21,19 +25,17 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
-;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @RunWith(MockitoJUnitRunner.class)
-public class LocationControllerTests {
+public class SourceControllerTests {
 
     @Mock
-    LocationService service ;
+    SourceService service ;
 
     @InjectMocks
-    LocationController controller;
+    SourceController controller;
 
     @Autowired
     private MockMvc mvc;
@@ -44,16 +46,16 @@ public class LocationControllerTests {
     }
 
     @Test
-    public void LocationControllerTest() throws Exception {
+    public void SourceControllerTest() throws Exception {
         mvc = MockMvcBuilders.standaloneSetup(controller).build();
-        List<Location> list= new ArrayList<>();
-        Location location= new Location("Argentina","La Plata");
-        list.add(location);
+        List<Source> list= new ArrayList<>();
+        Source source= new Source("NetFlix");
+        list.add(source);
         when(service.findAll()).thenReturn(list);
 
-        MockHttpServletResponse response= mvc.perform(get("/location")).andExpect(status().isOk()).andReturn().getResponse();
+        MockHttpServletResponse response= mvc.perform(get("/sources")).andExpect(status().isOk()).andReturn().getResponse();
 
-        assertEquals("[{\"id\":null,\"country\":\"Argentina\",\"city\":\"La Plata\"}]",response.getContentAsString());
+        assertEquals("[{\"id\":null,\"name\":\"NetFlix\"}]",response.getContentAsString());
     }
 
 }
