@@ -1,5 +1,4 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.modelTest;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentDecadeException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentLocationException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentSourceException;
@@ -12,7 +11,6 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.service.CriticService;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.RateDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.UserDTO;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,15 +1,11 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.controllerTests;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.controllers;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Decade;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Location;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.RateType;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Genre;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.TitleType;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.LocationService;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.TitleService;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.InverseReq;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.webservices.LocationController;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.webservices.TitleController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
@@ -99,13 +95,12 @@ public class TitleControllerTests {
         mvc = MockMvcBuilders.standaloneSetup(controller).build();
 
         List<Genre> genres = new ArrayList<>();
-        genres.add(Genre.ACTION);
-        genres.add(Genre.DRAMA);
+        genres.add(Genre.THRILLER);
 
         List<Title> list= new ArrayList<>();
-        Title title= new Title(9, TitleType.MOVIE,"Die Hard",false,1985,1985,90,genres);
+        Title title= new Title(7, TitleType.MOVIE,"Terminator 2",true,1985,1985,10,genres);
         list.add(title);
-        Title title2= new Title(2, TitleType.SHORT,"SNOOPY",false,1978,1979,30,genres);
+        Title title2= new Title(6, TitleType.MOVIE,"Rambo",true,1978,1979,20,genres);
         list.add(title2);
 
         when(service.inverseQuery(any(InverseReq.class))).thenReturn(list);
@@ -129,7 +124,7 @@ public class TitleControllerTests {
                 .content(asJsonString(inverseRequest))
                 .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andReturn().getResponse();
 
-        String expectedResponse="[{\"titleId\":9,\"title\":\"Die Hard\",\"duration\":90,\"type\":\"MOVIE\",\"startYear\":1985,\"endYear\":1985,\"adult\":false},{\"titleId\":2,\"title\":\"SNOOPY\",\"duration\":30,\"type\":\"SHORT\",\"startYear\":1978,\"endYear\":1979,\"adult\":false}]";
+        String expectedResponse="[{\"titleId\":7,\"title\":\"Terminator 2\",\"duration\":10,\"type\":\"MOVIE\",\"startYear\":1985,\"endYear\":1985,\"adult\":true},{\"titleId\":6,\"title\":\"Rambo\",\"duration\":20,\"type\":\"MOVIE\",\"startYear\":1978,\"endYear\":1979,\"adult\":true}]";
         assertEquals(expectedResponse,response.getContentAsString());
     }
 

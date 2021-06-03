@@ -1,8 +1,5 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.modelTest;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.RateType;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewRate;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
 import org.junit.Test;
 import org.mockito.Mockito;

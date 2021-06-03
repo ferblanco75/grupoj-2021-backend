@@ -1,9 +1,8 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.controllerTests;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.controllers;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Location;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.LocationService;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.webservices.LocationController;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +20,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
-;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

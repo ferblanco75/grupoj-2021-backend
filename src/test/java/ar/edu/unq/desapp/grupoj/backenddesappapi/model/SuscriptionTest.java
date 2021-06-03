@@ -1,7 +1,5 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.modelTest;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Suscription;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;

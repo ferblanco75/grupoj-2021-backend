@@ -1,4 +1,4 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.controllerTests;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.controllers;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Language;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.LanguageService;
@@ -33,7 +33,7 @@ public class LanguageControllerTests {
     LanguageController controller;
 
     @Autowired
-    private MockMvc mvc;
+    MockMvc mvc;
 
     @Before
     public void setup(){

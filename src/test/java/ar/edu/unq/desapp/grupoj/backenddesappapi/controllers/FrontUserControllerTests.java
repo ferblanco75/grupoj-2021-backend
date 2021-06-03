@@ -1,4 +1,4 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.controllerTests;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.controllers;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.FrontUser;
 

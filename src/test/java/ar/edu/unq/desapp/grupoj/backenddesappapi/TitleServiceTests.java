@@ -3,7 +3,6 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.RateType;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Rates;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewType;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Genre;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.ReviewService;
@@ -21,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class TitleServiceTests {
@@ -56,19 +54,9 @@ class TitleServiceTests {
         req.minStars=2;
         req.rating= RateType.UP;
 
-//        List<Title> titles = titleService.inverseQuery(req);
-  //      assertEquals(0,titles.size());
 
         UserDTO user = new UserDTO(1,"Jose","bla",1);
         ReviewDTO reviewDTO = new ReviewDTO(null,3,"text","text2",4,false,3,user);
-        /*
-        reviewDTO.languageId=1;
-        reviewDTO.rating=4;
-        reviewDTO.spoilerAlert=false;
-        reviewDTO.titleId=3;
-        reviewDTO.type= ReviewType.NORMAL;
-        reviewDTO.user=new UserDTO(1,"Jose","bla",1);
-        */
 
         Review review =reviewService.save(reviewDTO);
 
