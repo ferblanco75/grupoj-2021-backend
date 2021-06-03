@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -56,6 +57,20 @@ public class SourceControllerTests {
         MockHttpServletResponse response= mvc.perform(get("/sources")).andExpect(status().isOk()).andReturn().getResponse();
 
         assertEquals("[{\"id\":null,\"name\":\"NetFlix\"}]",response.getContentAsString());
+    }
+
+
+    @Test
+    public void getOneOfSourceInController() throws Exception {
+        mvc = MockMvcBuilders.standaloneSetup(controller).build();
+
+        Source source= new Source("Netflix");
+
+        when(service.getById(anyInt())).thenReturn(source);
+
+        MockHttpServletResponse response= mvc.perform(get("/sources/1")).andExpect(status().isOk()).andReturn().getResponse();
+
+        assertEquals("{\"id\":null,\"name\":\"Netflix\"}",response.getContentAsString());
     }
 
 }
