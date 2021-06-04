@@ -7,7 +7,6 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Decade;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.DecadeRepository;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.titlesRepository.EpisodeRepository;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.titlesRepository.TitleRepository;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.titlesRepository.TitleRepositoryQueries;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.InverseReq;
@@ -16,8 +15,8 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
-
 import java.util.*;
+
 
 @Service
 public class TitleService {
@@ -55,20 +54,19 @@ public class TitleService {
         titleRepo.save(title3);
 
     }
-    public Optional<Title> getByTitleId(Integer id) {
-        return this.titleRepo.getByTitleId(id);
+    public Title getByTitleId(Integer id) throws NonExistentTitleException {
+        return this.titleRepo.getByTitleId(id).orElseThrow(() -> new NonExistentTitleException(id));
     }
 
-    public Iterable<Title> findAll() {
+    public List<Title> findAll() {
         return this.titleRepo.findAll();
     }
 
-    protected void addReviewToTitle(Review review, Integer titleId) throws NonExistentTitleException {
-        Title title = getByTitleId(titleId).orElseThrow(() -> new NonExistentTitleException(titleId));
+    void addReviewToTitle(Review review, Integer titleId) throws NonExistentTitleException{
+        Title title = getByTitleId(titleId);
         title.addReview(review);
         titleRepo.save(title);
     }
-
 
     public List<Title> inverseQuery(InverseReq req) {
         List<Decade> decades= decadeRepo.getAllByIdIn(req.decade);

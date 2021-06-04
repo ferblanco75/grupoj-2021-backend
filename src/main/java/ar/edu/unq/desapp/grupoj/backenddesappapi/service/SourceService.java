@@ -2,13 +2,13 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.SourceRepository;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentSourceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
+import java.util.List;
 
 @Service
 public class SourceService {
@@ -25,11 +25,11 @@ public class SourceService {
         sourceRepo.save(new Source("HBO Go"));
 
     }
-    public Optional<Source> getById(Integer id) {
-        return this.sourceRepo.getById(id);
+    public Source getById(Integer id) throws NonExistentSourceException {
+        return sourceRepo.getById(id).orElseThrow(() -> new NonExistentSourceException(id));
     }
 
-    public Iterable<Source> findAll() {
+    public List<Source> findAll() {
         return this.sourceRepo.findAll();
     }
 }

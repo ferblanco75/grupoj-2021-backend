@@ -31,6 +31,7 @@ public interface ReviewRepository extends CrudRepository<Review, Integer>, JpaSp
 
     Iterable<Review> findAllByTitleId(Integer idTitle);
 
+
     List<Review> findReviewsByTitleIdAndUser(Integer titleId, Critic user);
 
 
@@ -41,7 +42,6 @@ public interface ReviewRepository extends CrudRepository<Review, Integer>, JpaSp
     Iterable<Review> findAllByType(ReviewType type);
 
     Iterable<Review> findAllByUser(User user);
-
 
 }
 

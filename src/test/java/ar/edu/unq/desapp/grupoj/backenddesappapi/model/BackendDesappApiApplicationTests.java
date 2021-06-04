@@ -1,12 +1,7 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentDecadeException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentLocationException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentSourceException;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Language;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Location;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.RateType;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Decade;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.UserService;
@@ -20,11 +15,12 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 
@@ -108,18 +104,18 @@ class BackendDesappApiApplicationTests {
 	}
 
 	@Test
-	void retrieveOneUserFromService() throws NonExistentLocationException, NonExistentSourceException {
+	void retrieveOneUserFromService() throws NonExistentSourceException {
 
-		Source sourceRetrieved = sourceSrvc.getById(1).get();
+		Source sourceRetrieved = sourceSrvc.getById(1);
 		assertEquals("Netflix-2", sourceRetrieved.getName());
 		assertEquals(1, sourceRetrieved.getId());
 	}
 
 	@Test
 	void retrieveCriticWithUnknownSourceFromServiceAndGetSourceException() {
-		Exception exception = assertThrows(NonExistentSourceException.class, () -> {
-			criticSrvc.getBySourceAndCriticId(999,"pepe");
-		});
+		Exception exception = assertThrows(NonExistentSourceException.class,
+				()->criticSrvc.getBySourceAndCriticId(999,"pepe")
+		);
 
 		String expectedMessage = "There is no source with ID 999";
 		String actualMessage = exception.getMessage();
@@ -129,9 +125,9 @@ class BackendDesappApiApplicationTests {
 
 	@Test
 	void retrieveUserWithUnknownSourceFromServiceAndGetLocationException() {
-		Exception exception = assertThrows(NonExistentLocationException.class, () -> {
-			userSrvc.getBySourceAndUserIdAndNickId(1,"pepe","pepe",999);
-		});
+		Exception exception = assertThrows(NonExistentLocationException.class,
+				()->userSrvc.getBySourceAndUserIdAndNickId(1,"pepe","pepe",999)
+		);
 
 		String expectedMessage = "There is no Location with ID 999";
 		String actualMessage = exception.getMessage();
@@ -140,15 +136,10 @@ class BackendDesappApiApplicationTests {
 	}
 
 	@Test
-	void retrieveAllUsersFromService() throws NonExistentLocationException, NonExistentSourceException {
+	void retrieveAllUsersFromService(){
 
-		List<String> sources =new ArrayList<>();
-
-		Iterator<Source> itr = sourceSrvc.findAll().iterator();
-		while(itr.hasNext()) {
-			Source source = itr.next();
-			sources.add(source.getName());
-		}
+		List<String> sources =sourceSrvc.findAll().stream()
+				.map(source->source.getName()).collect(Collectors.toList());
 
 		assertEquals(6, sources.size());
 		assertTrue(sources.contains("Netflix"));
@@ -161,8 +152,8 @@ class BackendDesappApiApplicationTests {
 	}
 
 	@Test
-	void retrieveOneDecadeFromService() {
-		Decade decadeRetrieved = decadeSrvc.getById("D80").get();
+	void retrieveOneDecadeFromService() throws NonExistentDecadeException {
+		Decade decadeRetrieved = decadeSrvc.getById("D80");
 		assertEquals(1980, decadeRetrieved.getFrom());
 		assertEquals(1989, decadeRetrieved.getTo());
 	}
@@ -170,17 +161,27 @@ class BackendDesappApiApplicationTests {
 	@Test
 	void retrieveAllDecadeFromService() {
 
-		List<Decade> decades =new ArrayList<>();
-
-		Iterator<Decade> itr = decadeSrvc.findAll().iterator();
-		while(itr.hasNext()) {
-			Decade decade= itr.next();
-			decades.add(decade);
-		}
-
+		List<Decade> decades = decadeSrvc.findAll();
 		assertEquals(5, decades.size());
 
 
+	}
+
+
+	@Test
+	public void testReview9(){
+		User user = Mockito.mock(User.class);
+		Language language = Mockito.mock(Language.class);
+		Review review = new Review(9,user,"Prueba 1","texto extendido",3,true,language);
+
+		assertEquals(0,review.getReviewRateInt());
+		assertEquals(language,review.getLanguage());
+		assertEquals(user,review.getUser());
+		assertEquals(true,review.getSpoilerAlert());
+				//review.getDate() //Mock de date
+		assertEquals(ReviewType.NORMAL, review.getType());
+		assertEquals("Prueba 1",review.getText());
+		assertEquals("texto extendido",review.getTextExtended());
 	}
 
 

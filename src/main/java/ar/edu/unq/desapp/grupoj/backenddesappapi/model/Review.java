@@ -43,11 +43,11 @@ public class Review {
 
     @OneToMany(targetEntity= ReviewRate.class, cascade = CascadeType.ALL)
     @Name("reviewRates")
-    protected List<ReviewRate> reviewRates = new ArrayList<>();
+    private List<ReviewRate> reviewRates = new ArrayList<>();
 
     @OneToMany(targetEntity= ReviewReport.class, cascade = CascadeType.ALL)
     @Name("reviewReports")
-    protected List<ReviewReport> reviewReports= new ArrayList<>();
+    private List<ReviewReport> reviewReports= new ArrayList<>();
 
     protected Review() {
     }
@@ -63,7 +63,6 @@ public class Review {
         this.textExtended= textExtended;
         this.titleId=titleId;
         this.spoilerAlert=haveSpoiler;
-
         this.language=language;
 
     }
@@ -107,6 +106,10 @@ public class Review {
         rate.ratingUp= this.ratedUp;
         rate.ratingDown=this.ratedDown;
         return rate;
+    }
+
+    public Critic getUser() {
+        return user;
     }
 
     public Long getReviewRateInt(){

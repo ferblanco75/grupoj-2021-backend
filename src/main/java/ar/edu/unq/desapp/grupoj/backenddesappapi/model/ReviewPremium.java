@@ -1,9 +1,7 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
-
 import javax.persistence.Entity;
-
 
 @Entity
 public class ReviewPremium extends Review{
@@ -14,5 +12,6 @@ public class ReviewPremium extends Review{
     }
 
     protected ReviewPremium(){ }
+
 
 }

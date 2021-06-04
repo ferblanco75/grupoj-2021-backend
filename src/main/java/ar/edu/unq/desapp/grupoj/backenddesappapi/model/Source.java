@@ -5,7 +5,6 @@ import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
-
 @Entity
 public class Source {
 
