@@ -31,7 +31,11 @@ public class DecadeService {
     public List<Decade> findAll() {
         return repo.findAll();
     }
+
     public Decade getById(String id) throws NonExistentDecadeException {
         return repo.getById(id).orElseThrow(()-> new NonExistentDecadeException(id));
     }
+
+
+
 }

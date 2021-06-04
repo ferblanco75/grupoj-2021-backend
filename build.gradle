@@ -42,6 +42,7 @@ test {
 
 jacoco{
 	toolVersion = '0.8.2'
+
 }
 
 jacocoTestReport{
@@ -49,5 +50,12 @@ jacocoTestReport{
 		html.enabled = true
 		xml.enabled = true
 		csv.enabled = true
+	}
+	afterEvaluate { // (optional) : to exclude classes / packages from coverage
+		classDirectories.from = files(classDirectories.files.collect {
+			fileTree(
+					dir: it,
+					exclude: [ 'src/main/java/ar.edu.unq.desapp.grupoj.backenddesappapi/ServletInitializer','src/main/java/ar.edu.unq.desapp.grupoj.backenddesappapi/BackendDesappApiApplication'])
+		})
 	}
 }

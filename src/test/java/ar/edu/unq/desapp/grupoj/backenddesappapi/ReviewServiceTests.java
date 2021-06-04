@@ -48,15 +48,7 @@ class ReviewServiceTests {
     void  addOneReviewAndThenGetAllReviews () throws NonExistentSourceException, UserAlreadyReviewTitle, NonExistentLanguageException, NonExistentLocationException, NonExistentTitleException {
         UserDTO user = new UserDTO(3,"DummyUser","bla",1);
         ReviewDTO reviewDTO = new ReviewDTO(null,1,"","",4,false,1,user);
-        /*
-        ReviewDTO reviewDTO = new ReviewDTO();
-        reviewDTO.languageId=1;
-        reviewDTO.rating=4;
-        reviewDTO.spoilerAlert=false;
-        reviewDTO.titleId=1;
-        reviewDTO.type= ReviewType.NORMAL;
-        reviewDTO.user=new UserDTO(3,"DummyUser","bla",1);
-        */
+
         reviewService.save(reviewDTO);
         List<Review> reviews = reviewService.findAllByIdTitle(1);
         assertEquals(4,reviews.size());
@@ -94,21 +86,14 @@ class ReviewServiceTests {
 
         reviewService.savePremium(reviewDTO);
         List<Review> reviews = reviewService.findAll();
-        assertEquals(4,reviews.size());
+        assertEquals(5,reviews.size());
     }
 
     @Test
     void  rateReviewAndGetEstatistics () throws NonExistentSourceException, NonExistentLocationException, NonExistentReviewException, NonExistentTitleException, UserAlreadyReviewTitle, NonExistentLanguageException {
         UserDTO user = new UserDTO(1,"bla","bla",1);
         ReviewDTO reviewDTO = new ReviewDTO(null,1,"","",4,false,1,user);
-        /*
-        reviewDTO.languageId=1;
-        reviewDTO.rating=4;
-        reviewDTO.spoilerAlert=false;
-        reviewDTO.titleId=1;
-        reviewDTO.type= ReviewType.NORMAL;
-        reviewDTO.user=new UserDTO(1,"bla","bla",1);
-        */
+
         Review review =reviewService.save(reviewDTO);
 
         UserDTO userDto = new UserDTO(1,"quique","pepe",1);
@@ -125,15 +110,7 @@ class ReviewServiceTests {
     void  reportReviewAndMatch () throws NonExistentSourceException, NonExistentLocationException, NonExistentReviewException, NonExistentTitleException, UserAlreadyReviewTitle, NonExistentLanguageException {
         UserDTO user = new UserDTO(1,"pipo","bla",1);
         ReviewDTO reviewDTO = new ReviewDTO(null,1,"","",4,false,1,user);
-        /*
-        ReviewDTO reviewDTO = new ReviewDTO();
-        reviewDTO.languageId=1;
-        reviewDTO.rating=4;
-        reviewDTO.spoilerAlert=false;
-        reviewDTO.titleId=1;
-        reviewDTO.type= ReviewType.NORMAL;
-        reviewDTO.user=new UserDTO(1,"pipo","bla",1);
-        */
+
         reviewService.save(reviewDTO);
 
         UserDTO userDto = new UserDTO(1,"quique","pepe",1);
@@ -153,16 +130,37 @@ class ReviewServiceTests {
         reviewService.save(reviewDTO);
 
 
-        Exception exception = assertThrows(UserAlreadyReviewTitle.class, () -> {
-            reviewService.save(reviewDTO);
+        UserDTO repeatedUser = new UserDTO(2,"RepeatedUser","nick",1);
+        ReviewDTO otherReviewDTO = new ReviewDTO(null,1,"","",4,false,1,repeatedUser);
+
+        assertThrows(UserAlreadyReviewTitle.class, () -> {
+            reviewService.save(otherReviewDTO );
         });
 
-        String expectedMessage = "User already review titleId1(Netflix RepeatedUsernick)";
-        String actualMessage = exception.getMessage();
-
-        assertEquals(expectedMessage,actualMessage);
 
     }
+    @Test
+    void  addOneReviewWithNonExistentTitleIdAndGetException () throws UserAlreadyReviewTitle, NonExistentSourceException, NonExistentLanguageException, NonExistentTitleException, NonExistentLocationException {
+        UserDTO user = new UserDTO(2,"RepeatedUser","nick",1);
+        ReviewDTO reviewDTO = new ReviewDTO(null,1000,"","",4,false,1,user);
+
+
+        assertThrows(NonExistentTitleException.class, () -> {
+            reviewService.save(reviewDTO);
+        });
+    }
+
+    @Test
+    void  rateAReviewThatNotExistsAndGetException () throws UserAlreadyReviewTitle, NonExistentSourceException, NonExistentLanguageException, NonExistentTitleException, NonExistentLocationException {
+        UserDTO user = new UserDTO(2,"RepeatedUser","nick",1);
+        RateDTO rate = new RateDTO(user,12,RateType.DOWN);
+
+        assertThrows(NonExistentReviewException.class, () -> {
+            reviewService.rate(rate);
+        });
+    }
+
+
 
 
 }
