@@ -92,12 +92,12 @@ public class ReviewService {
 */
     }
 
-    public Iterable<Review> findAll() {
-        return reviewRepo.findAllByOrderByDateDesc();
+    public List<Review> findAll() {
+        return reviewRepo.findAll();
     }
 
-    public Iterable<Review> findAllByIdTitle(Integer idTitle) throws ResourceNotFoundException {
-        Title title = titleService.getByTitleId(idTitle).orElseThrow(() -> new ResourceNotFoundException("Non existent Title."));
+    public List<Review> findAllByIdTitle(Integer idTitle) throws NonExistentTitleException {
+        Title title = titleService.getByTitleId(idTitle);
         return reviewRepo.findAllByTitleId(title.getTitleId());
     }
 
@@ -179,27 +179,6 @@ public class ReviewService {
         reviewRepo.save(aReview);
         return report;
     }
-
-    public Iterable<Review> findAllBySpoilerAlert(boolean spoilerAlert) throws NonExistentReviewException {
-        return  reviewRepo.findAllBySpoilerAlert(spoilerAlert);
-    }
-
-
-    public Iterable<Review> findAllByTypeNormal(String type) throws ResourceNotFoundException {
-        ReviewType reviewType = ReviewType.NORMAL;
-        return  reviewRepo.findAllByType(reviewType);
-    }
-
-    public Iterable<Review> findAllByTypeCritic(String type) throws ResourceNotFoundException {
-        ReviewType reviewType = ReviewType.PREMIUM;
-        return  reviewRepo.findAllByType(reviewType);
-    }
-
-
-    public Iterable<Review> getAllByIdOrderByDate(Integer id) throws ResourceNotFoundException {
-            return reviewRepo.findAllByIdOrderByDateDesc(id);
-    }
-
 
 
 

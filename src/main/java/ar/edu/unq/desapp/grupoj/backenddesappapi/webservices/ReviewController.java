@@ -14,9 +14,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.awt.print.Pageable;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @EnableAutoConfiguration
@@ -28,7 +28,7 @@ public class ReviewController {
     private ReviewService service;
 
     @GetMapping("/review")
-    public Iterable<Review> getAllReviews() {
+    public List<Review> getAllReviews() {
         return service.findAll();
     }
 
@@ -38,9 +38,8 @@ public class ReviewController {
     }
 
     @GetMapping("/review/{idTitle}")
-    public Iterable <Review> getReviewPorId(@PathVariable(value = "idTitle") Integer idTitle) throws ResourceNotFoundException {
+    public List <Review> getReviewPorId(@PathVariable(value = "idTitle") Integer idTitle) throws NonExistentTitleException {
         return service.findAllByIdTitle(idTitle);
-
     }
 
     @PostMapping("/review/premium")

@@ -1,19 +1,17 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos;
 
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.TitleType;
 
 
 public class TitleDTO {
-
-
-    public Integer titleId;
-    public String title;
+    private Integer titleId;
+    private String title;
     private Boolean isAdult;
-
-    public Integer duration;
-    public TitleType type;
-    public Integer startYear;
-    public Integer endYear;
+    private Integer duration;
+    private TitleType type;
+    private Integer startYear;
+    private Integer endYear;
 
 
     public TitleDTO(Integer id,String title, Integer time, TitleType type, Integer startYear, Integer endYear,Boolean forAdult){
@@ -26,6 +24,16 @@ public class TitleDTO {
         this.isAdult=forAdult;
     }
 
+
+    public static TitleDTO fromModel(Title title){
+        return new TitleDTO(title.getTitleId(),
+                title.getTitle(),
+                title.getDuration(),
+                title.getTitleType(),
+                title.getStartYear(),
+                title.getEndYear(),
+                title.getAdult());
+    }
     protected TitleDTO(){}
 
     public Integer getTitleId() {
@@ -55,4 +63,5 @@ public class TitleDTO {
     public TitleType getType() {
         return type;
     }
+
 }

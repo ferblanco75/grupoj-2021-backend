@@ -22,25 +22,13 @@ import java.util.Optional;
 
 @Repository
 public interface ReviewRepository extends CrudRepository<Review, Integer>, JpaSpecificationExecutor<Review> {
-    Iterable<Review> findAllByOrderByDateDesc();
+    List<Review> findAll();
 
     Optional<Review> findById(Integer integer);
 
-    Iterable<Review> findAllByIdOrderByDateDesc(Integer integer);
-
-
-    Iterable<Review> findAllByTitleId(Integer idTitle);
+    List<Review> findAllByTitleId(Integer idTitle);
 
     List<Review> findReviewsByTitleIdAndUser(Integer titleId, Critic user);
-
-
-    Iterable<Review> findAllBySpoilerAlert(boolean spoilerAlert);
-
-    Iterable<Review> findAllByLanguage(Language language);
-
-    Iterable<Review> findAllByType(ReviewType type);
-
-    Iterable<Review> findAllByUser(User user);
 
 
 }
