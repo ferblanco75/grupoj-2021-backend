@@ -24,7 +24,7 @@ import java.util.Optional;
 public interface ReviewRepository extends CrudRepository<Review, Integer>, JpaSpecificationExecutor<Review> {
     List<Review> findAll();
 
-    
+
 
     Optional<Review> findById(Integer integer);
 
