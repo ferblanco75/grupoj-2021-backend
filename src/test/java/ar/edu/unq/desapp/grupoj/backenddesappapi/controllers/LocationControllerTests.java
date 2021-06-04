@@ -29,10 +29,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class LocationControllerTests {
 
     @Mock
-    LocationService service ;
+    private LocationService service ;
 
     @InjectMocks
-    LocationController controller;
+    private LocationController controller;
 
     @Autowired
     private MockMvc mvc;
@@ -43,7 +43,7 @@ public class LocationControllerTests {
     }
 
     @Test
-    public void LocationControllerTest() throws Exception {
+    public void locationControllerTest() throws Exception {
         mvc = MockMvcBuilders.standaloneSetup(controller).build();
         List<Location> list= new ArrayList<>();
         Location location= new Location("Argentina","La Plata");

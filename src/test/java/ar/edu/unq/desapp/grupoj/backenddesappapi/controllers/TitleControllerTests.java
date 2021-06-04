@@ -36,10 +36,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TitleControllerTests {
 
     @Mock
-    TitleService service ;
+    private TitleService service ;
 
     @InjectMocks
-    TitleController controller;
+    private TitleController controller;
 
     @Autowired
     private MockMvc mvc;

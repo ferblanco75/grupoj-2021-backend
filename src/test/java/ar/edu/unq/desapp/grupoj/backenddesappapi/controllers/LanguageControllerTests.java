@@ -27,13 +27,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class LanguageControllerTests {
 
     @Mock
-    LanguageService service ;
+    private LanguageService service ;
 
     @InjectMocks
-    LanguageController controller;
+    private LanguageController controller;
 
     @Autowired
-    MockMvc mvc;
+    private MockMvc mvc;
 
     @Before
     public void setup(){
@@ -41,7 +41,7 @@ public class LanguageControllerTests {
     }
 
     @Test
-    public void LanguagueControllerTest() throws Exception {
+    public void languagueControllerTest() throws Exception {
         mvc = MockMvcBuilders.standaloneSetup(controller).build();
         List<Language> langs= new ArrayList<>();
         Language language = new Language("ARMENIO");

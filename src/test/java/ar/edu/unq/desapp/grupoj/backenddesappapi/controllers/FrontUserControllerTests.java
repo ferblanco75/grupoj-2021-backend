@@ -37,10 +37,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class FrontUserControllerTests {
 
     @Mock
-    FrontUserService service ;
+    private FrontUserService service ;
 
     @InjectMocks
-    FrontUserController controller;
+    private FrontUserController controller;
 
     @Autowired
     private MockMvc mvc;
@@ -51,7 +51,7 @@ public class FrontUserControllerTests {
     }
 
     @Test
-    public void FrontUserControllerTest() throws Exception {
+    public void frontUserControllerTest() throws Exception {
         mvc = MockMvcBuilders.standaloneSetup(controller).build();
         List<FrontUser> list= new ArrayList<>();
         FrontUser user= new FrontUser("quique","alonso.em@gmail.com","123456");
@@ -64,11 +64,10 @@ public class FrontUserControllerTests {
     }
 
     @Test
-    public void RegisterFrontUserControllerTest() throws Exception {
+    public void registerFrontUserControllerTest() throws Exception {
         mvc = MockMvcBuilders.standaloneSetup(controller).build();
         FrontUser user= new FrontUser("quique","alonso.em@gmail.com","123456");
         when(service.save(Mockito.any())).thenReturn(user);
-        String a = "{\"name\":\"quique\",\"email\":\"alonso.em@gmail.com\",\"password\":\"123456\"}";
 
         MockHttpServletResponse response= mvc.perform(post("/register")
                 .content(asJsonString(user))

@@ -79,7 +79,6 @@ class BackendDesappApiApplicationTests {
 		RateDTO rateDTO = new RateDTO(user,123, rateType);
 		assertEquals(123, rateDTO.reviewId);
 	}
-	//RateDTO(UserDTO user, Integer reviewId,RateType rateType)
 
 	@Test
 	void userServiceTest1() throws NonExistentLocationException, NonExistentSourceException {

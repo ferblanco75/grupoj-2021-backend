@@ -33,10 +33,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class SourceControllerTests {
 
     @Mock
-    SourceService service ;
+    private SourceService service ;
 
     @InjectMocks
-    SourceController controller;
+    private SourceController controller;
 
     @Autowired
     private MockMvc mvc;
@@ -47,7 +47,7 @@ public class SourceControllerTests {
     }
 
     @Test
-    public void SourceControllerTest() throws Exception {
+    public void sourceControllerTest() throws Exception {
         mvc = MockMvcBuilders.standaloneSetup(controller).build();
         List<Source> list= new ArrayList<>();
         Source source= new Source("NetFlix");
