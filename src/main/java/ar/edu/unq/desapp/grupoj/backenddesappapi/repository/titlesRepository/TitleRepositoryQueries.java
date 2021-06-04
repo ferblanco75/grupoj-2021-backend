@@ -1,18 +1,26 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.repository.TitlesRepository;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.repository.titlesRepository;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast.Cast;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast.Person;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.cast.Cast;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.cast.Person;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Decade;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Genre;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.webservices.InverseReq;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.InverseReq;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Subquery;
+import javax.persistence.criteria.Path;
+
 import java.util.List;
 
 @Repository
@@ -27,8 +35,6 @@ public class TitleRepositoryQueries {
 
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Title> cq = cb.createQuery(Title.class);
-
-//        req.actors
 
 
         Root<Title> title = cq.from(Title.class);

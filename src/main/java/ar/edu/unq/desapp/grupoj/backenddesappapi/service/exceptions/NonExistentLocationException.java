@@ -1,4 +1,4 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.exception;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions;
 
 public class NonExistentLocationException extends Exception{
     public NonExistentLocationException(Integer locationId) {

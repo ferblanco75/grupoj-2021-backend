@@ -4,9 +4,15 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.model.user;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Location;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.UserDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.UserDTO;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.persistence.ManyToOne;
+import javax.persistence.Column;
+import javax.persistence.CascadeType;
 
-import javax.persistence.*;
+
 
 @Entity
 @Table(
@@ -46,8 +52,5 @@ public class User extends Critic {
     }
 
 
-    public UserDTO toDTO(Integer sourceId, String userId, String userNick, Integer locationId) {
-        return new UserDTO(sourceId, userId, userNick, locationId);
-    }
 
 }

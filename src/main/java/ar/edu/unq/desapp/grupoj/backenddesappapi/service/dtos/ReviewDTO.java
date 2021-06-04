@@ -1,4 +1,4 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Language;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
@@ -27,6 +27,7 @@ public class ReviewDTO {
 
     public UserDTO user;
 
+
     public Date getDate() {
         return date;
     }
@@ -48,6 +49,7 @@ public class ReviewDTO {
 
 
     public Review toModel(Language language, User user) {
+
         return new Review(titleId, user, text, textExtended, rating, spoilerAlert,language);
     }
 

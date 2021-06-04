@@ -2,8 +2,8 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
 
 public class Rates {
-    private Integer id;
-    private Review review;
+//    private Integer id;
+ //   private Review review;
 
     public Long ratingUp ;
     public Long ratingDown;

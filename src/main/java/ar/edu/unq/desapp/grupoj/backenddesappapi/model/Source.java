@@ -1,6 +1,9 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 
 @Entity

@@ -1,12 +1,16 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model.user;
 
-
-
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
-
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.persistence.ManyToOne;
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.GenerationType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.CascadeType;
 
 
 @Entity
@@ -20,7 +24,7 @@ public class Critic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="source")
     private Source source;
 

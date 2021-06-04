@@ -29,7 +29,7 @@ public class ReviewCriteriaRepository {
         this.criteriaBuilder = entityManager.getCriteriaBuilder();
     }
 
-    public Page<Review> FindAllWithFilters(ReviewPage reviewPage, ReviewSearchCriteria reviewSearchCriteria){
+    public Page<Review> findAllWithFilters(ReviewPage reviewPage, ReviewSearchCriteria reviewSearchCriteria){
 
         CriteriaQuery<Review> criteriaQuery = criteriaBuilder.createQuery(Review.class);
         Root<Review> reviewRoot = criteriaQuery.from(Review.class);

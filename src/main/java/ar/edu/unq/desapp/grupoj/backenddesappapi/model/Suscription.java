@@ -9,5 +9,12 @@ public class Suscription {
         this.source=aSource;
         this.titleId=aTitleId;
     }
-    
+
+    public Source getSource() {
+        return source;
+    }
+
+    public Integer getTitleId() {
+        return titleId;
+    }
 }

@@ -1,12 +1,27 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.converter.ReviewConverter;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
+
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewPremium;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Language;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewReport;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Rates;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewRate;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.RateType;
+
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.*;
 
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReviewDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReviewPremiumDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReportDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.RateDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.UserDTO;
+
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -27,7 +42,7 @@ public class ReviewService {
     private  ReviewRepository reviewRepo;
 
     @Autowired
-    private  LanguageRepository languageRepo;
+    private  LanguageService languageSrvc;
 
     @Autowired
     private TitleService titleService;
@@ -41,6 +56,7 @@ public class ReviewService {
     @Autowired
     private ReportRepository reportRepo;
 
+
     @Autowired
     private UserRepository userRepo;
 
@@ -51,7 +67,7 @@ public class ReviewService {
     private LocationRepository locationRepo;
 
     @Autowired
-    private  ReviewCriteriaRepository reviewCriteriaRepository;
+    private ReviewCriteriaRepository reviewCriteriaRepository;
 
 
     public ReviewService(){ }
@@ -138,7 +154,7 @@ public class ReviewService {
         return aReview.getReviewRate();
     }
 
-    public void rateReview(Review review, UserDTO user,RateType rateType) throws NonExistentLocationException, NonExistentSourceException {
+    public void rateReview(Review review, UserDTO user, RateType rateType) throws NonExistentLocationException, NonExistentSourceException {
         User rateUser = userService.getBySourceAndUserIdAndNickId(user.sourceId, user.userId, user.userNick,user.locationId);
         review.addRate(new ReviewRate(rateType,rateUser ,review));
 
@@ -146,30 +162,10 @@ public class ReviewService {
 
 
     private Language checkLanguage(Integer languageId) throws NonExistentLanguageException {
-        return languageRepo.getById(languageId).orElseThrow(() -> new NonExistentLanguageException(languageId));
-    }
-
-    private Language getLanguageByName(String languageName) throws NonExistentLanguageNameException {
-        return languageRepo.findByValue(languageName).orElseThrow(() -> new NonExistentLanguageNameException(languageName));
+        return languageSrvc.getById(languageId);
     }
 
 
-    private Iterable<User> getAllUsersBySource(Source source) throws ResourceNotFoundException {
-        return userRepo.findAllBySource(source);
-    }
-
-    private Iterable<User> getAllUsersByLocation(Location location) throws ResourceNotFoundException {
-        return userRepo.findAllByLocation(location);
-    }
-
-    private Source getSourceByName(String sourceName) throws ResourceNotFoundException {
-        return sourceRepo.getByName(sourceName).orElseThrow(() -> new ResourceNotFoundException("not found review"));
-    }
-
-
-    private Iterable <Location> getLocationsByName(String country) throws ResourceNotFoundException {
-        return locationRepo.findAllByCountry(country);
-    }
 
 
     @Transactional
@@ -188,10 +184,6 @@ public class ReviewService {
         return  reviewRepo.findAllBySpoilerAlert(spoilerAlert);
     }
 
-    public Iterable<Review> findAllByLanguage(String language) throws NonExistentReviewException, NonExistentLanguageException, NonExistentLanguageNameException {
-        Language lang = getLanguageByName(language);
-        return  reviewRepo.findAllByLanguage(lang);
-    }
 
     public Iterable<Review> findAllByTypeNormal(String type) throws ResourceNotFoundException {
         ReviewType reviewType = ReviewType.NORMAL;
@@ -201,29 +193,6 @@ public class ReviewService {
     public Iterable<Review> findAllByTypeCritic(String type) throws ResourceNotFoundException {
         ReviewType reviewType = ReviewType.PREMIUM;
         return  reviewRepo.findAllByType(reviewType);
-    }
-
-    public Iterable<Review> findAllByUserInSource(String sourceName) throws ResourceNotFoundException{
-        Source source = getSourceByName(sourceName);
-        Iterable <User> users = getAllUsersBySource(source);
-        Iterable<Review> reviews = new ArrayList<Review>();
-        for (User user:users ) {
-            reviews = reviewRepo.findAllByUser(user);
-        }
-        return reviews;
-    }
-
-    public Iterable<Review> findAllByUserInCountry(String country) throws ResourceNotFoundException{
-       Iterable <Location> locations = getLocationsByName(country);
-        Iterable <User> users = new ArrayList<User>();
-        for (Location location:locations){
-           users = userRepo.findAllByLocation(location);
-        }
-        Iterable<Review> reviews = new ArrayList<Review>();
-        for (User user:users ) {
-            reviews = reviewRepo.findAllByUser(user);
-        }
-        return reviews;
     }
 
 
@@ -239,7 +208,7 @@ public class ReviewService {
     //
 
     public Page<Review> getReviews(ReviewPage reviewPage, ReviewSearchCriteria reviewSearchCriteria){
-        return reviewCriteriaRepository.FindAllWithFilters(reviewPage, reviewSearchCriteria);
+        return reviewCriteriaRepository.findAllWithFilters(reviewPage, reviewSearchCriteria);
 
     }
 }

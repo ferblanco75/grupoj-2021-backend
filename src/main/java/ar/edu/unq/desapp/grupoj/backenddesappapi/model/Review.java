@@ -2,9 +2,8 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.ReviewDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReviewDTO;
 import jdk.jfr.Name;
-import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.time.Instant;

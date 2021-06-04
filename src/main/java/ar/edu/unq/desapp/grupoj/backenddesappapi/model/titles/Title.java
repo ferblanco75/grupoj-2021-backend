@@ -1,10 +1,9 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast.Cast;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast.Job;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast.Person;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.cast.Cast;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.cast.Job;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.cast.Person;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
-import org.springframework.boot.autoconfigure.batch.BatchProperties;
 
 import javax.persistence.*;
 import java.util.ArrayList;

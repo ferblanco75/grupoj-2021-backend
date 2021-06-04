@@ -1,6 +1,5 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.webservices;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Decade;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.RateType;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Genre;
 

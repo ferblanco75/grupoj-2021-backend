@@ -1,4 +1,4 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.model.Cast;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.model.cast;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +17,14 @@ public class Person {
     public Person (String name){
         this.name=name;
     }
+
     protected Person(){}
 
+    public String getName() {
+        return name;
+    }
 
+    public Integer getId() {
+        return id;
+    }
 }
