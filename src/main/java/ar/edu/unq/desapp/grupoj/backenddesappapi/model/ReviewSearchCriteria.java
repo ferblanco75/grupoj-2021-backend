@@ -6,7 +6,16 @@ public class ReviewSearchCriteria {
     private Integer language;
     private Integer id;
     private boolean spoilerAlert;
+    private String locationCountry;
+    private ReviewType reviewType;
 
+    public ReviewType getReviewType() {
+        return reviewType;
+    }
+
+    public void setReviewType(ReviewType reviewType) {
+        this.reviewType = reviewType;
+    }
 
     public Integer getSource() {
         return source;
@@ -41,4 +50,14 @@ public class ReviewSearchCriteria {
     public void setLanguage(Integer language) {
         this.language = language;
     }
+
+    public String getLocationCountry() {
+        return locationCountry;
+    }
+
+    public void setLocationCountry(String locationCountry) {
+        this.locationCountry = locationCountry;
+    }
+
+
 }
