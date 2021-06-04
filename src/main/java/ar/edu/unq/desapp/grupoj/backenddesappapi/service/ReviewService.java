@@ -1,33 +1,19 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
-
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.*;
-
-
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReviewDTO;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReviewPremiumDTO;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReportDTO;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.RateDTO;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.UserDTO;
-
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
-import javax.persistence.criteria.Predicate;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.awt.print.Pageable;
-import java.util.*;
 
 @Service
 public class ReviewService {
@@ -120,10 +106,10 @@ public class ReviewService {
 
 
     @Transactional
-    public Review  savePremium(ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentTitleException, NonExistentLanguageException, UserAlreadyReviewTitle {
+    public Review  savePremium(ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentTitleException, NonExistentLanguageException, UserAlreadyReviewTitle, NonExistentLocationException, NonExistentCriticException {
         Language language= checkLanguage(aReview.languageId);
 
-        Critic critic = criticService.getBySourceAndCriticId(aReview.critic.getSourceId(),aReview.critic.getUserId());
+        Critic critic = criticService.getBySourceAndCriticId(aReview.critic.getSourceId(),aReview.critic.getUserId(),aReview.critic.getLocationId());
 
 
         ReviewPremium review = aReview.toModel(language,critic);

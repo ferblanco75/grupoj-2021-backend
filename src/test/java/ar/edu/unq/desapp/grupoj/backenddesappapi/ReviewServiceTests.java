@@ -15,12 +15,7 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReportDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.RateDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.UserDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.CriticDTO;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentLanguageException;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentLocationException;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentReviewException;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentSourceException;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentTitleException;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.UserAlreadyReviewTitle;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.*;
 
 
 import org.junit.jupiter.api.Test;
@@ -55,14 +50,14 @@ class ReviewServiceTests {
     }
 
     @Test
-    void  addOnePremiumReviewAndThenGetAllReviews () throws NonExistentSourceException, UserAlreadyReviewTitle, NonExistentLanguageException, NonExistentTitleException {
+    void  addOnePremiumReviewAndThenGetAllReviews () throws NonExistentSourceException, UserAlreadyReviewTitle, NonExistentLanguageException, NonExistentTitleException, NonExistentLocationException, NonExistentCriticException {
          ReviewPremiumDTO reviewDTO = new ReviewPremiumDTO();
         reviewDTO.languageId=1;
         reviewDTO.rating=4;
         reviewDTO.spoilerAlert=false;
         reviewDTO.titleId=1;
         reviewDTO.type= ReviewType.NORMAL;
-        reviewDTO.critic=new CriticDTO(2,"bla");
+        reviewDTO.critic=new CriticDTO(2,"bla",1);
 
 
         reviewService.savePremium(reviewDTO);
@@ -71,7 +66,7 @@ class ReviewServiceTests {
     }
 
     @Test
-    void  getAllReviewsNotJustTitleNumber1 () throws NonExistentSourceException, UserAlreadyReviewTitle, NonExistentLanguageException, NonExistentTitleException {
+    void  getAllReviewsNotJustTitleNumber1 () throws NonExistentSourceException, UserAlreadyReviewTitle, NonExistentLanguageException, NonExistentTitleException, NonExistentLocationException, NonExistentCriticException {
         Language language = Mockito.mock(Language.class);
         User user = Mockito.mock(User.class);
 
@@ -81,7 +76,7 @@ class ReviewServiceTests {
         reviewDTO.spoilerAlert=false;
         reviewDTO.titleId=2;
         reviewDTO.type= ReviewType.NORMAL;
-        reviewDTO.critic=new CriticDTO(3,"bla");
+        reviewDTO.critic=new CriticDTO(3,"bla",2);
 
 
         reviewService.savePremium(reviewDTO);

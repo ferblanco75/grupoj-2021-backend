@@ -1,19 +1,18 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Location;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Language;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Location;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.LanguageService;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.LocationService;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentLanguageException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 
@@ -61,7 +60,7 @@ class BackendDesappApiAuxiliarTests {
 	@Test
 	void retrieveAllLocationsFromService() {
 		List<Location> locations = locationSrvc.findAll();
-		assertEquals(5, locations.size());
+		assertEquals(6, locations.size());
 		List<String> cities = locations.stream().map(i->i.getCity()).collect(Collectors.toList());
 		List<String> countries= locations.stream().map(i->i.getCountry()).collect(Collectors.toList());
 		assertTrue(cities.contains("Buenos Aires"));

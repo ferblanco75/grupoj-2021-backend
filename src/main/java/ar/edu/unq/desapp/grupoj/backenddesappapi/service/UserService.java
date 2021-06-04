@@ -46,7 +46,6 @@ public class UserService {
 
 
     public User createUser(Integer sourceId, String userId, String userNick, Integer locationId) throws NonExistentLocationException, NonExistentSourceException {
-        //TODO meter las excepciones en el service
         Location location= locationSrvc.getById(locationId);
         Source source = sourceSrvc.getById(sourceId);
         User user = new User(source,userId,userNick,location);

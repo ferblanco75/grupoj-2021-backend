@@ -1,7 +1,7 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.webservices;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.*;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.ReviewService;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.RateDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReportDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReviewDTO;
@@ -10,13 +10,9 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.data.domain.Page;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.awt.print.Pageable;
-import java.util.Date;
-import java.util.List;
 
 import java.util.List;
 
@@ -45,7 +41,7 @@ public class ReviewController {
     }
 
     @PostMapping("/review/premium")
-    public Review savePremiumReview(@RequestBody ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentLanguageException, NonExistentTitleException, UserAlreadyReviewTitle {
+    public Review savePremiumReview(@RequestBody ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentLanguageException, NonExistentTitleException, UserAlreadyReviewTitle, NonExistentLocationException, NonExistentCriticException {
         return service.savePremium(aReview);
     }
 

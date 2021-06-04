@@ -6,6 +6,7 @@ public class CriticDTO {
 
         private Integer sourceId;
         private String userId;
+        private Integer locationId;
 
         protected CriticDTO(){}
 
@@ -17,13 +18,18 @@ public class CriticDTO {
             return sourceId;
         }
 
-        public CriticDTO(Integer sourceId, String userId){
+    public Integer getLocationId() {
+        return locationId;
+    }
+
+    public CriticDTO(Integer sourceId, String userId, Integer locationId){
             this.sourceId=sourceId;
             this.userId=userId;
+            this.locationId=locationId;
         }
 
         public static CriticDTO fromModel(Critic critic){
-            return new CriticDTO(critic.getSource().getId(),critic.getUserId());
+            return new CriticDTO(critic.getSource().getId(),critic.getUserId(),critic.getLocation().getId());
         }
 
 }

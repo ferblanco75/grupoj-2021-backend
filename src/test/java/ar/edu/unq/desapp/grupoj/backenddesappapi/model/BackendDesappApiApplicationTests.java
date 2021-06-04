@@ -1,4 +1,5 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentCriticException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentDecadeException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentLocationException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentSourceException;
@@ -49,7 +50,8 @@ class BackendDesappApiApplicationTests {
 	@Test
 	void getUserCriticNamedJoeReturnsJoe(){
 		Source source = new Source("NETFLIX");
-		Critic critic = new Critic(source,"Joe");
+		Location location = new Location ("Argentina","City Bell");
+		Critic critic = new Critic(source,"Joe",location);
 		assertEquals("Joe", critic.getUserId());
 	}
 
@@ -93,9 +95,9 @@ class BackendDesappApiApplicationTests {
 
 
 	@Test
-	void getOneForCriticService() throws NonExistentSourceException {
+	void getOneForCriticService() throws NonExistentSourceException, NonExistentLocationException, NonExistentCriticException {
 
-		Critic retrievedCritic= criticSrvc.getBySourceAndCriticId(1,"ventura");
+		Critic retrievedCritic= criticSrvc.getBySourceAndCriticId(1,"ventura",1);
 		assertEquals("Netflix-2", retrievedCritic.getSource().getName());
 		assertEquals("ventura", retrievedCritic.getUserId());
 
@@ -113,7 +115,7 @@ class BackendDesappApiApplicationTests {
 	@Test
 	void retrieveCriticWithUnknownSourceFromServiceAndGetSourceException() {
 		Exception exception = assertThrows(NonExistentSourceException.class,
-				()->criticSrvc.getBySourceAndCriticId(999,"pepe")
+				()->criticSrvc.getBySourceAndCriticId(999,"pepe",1)
 		);
 
 		String expectedMessage = "There is no source with ID 999";
