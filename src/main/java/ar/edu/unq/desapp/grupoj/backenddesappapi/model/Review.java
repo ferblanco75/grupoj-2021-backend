@@ -1,6 +1,8 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReviewDTO;
 import jdk.jfr.Name;
 
 import javax.persistence.*;
@@ -25,7 +27,7 @@ public class Review {
     private String text;
     private String textExtended;
     private Integer rating;
-    private Boolean spoilerAlert=false;
+    private boolean spoilerAlert=false;
     private Date date=Date.from(Instant.now());
     private Long ratedUp=(long) 0;
     private Long ratedDown= (long) 0;
@@ -50,6 +52,10 @@ public class Review {
     protected Review() {
     }
 
+    public void setTitleId(Integer titleId) {
+        this.titleId = titleId;
+    }
+
     public Review(Integer titleId, Critic criticOrUser, String text, String textExtended, Integer rating, Boolean haveSpoiler, Language language){
         this.user=criticOrUser;
         this.text=text;
@@ -64,16 +70,20 @@ public class Review {
     public Integer getRating() {
         return rating;
     }
+
+    public Critic getUser() {
+        return user;
+    }
+
     public String getText() {
         return text;
     }
     public String getTextExtended() {return textExtended;}
-
     public Integer getTitleId() {
         return titleId;
     }
 
-    public Boolean getSpoilerAlert() {
+    public boolean getSpoilerAlert() {
         return spoilerAlert;
     }
 
@@ -98,9 +108,6 @@ public class Review {
         return rate;
     }
 
-    public Critic getUser() {
-        return user;
-    }
 
     public Long getReviewRateInt(){
         return this.ratedUp-this.ratedDown;
@@ -126,4 +133,12 @@ public class Review {
         this.ratedDown= reviewRates.stream().filter(i -> i.getType()==RateType.DOWN).count();
     }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+/*
+    public ReviewDTO toDTO(Integer titleId, User user, String text, String textExtended, Integer rating, boolean spoilerAlert,Language language) {
+        return new ReviewDTO(titleId, text, textExtended, rating, spoilerAlert,language);
+    }
+*/
 }

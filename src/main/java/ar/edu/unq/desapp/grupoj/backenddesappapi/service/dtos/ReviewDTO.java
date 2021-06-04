@@ -11,7 +11,10 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.Optional;
 
+import lombok.*;
 
+@Builder @AllArgsConstructor
+@Getter
 public class ReviewDTO {
 
     private Integer id;
@@ -26,6 +29,8 @@ public class ReviewDTO {
 
     private UserDTO user;
 
+    //TODO Se deberia ir
+    public Language language;
 
     public ReviewDTO(Integer titleId,String text, String textExtended, Integer rating, Boolean spoilerAlert,Integer languageId, UserDTO user){
         this.titleId=titleId;

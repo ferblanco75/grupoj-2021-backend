@@ -1,16 +1,10 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewPremium;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Language;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewReport;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Rates;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewRate;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.RateType;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
+
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.ReviewRepository;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.ReportRepository;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.*;
 
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReviewDTO;
@@ -23,10 +17,17 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.Predicate;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.awt.print.Pageable;
+import java.util.*;
 
 @Service
 public class ReviewService {
@@ -49,6 +50,21 @@ public class ReviewService {
     @Autowired
     private ReportRepository reportRepo;
 
+
+    @Autowired
+    private UserRepository userRepo;
+
+    @Autowired
+    private SourceRepository sourceRepo;
+
+    @Autowired
+    private LocationRepository locationRepo;
+
+    @Autowired
+    private ReviewCriteriaRepository reviewCriteriaRepository;
+
+
+    public ReviewService(){ }
 
     @EventListener
     public void appReady(ApplicationReadyEvent event) {
@@ -94,6 +110,12 @@ public class ReviewService {
         titleService.addReviewToTitle(review,aReview.getTitleId());
 
         return review;
+    }
+
+    private void checkUniqueReviewer(Review review, Critic user) throws UserAlreadyReviewTitle {
+        if (reviewRepo.findReviewsByTitleIdAndUser(review.getTitleId(),user).size()>0) {
+            throw new UserAlreadyReviewTitle(review.getTitleId(), user.getUniqueIdString());
+        }
     }
 
 
@@ -147,16 +169,18 @@ public class ReviewService {
         return report;
     }
 
-    private void checkUniqueReviewer(Review review, Critic user) throws UserAlreadyReviewTitle {
-        if (reviewRepo.findReviewsByTitleIdAndUser(review.getTitleId(),user).size()>0) {
-            throw new UserAlreadyReviewTitle(review.getTitleId(), user.getUniqueIdString());
-        }
-    }
+
 
 
     private Language checkLanguage(Integer languageId) throws NonExistentLanguageException {
         return languageSrvc.getById(languageId);
     }
 
+    public Page<Review> getReviews(ReviewPage reviewPage, ReviewSearchCriteria reviewSearchCriteria){
+        return reviewCriteriaRepository.findAllWithFilters(reviewPage, reviewSearchCriteria);
 
+    }
+    //ATENCION EL Service debe pasarle un DTO al controller
+    //hay que hacer una implementacion toDTO antes
+    //
 }

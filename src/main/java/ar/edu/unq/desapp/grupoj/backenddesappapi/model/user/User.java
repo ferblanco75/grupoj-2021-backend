@@ -4,12 +4,14 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.model.user;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Location;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.UserDTO;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.ManyToOne;
 import javax.persistence.Column;
 import javax.persistence.CascadeType;
+
 
 
 @Entity
@@ -42,9 +44,13 @@ public class User extends Critic {
         return location;
     }
 
+    public Integer getSourceId(){ return super.getSourceId();}
+
     @Override
     public String getUniqueIdString(){
         return super.getUniqueIdString() + getUserNick();
     }
+
+
 
 }

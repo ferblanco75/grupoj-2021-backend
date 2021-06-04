@@ -63,5 +63,4 @@ public class TitleDTO {
     public TitleType getType() {
         return type;
     }
-
 }

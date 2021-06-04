@@ -40,7 +40,7 @@ class BackendDesappApiApplicationTests {
 	@Test
 	void ratingThreeInReviewReturnsThree() {
 		User user = Mockito.mock(User.class);
-		Language lang = new Language("Spanish");
+		Language lang = new Language("Espanol");
 		Review review = new Review(1, user,"Maso, para un domingo zafa",
 				"pochoclera",3,true, lang);
 		assertEquals(3, review.getRating());

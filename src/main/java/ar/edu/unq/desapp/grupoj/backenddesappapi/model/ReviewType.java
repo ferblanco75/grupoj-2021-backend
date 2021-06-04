@@ -4,3 +4,4 @@ public enum ReviewType {
     NORMAL,
     PREMIUM
 }
+

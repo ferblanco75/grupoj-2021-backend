@@ -12,6 +12,7 @@ import java.util.Optional;
 public interface SourceRepository extends CrudRepository<Source, Integer> {
     List<Source> findAll();
     Optional<Source> getById(Integer id);
+    Optional<Source> getByName(String name);
 
 }
 
