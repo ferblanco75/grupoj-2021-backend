@@ -27,12 +27,12 @@ public class TitleDTO {
 
     public static TitleDTO fromModel(Title title){
         return new TitleDTO(title.getTitleId(),
-                title.getTitle(),
-                title.getDuration(),
-                title.getTitleType(),
-                title.getStartYear(),
-                title.getEndYear(),
-                title.getAdult());
+                            title.getTitle(),
+                            title.getDuration(),
+                            title.getTitleType(),
+                            title.getStartYear(),
+                            title.getEndYear(),
+                            title.getAdult());
     }
     protected TitleDTO(){}
 
@@ -63,5 +63,4 @@ public class TitleDTO {
     public TitleType getType() {
         return type;
     }
-
 }

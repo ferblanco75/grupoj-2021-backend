@@ -13,8 +13,13 @@ import java.util.List;
 @Service
 public class LanguageService {
 
-    @Autowired
+
     private LanguageRepository repository;
+
+    @Autowired
+    public LanguageService(LanguageRepository repo){
+        repository=repo;
+    }
 
     @EventListener
     public void appReady(ApplicationReadyEvent event) {
@@ -32,4 +37,5 @@ public class LanguageService {
 
         return repository.getById(id).orElseThrow(() -> new NonExistentLanguageException(id));
     }
+
 }

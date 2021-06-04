@@ -18,6 +18,8 @@ import java.awt.print.Pageable;
 import java.util.Date;
 import java.util.List;
 
+import java.util.List;
+
 @RestController
 @EnableAutoConfiguration
 public class ReviewController {
@@ -43,7 +45,7 @@ public class ReviewController {
     }
 
     @PostMapping("/review/premium")
-    public Review savePremiumReview(@RequestBody ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException, NonExistentTitleException, UserAlreadyReviewTitle {
+    public Review savePremiumReview(@RequestBody ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentLanguageException, NonExistentTitleException, UserAlreadyReviewTitle {
         return service.savePremium(aReview);
     }
 
@@ -53,7 +55,7 @@ public class ReviewController {
     }
 
     @PutMapping("/review/report")
-    public ReviewReport rate(@RequestBody ReportDTO jsonReport) throws NonExistentReviewException, NonExistentLocationException, NonExistentSourceException, NonExistentUserException {
+    public ReviewReport rate(@RequestBody ReportDTO jsonReport) throws NonExistentReviewException, NonExistentLocationException, NonExistentSourceException {
         return service.report(jsonReport);
     }
 

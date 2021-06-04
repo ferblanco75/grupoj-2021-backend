@@ -2,11 +2,13 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Decade;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.DecadeRepository;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentDecadeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -26,10 +28,14 @@ public class DecadeService {
 
     }
 
-    public Iterable<Decade> findAll() {
+    public List<Decade> findAll() {
         return repo.findAll();
     }
-    public Optional<Decade> getById(String id) {
-        return repo.getById(id);
+
+    public Decade getById(String id) throws NonExistentDecadeException {
+        return repo.getById(id).orElseThrow(()-> new NonExistentDecadeException(id));
     }
+
+
+
 }

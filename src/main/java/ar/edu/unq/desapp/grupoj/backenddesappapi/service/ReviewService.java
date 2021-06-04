@@ -1,19 +1,11 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
-
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewPremium;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Language;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewReport;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Rates;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewRate;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.RateType;
-
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
+
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.*;
+
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReviewDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReviewPremiumDTO;
@@ -27,11 +19,13 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.Predicate;
 import javax.transaction.Transactional;
+import java.util.List;
 import java.awt.print.Pageable;
 import java.util.*;
 
@@ -103,18 +97,17 @@ public class ReviewService {
 
     @Transactional
     public Review save(ReviewDTO aReview) throws NonExistentLocationException, NonExistentLanguageException, NonExistentSourceException, NonExistentTitleException, UserAlreadyReviewTitle {
-        Language language= checkLanguage(aReview.languageId);
+        Language language= checkLanguage(aReview.getLanguageId());
+        User user = userService.getBySourceAndUserIdAndNickId(aReview.getUser().getSourceId(),
+                                                            aReview.getUser().getUserId(),
+                                                            aReview.getUser().getUserNick(),
+                                                            aReview.getUser().getLocationId());
 
-        //Creo u obtengo el usuario
-        User user = userService.getBySourceAndUserIdAndNickId(aReview.user.sourceId,aReview.user.userId, aReview.user.userNick,aReview.languageId);
-
-        //Guardo la review
         Review review = aReview.toModel(language,user);
         this.checkUniqueReviewer(review,user);
         reviewRepo.save(review);
 
-        //Actualizo titulo con la nueva Review
-        titleService.addReviewToTitle(review,aReview.titleId);
+        titleService.addReviewToTitle(review,aReview.getTitleId());
 
         return review;
     }
@@ -129,21 +122,19 @@ public class ReviewService {
     @Transactional
     public Review  savePremium(ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentTitleException, NonExistentLanguageException, UserAlreadyReviewTitle {
         Language language= checkLanguage(aReview.languageId);
-        //Creo u obtengo el usuario/critico
-        Critic critic = criticService.getBySourceAndCriticId(aReview.critic.sourceId,aReview.critic.userId);
 
-        //Guardo la review
+        Critic critic = criticService.getBySourceAndCriticId(aReview.critic.getSourceId(),aReview.critic.getUserId());
+
+
         ReviewPremium review = aReview.toModel(language,critic);
         this.checkUniqueReviewer(review,critic);
         reviewRepo.save(review);
 
-        //Actualizo titulo con la nueva Review
         titleService.addReviewToTitle(review,aReview.titleId);
 
         return review;
 
     }
-
 
     @Transactional
     public Rates rate(RateDTO rateDto) throws NonExistentReviewException, NonExistentSourceException, NonExistentLocationException {
@@ -154,24 +145,22 @@ public class ReviewService {
         return aReview.getReviewRate();
     }
 
-    public void rateReview(Review review, UserDTO user, RateType rateType) throws NonExistentLocationException, NonExistentSourceException {
-        User rateUser = userService.getBySourceAndUserIdAndNickId(user.sourceId, user.userId, user.userNick,user.locationId);
-        review.addRate(new ReviewRate(rateType,rateUser ,review));
-
+    private void rateReview(Review review, UserDTO user, RateType rateType) throws NonExistentLocationException, NonExistentSourceException {
+        User rateUser = userService.getBySourceAndUserIdAndNickId(user.getSourceId(),
+                                                                    user.getUserId(),
+                                                                    user.getUserNick(),
+                                                                    user.getLocationId());
+        review.addRate(new ReviewRate(rateType,rateUser,review));
     }
-
-
-    private Language checkLanguage(Integer languageId) throws NonExistentLanguageException {
-        return languageSrvc.getById(languageId);
-    }
-
-
 
 
     @Transactional
     public ReviewReport report(ReportDTO reportDto) throws NonExistentReviewException, NonExistentLocationException, NonExistentSourceException {
         Review aReview= reviewRepo.findById(reportDto.reviewId).orElseThrow(() -> new NonExistentReviewException(reportDto.reviewId));
-        User user= userService.getBySourceAndUserIdAndNickId(reportDto.user.sourceId, reportDto.user.userId, reportDto.user.userNick,reportDto.user.locationId);
+        User user= userService.getBySourceAndUserIdAndNickId(reportDto.user.getSourceId(),
+                                                            reportDto.user.getUserId(),
+                                                            reportDto.user.getUserNick(),
+                                                            reportDto.user.getLocationId());
         ReviewReport report= new ReviewReport(reportDto.reason,user);
         reportRepo.save(report);
 
@@ -182,17 +171,16 @@ public class ReviewService {
 
 
 
-    //ATENCION EL Service debe pasarle un DTO al controller
-    //hay que hacer una implementacion toDTO antes
-    //
+
+    private Language checkLanguage(Integer languageId) throws NonExistentLanguageException {
+        return languageSrvc.getById(languageId);
+    }
 
     public Page<Review> getReviews(ReviewPage reviewPage, ReviewSearchCriteria reviewSearchCriteria){
         return reviewCriteriaRepository.findAllWithFilters(reviewPage, reviewSearchCriteria);
 
     }
+    //ATENCION EL Service debe pasarle un DTO al controller
+    //hay que hacer una implementacion toDTO antes
+    //
 }
-
-
-
-
-
