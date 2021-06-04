@@ -9,8 +9,9 @@ import java.util.Optional;
 
 @Repository
 public interface LocationRepository extends CrudRepository<Location, Integer> {
+    List<Location> findAll();
 
-    Iterable<Location> findAll();
+    //Iterable<Location> findAll();
     Optional<Location> getById(Integer id);
 }
 

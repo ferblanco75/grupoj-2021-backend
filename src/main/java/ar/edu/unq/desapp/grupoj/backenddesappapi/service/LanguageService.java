@@ -24,7 +24,7 @@ public class LanguageService {
         repository.save(new Language("Frances"));
     }
 
-    public Iterable<Language> findAll() {
+    public List<Language> findAll() {
         return repository.findAll();
     }
 

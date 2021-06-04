@@ -27,7 +27,7 @@ public class LocationService {
 
     }
 
-    public Iterable<Location> findAll() {
+    public List<Location> findAll() {
         return repository.findAll();
     }
 
