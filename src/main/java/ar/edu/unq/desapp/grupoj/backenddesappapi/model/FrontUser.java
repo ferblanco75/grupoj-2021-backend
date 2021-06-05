@@ -10,28 +10,58 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(
-        name = "frontusers",
+        name = "frontuser",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})}
 )
 
-public class FrontUser {
+public class FrontUser  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
+    private String userName;
     private String email;
     private String password;
+    private boolean active;
+    private String roles;
 
-    public FrontUser(String name, String email, String password) {
-        this.name = name;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 
     protected FrontUser(){}
 
-    public String getName() {
-        return name;
+
+
+    public String getUsername() {
+        return userName;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public String getRoles() {
+        return roles;
     }
 
     public Integer getId() {
