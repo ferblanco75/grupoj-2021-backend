@@ -18,24 +18,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    UserDetailsService userDetailsService;
+    private FrontUserService frontUserService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+        auth.userDetailsService(frontUserService);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //http.authorizeRequests().antMatchers("/register").permitAll()
-        http.csrf().disable().authorizeRequests().antMatchers("/register").permitAll();
-        //http.csrf().disable().authorizeRequests().antMatchers("/swagger-ui.html").permitAll();
-        http.csrf().disable().authorizeRequests().antMatchers("/authenticate").permitAll()
-                .anyRequest().authenticated().and().sessionManagement();
+        http.csrf().disable();
+        http.authorizeRequests()
+                .antMatchers("/register").permitAll()
+                //.antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/authenticate").permitAll()
+                .anyRequest().authenticated();
                 //.and().formLogin();
-        /*http.csrf().disable().authorizeRequests().antMatchers("/user").hasAnyRole("ADMIN", "USER")
-                .and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);*/
     }
 
     @Override

@@ -45,7 +45,8 @@ public class FrontUserController {
         return a;
     }
 
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    //@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 
         try {
