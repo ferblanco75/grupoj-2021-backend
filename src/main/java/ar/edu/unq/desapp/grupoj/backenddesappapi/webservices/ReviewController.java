@@ -16,15 +16,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins ="*")
 @RestController
 @EnableAutoConfiguration
-public class ReviewController {
+public class ReviewController{
 
     public final String datePattern = "yyyy/MM/dd";
 
     @Autowired
     private ReviewService service;
 
+    @CrossOrigin(origins ="*",methods = RequestMethod.GET, allowedHeaders = "*")
     @GetMapping("/review")
     public List<Review> getAllReviews() {
         return service.findAll();
