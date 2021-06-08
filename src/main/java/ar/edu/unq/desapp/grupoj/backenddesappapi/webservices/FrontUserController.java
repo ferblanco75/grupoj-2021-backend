@@ -4,6 +4,7 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.model.AuthenticationRequest;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.AuthenticationResponse;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.FrontUser;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.FrontUserService;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.RegisterDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -36,9 +37,9 @@ public class FrontUserController {
     }
     @CrossOrigin(origins ="*")
     @PostMapping("/register")
-    public FrontUser saveUser(@RequestBody FrontUser frontuser) {
+    public FrontUser saveUser(@RequestBody RegisterDTO registerReq) {
 
-        return service.save(frontuser);
+        return service.save(registerReq.toModel());
     }
 
     //@RequestMapping(value = "/authenticate", method = RequestMethod.POST)

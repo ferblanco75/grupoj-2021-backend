@@ -11,7 +11,7 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(
         name = "frontuser",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})}
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"userName"})}
 )
 
 public class FrontUser  {
@@ -19,37 +19,33 @@ public class FrontUser  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String userName;
-    private String email;
     private String password;
-    private boolean active;
-    private String roles;
+    private String name;
+    private boolean active=true;
+    private String roles="USER";
+    //private Source source;
+
+    protected FrontUser(){}
+
+    public FrontUser(String email, String name, String password){
+        this.userName=email;
+        this.name=name;
+        this.password=password;
+    }
+
 
     public void setId(Integer id) {
         this.id = id;
     }
+//    public void setSource(Source source) { this.source = source;}
 
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public void setRoles(String roles) {
-        this.roles = roles;
-    }
-
-    protected FrontUser(){}
-
 
 
     public String getUsername() {
@@ -68,11 +64,11 @@ public class FrontUser  {
         return id;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
     public String getPassword() {
         return password;
     }
+
+    public String getName() {  return name;   }
+
 }
+
