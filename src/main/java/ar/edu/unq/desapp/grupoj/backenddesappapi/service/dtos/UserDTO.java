@@ -1,6 +1,5 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
 
 public class UserDTO {
