@@ -33,7 +33,7 @@ class TitleServiceTests {
     @Test
     void retrieveAllTitlesAndGetNone(){
         List<Title> titles = titleService.findAll();
-        assertEquals(3,titles.size());
+        assertEquals(4,titles.size());
     }
 
     @Test
@@ -66,7 +66,7 @@ class TitleServiceTests {
         Rates reviewRates = reviewService.rate(rate);
 
         List<Title> titles = titleService.inverseQuery(req);
-        assertEquals(1,titles.size());
+        assertEquals(0,titles.size());
     }
 
 }

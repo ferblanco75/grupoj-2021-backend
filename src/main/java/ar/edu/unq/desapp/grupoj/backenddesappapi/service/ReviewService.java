@@ -166,7 +166,8 @@ public class ReviewService {
         return reviewCriteriaRepository.findAllWithFilters(reviewPage, reviewSearchCriteria);
 
     }
-    //ATENCION EL Service debe pasarle un DTO al controller
-    //hay que hacer una implementacion toDTO antes
-    //
+
+    public List<ReviewReport> findAllReports() {
+        return reportRepo.findAll();
+    }
 }

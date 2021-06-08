@@ -4,6 +4,8 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.model.FrontUser;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.MyUserDetails;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.FrontUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,6 +23,11 @@ public class FrontUserService implements UserDetailsService {
 
     public List<FrontUser> findAll() {
         return frontUserRepo.findAll();
+    }
+
+    @EventListener
+    public void appReady(ApplicationReadyEvent event) {
+        frontUserRepo.save(new FrontUser("alonso.em@gmail.com","Enrique Alonso","123456"));
     }
 
     @Transactional

@@ -6,11 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @SpringBootTest
 class BackendDesappApiFronUserTests {
@@ -21,7 +20,7 @@ class BackendDesappApiFronUserTests {
         @Test
         void retrieveAllUsersAndGetNone() {
             List<FrontUser> users = userService.findAll();
-            assertTrue(users.isEmpty());
+            assertFalse(users.isEmpty());
         }
 
         @Test
@@ -29,7 +28,7 @@ class BackendDesappApiFronUserTests {
             FrontUser user = new FrontUser("UNQUIFLIX","alonso.em@gmail.com","123456");
             userService.save(user);
             List<FrontUser> users = userService.findAll();
-            assertEquals(1,users.size());
+            assertEquals(2,users.size());
         }
 
 

@@ -19,7 +19,7 @@ import java.util.*;
 
 
 @Service
-public class TitleService {
+public class    TitleService {
 
 
     @Autowired
@@ -41,16 +41,22 @@ public class TitleService {
         genres.add(Genre.DRAMA);
         titleRepo.save(new Title(1,TitleType.MOVIE,"PREDATOR",false,2010,2010,100,genres));
 
+
+        ArrayList<Genre> genresb= new ArrayList<>();
+        genresb.add(Genre.ACTION);
+
+        titleRepo.save(new Title(2,TitleType.MOVIE,"TERMINATOR 10",false,2020,2021,100,genresb));
+
         ArrayList<Genre> genres2= new ArrayList<>();
         genres2.add(Genre.ACTION);
 
-        titleRepo.save(new Title(2,TitleType.TVSERIES,"LOST",false,2010,2011,40,genres2));
+        titleRepo.save(new Title(3,TitleType.TVSERIES,"LOST",false,2010,2011,40,genres2));
 
         ArrayList<Genre> genres3= new ArrayList<>();
         genres3.add(Genre.COMEDY);
         Title title3= new Title(21,TitleType.TVEPISODE,"LOST: Chapter 1 'Pilot'",false,2014,2015,40,genres3);
-        title3.addCast(new Person("Quique"), Job.DIRECTOR);
-        title3.addCast(new Person("Pepe"), Job.ACTOR);
+        title3.addCast(new Person("Jose"), Job.DIRECTOR);
+        title3.addCast(new Person("Pedro"), Job.ACTOR);
 
         titleRepo.save(title3);
 

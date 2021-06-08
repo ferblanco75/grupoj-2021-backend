@@ -57,6 +57,13 @@ public class ReviewController {
         return service.report(jsonReport);
     }
 
+
+    @GetMapping("/review/report")
+    public List<ReviewReport> reviewReports(){
+        return service.findAllReports();
+    }
+
+
     @GetMapping("/review2")
     // public Iterable <ReviewDTO> getReviewsByCriteria
     public ResponseEntity<Page<Review>> getReviews(ReviewPage reviewPage, ReviewSearchCriteria reviewSearchCriteria){
