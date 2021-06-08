@@ -1,5 +1,8 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReviewDTO;
 import jdk.jfr.Name;
 
 import javax.persistence.*;
@@ -15,8 +18,6 @@ import java.util.List;
         uniqueConstraints = {@UniqueConstraint(columnNames = {"titleId","user_id"})}
 )
 public class Review {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -26,11 +27,13 @@ public class Review {
     private String text;
     private String textExtended;
     private Integer rating;
-    private Boolean spoilerAlert=false;
+    private boolean spoilerAlert=false;
     private Date date=Date.from(Instant.now());
+    private Long ratedUp=(long) 0;
+    private Long ratedDown= (long) 0;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    protected User user;
+    @OneToOne
+    protected Critic user;
 
     @ManyToOne(cascade = CascadeType.ALL)
     protected Language language;
@@ -40,18 +43,26 @@ public class Review {
 
     @OneToMany(targetEntity= ReviewRate.class, cascade = CascadeType.ALL)
     @Name("reviewRates")
-    protected List<ReviewRate> reviewRates = new ArrayList<>();
+    private List<ReviewRate> reviewRates = new ArrayList<>();
+
+    @OneToMany(targetEntity= ReviewReport.class, cascade = CascadeType.ALL)
+    @Name("reviewReports")
+    private List<ReviewReport> reviewReports= new ArrayList<>();
 
     protected Review() {
     }
 
-    public Review(Integer titleId, String text, String textExtended, Integer rating, Boolean haveSpoiler, Language language){
+    public void setTitleId(Integer titleId) {
+        this.titleId = titleId;
+    }
+
+    public Review(Integer titleId, Critic criticOrUser, String text, String textExtended, Integer rating, Boolean haveSpoiler, Language language){
+        this.user=criticOrUser;
         this.text=text;
         this.rating = rating;
         this.textExtended= textExtended;
         this.titleId=titleId;
         this.spoilerAlert=haveSpoiler;
-
         this.language=language;
 
     }
@@ -59,16 +70,20 @@ public class Review {
     public Integer getRating() {
         return rating;
     }
+
+    public Critic getUser() {
+        return user;
+    }
+
     public String getText() {
         return text;
     }
     public String getTextExtended() {return textExtended;}
-
     public Integer getTitleId() {
         return titleId;
     }
 
-    public Boolean getSpoilerAlert() {
+    public boolean getSpoilerAlert() {
         return spoilerAlert;
     }
 
@@ -88,9 +103,14 @@ public class Review {
 
     public Rates getReviewRate() {
         Rates rate = new Rates();
-        rate.ratingUp= reviewRates.stream().filter(i -> i.getType()==RateType.UP).count();
-        rate.ratingDown= reviewRates.stream().filter(i -> i.getType()==RateType.DOWN).count();
+        rate.ratingUp= this.ratedUp;
+        rate.ratingDown=this.ratedDown;
         return rate;
+    }
+
+
+    public Long getReviewRateInt(){
+        return this.ratedUp-this.ratedDown;
     }
 
     public Language getLanguage() {
@@ -99,5 +119,26 @@ public class Review {
 
     public void addRate(ReviewRate reviewRate){
         reviewRates.add(reviewRate);
+        calculateRates();
+
     }
+
+    public void addReport(ReviewReport reviewReport) {
+        reviewReports.add(reviewReport);
+
+    }
+
+    private void calculateRates(){
+        this.ratedUp=  reviewRates.stream().filter(i -> i.getType() == RateType.UP).count();
+        this.ratedDown= reviewRates.stream().filter(i -> i.getType()==RateType.DOWN).count();
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+/*
+    public ReviewDTO toDTO(Integer titleId, User user, String text, String textExtended, Integer rating, boolean spoilerAlert,Language language) {
+        return new ReviewDTO(titleId, text, textExtended, rating, spoilerAlert,language);
+    }
+*/
 }

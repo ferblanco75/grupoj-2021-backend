@@ -2,35 +2,36 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Location;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.LocationRepository;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentLocationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
-@CrossOrigin
-@RestController
+@Service
 public class LocationService {
 
-    private final LocationRepository locationRepo;
-
     @Autowired
-    public LocationService(LocationRepository aRepository) {
-        this.locationRepo = aRepository;
-    }
+    private LocationRepository repository;
 
     @EventListener
     public void appReady(ApplicationReadyEvent event) {
-        locationRepo.save(new Location("Argentina","Buenos Aires"));
-        locationRepo.save(new Location("Argentina","Mar del Plata"));
-        locationRepo.save(new Location("Argentina","Rosario"));
-        locationRepo.save(new Location("Brasil","Rio de Janeiro"));
-        locationRepo.save(new Location("Chile","Valparaiso"));
+        repository.save(new Location("Argentina","Buenos Aires"));
+        repository.save(new Location("Argentina","Mar del Plata"));
+        repository.save(new Location("Argentina","Rosario"));
+        repository.save(new Location("Brasil","Rio de Janeiro"));
+        repository.save(new Location("Chile","Valparaiso"));
 
     }
 
-    public Iterable<Location> findAll() {
-        return locationRepo.findAll();
+    public List<Location> findAll() {
+        return repository.findAll();
+    }
+
+    public Location getById(Integer locationId) throws NonExistentLocationException {
+        return repository.getById(locationId).orElseThrow(() -> new NonExistentLocationException(locationId));
     }
 }

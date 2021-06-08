@@ -1,118 +1,173 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.*;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.TitlesRepository.TitleRepository;
-
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.*;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
-
-@CrossOrigin
-@RestController
+@Service
 public class ReviewService {
 
     @Autowired
     private  ReviewRepository reviewRepo;
-    @Autowired
-    private  SourceRepository sourceRepo;
-    @Autowired
-    private  LocationRepository locationRepo;
-    @Autowired
-    private  LanguageRepository languageRepo;
 
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private CriticRepository criticRepository;
+    private  LanguageService languageSrvc;
 
     @Autowired
-    private TitleRepository titleRepo;
+    private TitleService titleService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private CriticService criticService;
+
+    @Autowired
+    private ReportRepository reportRepo;
+
+
+    @Autowired
+    private UserRepository userRepo;
+
+    @Autowired
+    private SourceRepository sourceRepo;
+
+    @Autowired
+    private LocationRepository locationRepo;
+
+    @Autowired
+    private ReviewCriteriaRepository reviewCriteriaRepository;
+
 
     public ReviewService(){ }
 
     @EventListener
     public void appReady(ApplicationReadyEvent event) {
 
-        Source source =new Source("Netflix");
-
-        Location location = new Location("Ecuador","Quito");
-        Language language = new Language("Spanish");
-
-        User user = new User (1,"fernando.test@gmail.com","Fernando",location);
-        user.addReview(new Review(1, "Maso, para un domingo zafa","pochoclera",3,true,language));
+        //save(new ReviewDTO());
+        //User user = new User (source,"fernando.test@gmail.com","Fernando",location);
+        //user.addReview(new Review(1, "Maso, para un domingo zafa","pochoclera",3,true,language));
+        /*
         user.addReview(new Review(3, "Muy mala pelicula","No la entendi",1,true,language));
         user.addReview(new Review(5, "Pectacular, alta peli pero muy larga!","Increibles efecto especiales",3,false,language));
-        userRepository.save(user);
+        */
+        //userRepository.save(user);
 
-
+/*
         Language language2 = new Language("English");
         Critic critic = new Critic(3,"criticoEspecialista@yahoo.com");
         critic.addReview(new ReviewPremium(4, "La mas pior!","Terriblemente aburrida.",5,true, language2));
         criticRepository.save(critic);
-
+*/
     }
 
-    public Iterable<Review> findAll() {
+    public List<Review> findAll() {
         return reviewRepo.findAll();
     }
 
-    public Iterable<Review> findAllByIdTitle(Integer idTitle) throws ResourceNotFoundException {
-        Title title = titleRepo.getByTitleId(idTitle).orElseThrow(() -> new ResourceNotFoundException("Non existent Title."));;
+    public List<Review> findAllByIdTitle(Integer idTitle) throws NonExistentTitleException {
+        Title title = titleService.getByTitleId(idTitle);
         return reviewRepo.findAllByTitleId(title.getTitleId());
     }
 
     @Transactional
-    public Review save(ReviewDTO aReview) throws NonExistentLocationException, NonExistentLanguageException, NonExistentSourceException {
-        Location location= locationRepo.getById(aReview.user.locationId).orElseThrow(() -> new NonExistentLocationException(aReview.user.locationId));
-        sourceRepo.getById(aReview.user.sourceId).orElseThrow(() -> new NonExistentSourceException(aReview.user.sourceId));
-        Review review = aReview.toModel(languageRepo);
+    public Review save(ReviewDTO aReview) throws NonExistentLocationException, NonExistentLanguageException, NonExistentSourceException, NonExistentTitleException, UserAlreadyReviewTitle {
+        Language language= checkLanguage(aReview.getLanguageId());
+        User user = userService.getBySourceAndUserIdAndNickId(aReview.getUser().getSourceId(),
+                                                            aReview.getUser().getUserId(),
+                                                            aReview.getUser().getUserNick(),
+                                                            aReview.getUser().getLocationId());
 
-        User user=userRepository.findBySourceIdAndUserIdAndUserNick(aReview.user.sourceId,aReview.user.userId, aReview.user.userNick)
-                .orElse(new User(aReview.user.sourceId, aReview.user.userId,aReview.user.userNick,location));
+        Review review = aReview.toModel(language,user);
+        this.checkUniqueReviewer(review,user);
+        reviewRepo.save(review);
 
-        user.addReview(review);
-        userRepository.save(user);
+        titleService.addReviewToTitle(review,aReview.getTitleId());
+
         return review;
     }
 
-    @Transactional
-    public Review  savePremium(ReviewPremiumDTO aReview) throws NonExistentSourceException {
-        sourceRepo.getById(aReview.critic.sourceId).orElseThrow(() -> new NonExistentSourceException(aReview.critic.sourceId));
-        ReviewPremium review = aReview.toModel(languageRepo);
-
-        Critic critic=criticRepository.findBySourceIdAndUserId(aReview.critic.sourceId,aReview.critic.userId)
-                .orElse(new Critic(aReview.critic.sourceId,aReview.critic.userId));
-
-        critic.addReview(review);
-
-        criticRepository.save(critic);
-        return review;
-
-    }
-
-
-    @Transactional
-    public Rates rate(RateDTO rateDto) throws NonExistentLocationException, NonExistentReviewException {
-        Review aReview= reviewRepo.findById(rateDto.reviewId).orElseThrow(() -> new NonExistentReviewException(rateDto.reviewId));
-        User user;
-        try {
-            user = userRepository.findBySourceIdAndUserIdAndUserNick(rateDto.user.sourceId ,rateDto.user.userId, rateDto.user.userNick).orElseThrow(() -> new NonExistentReviewException(rateDto.reviewId));
-        }catch (Exception e){
-
-            user = rateDto.user.toModel(locationRepo);
-
+    private void checkUniqueReviewer(Review review, Critic user) throws UserAlreadyReviewTitle {
+        if (reviewRepo.findReviewsByTitleIdAndUser(review.getTitleId(),user).size()>0) {
+            throw new UserAlreadyReviewTitle(review.getTitleId(), user.getUniqueIdString());
         }
-        aReview.addRate(new ReviewRate(rateDto.rateType,user,aReview));
+    }
 
+
+    @Transactional
+    public Review  savePremium(ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentTitleException, NonExistentLanguageException, UserAlreadyReviewTitle, NonExistentLocationException, NonExistentCriticException {
+        Language language= checkLanguage(aReview.languageId);
+
+        Critic critic = criticService.getBySourceAndCriticId(aReview.critic.getSourceId(),aReview.critic.getUserId(),aReview.critic.getLocationId());
+
+
+        ReviewPremium review = aReview.toModel(language,critic);
+        this.checkUniqueReviewer(review,critic);
+        reviewRepo.save(review);
+
+        titleService.addReviewToTitle(review,aReview.titleId);
+
+        return review;
+
+    }
+
+    @Transactional
+    public Rates rate(RateDTO rateDto) throws NonExistentReviewException, NonExistentSourceException, NonExistentLocationException {
+        Review aReview= reviewRepo.findById(rateDto.reviewId).orElseThrow(() -> new NonExistentReviewException(rateDto.reviewId));
+        this.rateReview(aReview,rateDto.user,rateDto.rateType);
         reviewRepo.save(aReview);
+
         return aReview.getReviewRate();
+    }
+
+    private void rateReview(Review review, UserDTO user, RateType rateType) throws NonExistentLocationException, NonExistentSourceException {
+        User rateUser = userService.getBySourceAndUserIdAndNickId(user.getSourceId(),
+                                                                    user.getUserId(),
+                                                                    user.getUserNick(),
+                                                                    user.getLocationId());
+        review.addRate(new ReviewRate(rateType,rateUser,review));
+    }
 
 
+    @Transactional
+    public ReviewReport report(ReportDTO reportDto) throws NonExistentReviewException, NonExistentLocationException, NonExistentSourceException {
+        Review aReview= reviewRepo.findById(reportDto.reviewId).orElseThrow(() -> new NonExistentReviewException(reportDto.reviewId));
+        User user= userService.getBySourceAndUserIdAndNickId(reportDto.user.getSourceId(),
+                                                            reportDto.user.getUserId(),
+                                                            reportDto.user.getUserNick(),
+                                                            reportDto.user.getLocationId());
+        ReviewReport report= new ReviewReport(reportDto.reason,user);
+        reportRepo.save(report);
+
+        aReview.addReport(report);
+        reviewRepo.save(aReview);
+        return report;
+    }
+
+
+
+
+    private Language checkLanguage(Integer languageId) throws NonExistentLanguageException {
+        return languageSrvc.getById(languageId);
+    }
+
+    public Page<Review> getReviews(ReviewPage reviewPage, ReviewSearchCriteria reviewSearchCriteria){
+        return reviewCriteriaRepository.findAllWithFilters(reviewPage, reviewSearchCriteria);
+
+    }
+
+    public List<ReviewReport> findAllReports() {
+        return reportRepo.findAll();
     }
 }

@@ -1,6 +1,14 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.GenerationType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 
 @Entity
 @Table (name="episodes")
@@ -43,5 +51,9 @@ public class Episode {
 
     public Title getTitle() {
         return title;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

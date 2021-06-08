@@ -2,39 +2,34 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.SourceRepository;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentSourceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
-
-@CrossOrigin
-@RestController
+@Service
 public class SourceService {
 
-    private final SourceRepository sourceRepo;
-
     @Autowired
-    public SourceService(SourceRepository aRepository) {
-        this.sourceRepo = aRepository;
-    }
+    private SourceRepository sourceRepo;
 
     @EventListener
     public void appReady(ApplicationReadyEvent event) {
+        sourceRepo.save(new Source("Netflix"));
         sourceRepo.save(new Source("Disney+"));
         sourceRepo.save(new Source("Amazon Prime Video"));
         sourceRepo.save(new Source("Paramount"));
         sourceRepo.save(new Source("HBO Go"));
 
     }
-    public Optional<Source> getById(Integer id) {
-        return this.sourceRepo.getById(id);
+    public Source getById(Integer id) throws NonExistentSourceException {
+        return sourceRepo.getById(id).orElseThrow(() -> new NonExistentSourceException(id));
     }
 
-    public Iterable<Source> findAll() {
+    public List<Source> findAll() {
         return this.sourceRepo.findAll();
     }
 }

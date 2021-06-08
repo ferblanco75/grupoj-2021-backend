@@ -1,7 +1,9 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
-import javax.persistence.*;
-
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @Entity
 public class Source {
@@ -17,9 +19,11 @@ public class Source {
     public Source(String platformName){
         this.name=platformName;
     }
+
     public Integer getId() {
         return this.id;
     }
+
     public String getName(){
         return this.name;
     }

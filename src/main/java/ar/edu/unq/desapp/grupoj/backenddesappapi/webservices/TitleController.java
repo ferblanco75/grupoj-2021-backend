@@ -1,14 +1,18 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.webservices;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.exception.NonExistentSourceException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.TitleService;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.InverseReq;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.TitleDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentTitleException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+@CrossOrigin(origins ="*")
 @RestController
 @EnableAutoConfiguration
 public class TitleController {
@@ -17,13 +21,28 @@ public class TitleController {
     private TitleService titleService;
 
     @GetMapping("/title")
-    public Iterable<Title> getAll() {
-        return titleService.findAll();
+    public List<TitleDTO> getAll() {
+        return titleService.findAll()
+                .stream()
+                .map(i->TitleDTO.fromModel(i))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/title/{id}")
-    public Title getById(@PathVariable(value = "id") Integer id) throws NonExistentSourceException {
-        return titleService.getByTitleId(id).orElseThrow(() -> new NonExistentSourceException(id));
+    public TitleDTO getById(@PathVariable(value = "id") Integer id) throws NonExistentTitleException {
+        return TitleDTO.fromModel(titleService.getByTitleId(id));
     }
 
+    @PostMapping("/title/inverse")
+    public List<TitleDTO> getAllMatching(@RequestBody InverseReq req) {
+        List<Title> titles = titleService.inverseQuery(req);
+
+        return titles.stream()
+                .map(i -> TitleDTO.fromModel(i))
+                .collect(Collectors.toList());
+    }
+
+    //return ResponseEntity.ok().body(resultado);
 }
+
+
