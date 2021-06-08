@@ -30,11 +30,12 @@ public class SpringFoxConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfo(
-                "My REST API",
-                "Some custom description of API.",
+                "Grupo 'J' 2021 - API REST",
+                "API REST para Desarrollo de Software - UNQ",
                 "1.0",
                 "Terms of service",
-                new Contact("Sallo Szrajbman", "www.baeldung.com", "salloszraj@gmail.com"),
+                new Contact("Grupo J 2021", "www.baeldung.com", "alonso.em@gmail.com"),
+
                 "License of API",
                 "API license URL",
                 Collections.emptyList());
