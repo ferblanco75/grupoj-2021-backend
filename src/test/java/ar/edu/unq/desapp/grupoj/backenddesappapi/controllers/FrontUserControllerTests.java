@@ -60,7 +60,7 @@ public class FrontUserControllerTests {
 
         MockHttpServletResponse response= mvc.perform(get("/frontusers")).andExpect(status().isOk()).andReturn().getResponse();
 
-        assertEquals("[{\"id\":null,\"name\":\"quique\",\"email\":\"alonso.em@gmail.com\",\"password\":\"123456\"}]",response.getContentAsString());
+        assertEquals("[{\"id\":null,\"password\":\"123456\",\"name\":\"alonso.em@gmail.com\",\"active\":true,\"roles\":\"USER\",\"username\":\"quique\"}]",response.getContentAsString());
     }
 
     @Test
@@ -75,7 +75,7 @@ public class FrontUserControllerTests {
                 .andExpect(status().isOk()).andReturn().getResponse();
 
         assertEquals(
-                "{\"id\":null,\"name\":\"quique\",\"email\":\"alonso.em@gmail.com\",\"password\":\"123456\"}",
+                "{\"id\":null,\"password\":\"123456\",\"name\":\"alonso.em@gmail.com\",\"active\":true,\"roles\":\"USER\",\"username\":\"quique\"}",
                 response.getContentAsString());
     }
 

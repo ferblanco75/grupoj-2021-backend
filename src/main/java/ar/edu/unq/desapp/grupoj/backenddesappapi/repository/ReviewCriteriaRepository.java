@@ -83,12 +83,12 @@ public class ReviewCriteriaRepository {
             );
         }
 
-        /*if (Objects.nonNull(reviewSearchCriteria.getLocationCountry())) {
+        if (Objects.nonNull(reviewSearchCriteria.getLocationCountry())) {
             predicates.add(
                     criteriaBuilder.equal(reviewRoot.get("user").get("location").get("country"),  reviewSearchCriteria.getLocationCountry()
                     )
             );
-        }*/
+        }
 
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }

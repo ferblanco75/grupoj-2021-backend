@@ -1,10 +1,12 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentSourceException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Location;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.CriticRepository;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.SourceRepository;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentCriticException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentLocationException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentSourceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -19,30 +21,47 @@ public class CriticService {
     private CriticRepository repo;
 
     @Autowired
-    private SourceRepository sourceRepo;
+    private SourceService sourceSrvc;
+
+    @Autowired
+    private LocationService locationSrvc;
 
     @EventListener
     public void appReady(ApplicationReadyEvent event) {
         Source source = new Source("Netflix-2");
-        repo.save(new Critic(source,"ventura"));
+        Location location= new Location("Argentina", "Bahia Blanca");
+        repo.save(new Critic(source,"ventura", location));
     }
 
 
-    //TODO Separar lectura de grabacion y crear excepciones de critic
-    /*@Transactional
-    public Critic getUser(Integer sourceId, String criticId) throws NonExistentSourceException {
-        Source source = sourceRepo.getById(sourceId).orElseThrow(() -> new NonExistentSourceException(sourceId));
-        Critic critic=repo.findBySourceAndUserId(source,criticId).orElseThrow(new NonExistet))
-    }*/
+    @Transactional
+    Critic getCritic(Integer sourceId, String criticId) throws NonExistentSourceException, NonExistentCriticException {
+        Source source = sourceSrvc.getById(sourceId);
+        Critic critic=repo.findBySourceAndUserId(source,criticId).orElseThrow(() -> new NonExistentCriticException(source,criticId));
+        return critic;
+    }
 
     @Transactional
-    public Critic getBySourceAndCriticId(Integer sourceId, String criticId) throws NonExistentSourceException {
-        Source source = sourceRepo.getById(sourceId).orElseThrow(() -> new NonExistentSourceException(sourceId));
-
-        Critic critic=repo.findBySourceAndUserId(source,criticId)
-                .orElse(new Critic(source, criticId));
+    Critic createCritic(Integer sourceId, String userId, Integer locationId) throws NonExistentLocationException, NonExistentSourceException {
+        Location location= locationSrvc.getById(locationId);
+        Source source = sourceSrvc.getById(sourceId);
+        Critic critic = new Critic(source,userId,location);
         repo.save(critic);
         return critic;
+    }
+
+    @Transactional
+    public Critic getBySourceAndCriticId(Integer sourceId, String criticId, Integer locationId) throws NonExistentCriticException, NonExistentSourceException, NonExistentLocationException {
+        Critic critic;
+        try {
+            critic= this.getCritic(sourceId, criticId);
+        }catch (NonExistentCriticException e) {
+            critic= this.createCritic(sourceId, criticId, locationId);
+        }
+        repo.save(critic);
+        return critic;
+
+
     }
 
 

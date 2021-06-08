@@ -1,5 +1,6 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model.user;
 
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Location;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -31,11 +32,15 @@ public class Critic {
     @Column(name="critic_id")
     private String userId;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    protected Location location;
+
     protected Critic(){}
 
-    public Critic(Source source, String userId){
+    public Critic(Source source, String userId, Location location){
         this.source=source;
         this.userId=userId;
+        this.location=location;
     }
 
     public Source getSource() {
@@ -52,5 +57,9 @@ public class Critic {
 
     public Integer getSourceId() {
         return this.source.getId();
+    }
+
+    public Location getLocation() {
+        return location;
     }
 }

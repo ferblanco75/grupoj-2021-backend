@@ -1,20 +1,20 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.webservices;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.InverseReq;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.TitleDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.TitleService;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.InverseReq;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.TitleDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentTitleException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestController
-@EnableAutoConfiguration
-public class TitleController {
+public class TitleController extends RestBaseController {
 
     @Autowired
     private TitleService titleService;

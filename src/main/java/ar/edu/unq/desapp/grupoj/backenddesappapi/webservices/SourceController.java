@@ -11,12 +11,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin(origins ="*")
 @EnableAutoConfiguration
 public class SourceController {
 
     @Autowired
     private SourceService sourceService;
 
+    @CrossOrigin(origins ="*")
     @GetMapping("/sources")
     public List<SourceDTO> getAll() {
         return sourceService.findAll()

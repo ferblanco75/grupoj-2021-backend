@@ -6,12 +6,12 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewType;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 
 import java.time.Instant;
 import java.util.Date;
-import java.util.Optional;
-
-import lombok.*;
 
 @Builder @AllArgsConstructor
 @Getter
@@ -30,7 +30,7 @@ public class ReviewDTO {
     private UserDTO user;
 
     //TODO Se deberia ir
-    public Language language;
+    //public Language language;
 
     public ReviewDTO(Integer titleId,String text, String textExtended, Integer rating, Boolean spoilerAlert,Integer languageId, UserDTO user){
         this.titleId=titleId;
