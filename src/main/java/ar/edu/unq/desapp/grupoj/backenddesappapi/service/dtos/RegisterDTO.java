@@ -32,4 +32,8 @@ public class RegisterDTO {
     public String getName() {
         return name;
     }
+
+    public Integer getSourceId() {
+        return sourceId;
+    }
 }

@@ -14,7 +14,7 @@ public class MyUserDetails implements UserDetails {
 
     private String userName;
     private String password;
-    private boolean active;
+    boolean active;
     private List<GrantedAuthority> authorities;
 
     public MyUserDetails(FrontUser user) {
@@ -28,8 +28,7 @@ public class MyUserDetails implements UserDetails {
 
 
 
-    public MyUserDetails(){
-    }
+    public MyUserDetails(){}
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

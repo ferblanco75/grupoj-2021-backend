@@ -3,8 +3,6 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.repository;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewPage;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.ReviewSearchCriteria;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Repository;
 
