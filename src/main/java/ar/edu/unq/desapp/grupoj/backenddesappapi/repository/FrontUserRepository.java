@@ -9,8 +9,8 @@ import java.util.Optional;
 
 
 @Repository
-    public interface FrontUserRepository extends JpaRepository<FrontUser, Integer> {
-        List<FrontUser> findAll();
-        Optional<FrontUser> findByUserName(String userName);
-    }
+public interface FrontUserRepository extends JpaRepository<FrontUser, Integer> {
+      List<FrontUser> findAll();
+      Optional<FrontUser> findByUserName(String userName);
+}
 
