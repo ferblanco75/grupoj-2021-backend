@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestController
 @CrossOrigin(origins ="*")
+@RestController
 @EnableAutoConfiguration
-public class TitleController extends RestBaseController {
+public class TitleController {
 
     @Autowired
     private TitleService titleService;

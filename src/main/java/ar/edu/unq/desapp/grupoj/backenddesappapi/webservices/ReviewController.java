@@ -19,7 +19,7 @@ import java.util.List;
 @CrossOrigin(origins ="*")
 @RestController
 @EnableAutoConfiguration
-public class ReviewController{
+public class ReviewController {
 
     public final String datePattern = "yyyy/MM/dd";
 

@@ -3,7 +3,7 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.webservices;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
-public class HomeResource extends RestBaseController{
+public class HomeResource {
 
 
     @GetMapping("/user")
