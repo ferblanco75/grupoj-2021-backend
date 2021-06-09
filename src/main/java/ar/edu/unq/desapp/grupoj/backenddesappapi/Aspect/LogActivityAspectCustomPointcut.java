@@ -17,7 +17,7 @@ public class LogActivityAspectCustomPointcut {
 	static Logger logger = LoggerFactory.getLogger(LogActivityAspectCustomPointcut.class);
 	
 	/// CUSTOM  POINTCUT////
-	@Pointcut("execution(* ar.edu.unq.desapp.grupoj.backenddesappapi.webservices.FrontUserController.*(..))")
+	@Pointcut("execution(* ar.edu.unq.desapp.grupoj.backenddesappapi.webservices..*(..))")
 
 	public void methodsStarterServicePointcut() {
 	}
