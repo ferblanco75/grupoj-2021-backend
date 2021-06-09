@@ -1,5 +1,6 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.webservices;
 
+import ar.edu.unq.desapp.grupoj.backenddesappapi.Aspect.LogActivity;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.AuthenticationRequest;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.AuthenticationResponse;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.FrontUser;
@@ -20,6 +21,7 @@ import java.util.List;
 @CrossOrigin(origins ="*")
 @RestController
 @EnableAutoConfiguration
+
 public class FrontUserController {
 
 
@@ -32,11 +34,13 @@ public class FrontUserController {
     @Autowired
     private FrontUserService service;
 
+    @LogActivity
     @GetMapping("/frontusers")
     public List<FrontUser> getAllFrontUsers() {
         return service.findAll();
     }
-    @CrossOrigin(origins ="*")
+
+
     @PostMapping("/register")
     public FrontUser saveUser(@RequestBody RegisterDTO registerReq) {
 
