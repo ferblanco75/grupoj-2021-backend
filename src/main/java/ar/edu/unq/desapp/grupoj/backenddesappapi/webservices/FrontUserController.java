@@ -40,7 +40,7 @@ public class FrontUserController {
         return service.findAll();
     }
 
-
+    @LogActivity
     @PostMapping("/register")
     public FrontUser saveUser(@RequestBody RegisterDTO registerReq) {
 
@@ -48,7 +48,7 @@ public class FrontUserController {
     }
 
     //@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    @CrossOrigin(origins ="*")
+    @LogActivity
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 

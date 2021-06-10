@@ -15,16 +15,17 @@ import org.springframework.stereotype.Component;
 public class LogActivityAspectCustomPointcut {
 
 	static Logger logger = LoggerFactory.getLogger(LogActivityAspectCustomPointcut.class);
-	
+
 	/// CUSTOM  POINTCUT////
 	@Pointcut("execution(* ar.edu.unq.desapp.grupoj.backenddesappapi.webservices..*(..))")
-
 	public void methodsStarterServicePointcut() {
+
 	}
 
 	@Before("methodsStarterServicePointcut()")
 	public void beforeMethods() throws Throwable {
 		logger.info("/////// BEFORE /////");
+
 	}
 
 	@After("methodsStarterServicePointcut()")
