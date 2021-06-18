@@ -1,6 +1,5 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.webservices;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.Aspect.LogActivity;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.AuthenticationRequest;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.AuthenticationResponse;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.FrontUser;
@@ -34,13 +33,11 @@ public class FrontUserController {
     @Autowired
     private FrontUserService service;
 
-    @LogActivity
     @GetMapping("/frontusers")
     public List<FrontUser> getAllFrontUsers() {
         return service.findAll();
     }
 
-    @LogActivity
     @PostMapping("/register")
     public FrontUser saveUser(@RequestBody RegisterDTO registerReq) {
 
@@ -48,7 +45,6 @@ public class FrontUserController {
     }
 
     //@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    @LogActivity
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 

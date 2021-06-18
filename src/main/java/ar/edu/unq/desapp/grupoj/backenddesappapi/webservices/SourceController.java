@@ -1,6 +1,5 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.webservices;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.Aspect.LogActivity;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.SourceService;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.SourceDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentSourceException;
@@ -22,7 +21,7 @@ public class SourceController {
     @Autowired
     private SourceService sourceService;
 
-    @LogActivity
+
     @GetMapping("/sources")
     public List<SourceDTO> getAll() {
         return sourceService.findAll()
