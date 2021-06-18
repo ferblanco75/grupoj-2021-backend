@@ -1,4 +1,5 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.config.MessagingConfig;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
@@ -6,6 +7,7 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.*;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -48,6 +50,9 @@ public class ReviewService {
 
     @Autowired
     private ReviewCriteriaRepository reviewCriteriaRepository;
+
+    @Autowired
+    private RabbitTemplate template;
 
 
     public ReviewService(){ }
@@ -94,6 +99,7 @@ public class ReviewService {
         reviewRepo.save(review);
 
         titleService.addReviewToTitle(review,aReview.getTitleId());
+        publishReview(aReview);
 
         return review;
     }
@@ -169,5 +175,15 @@ public class ReviewService {
 
     public List<ReviewReport> findAllReports() {
         return reportRepo.findAll();
+    }
+
+    public void publishReview (ReviewDTO aReview){
+        ReviewNotification notification = new ReviewNotification(aReview, "new review " );
+        template.convertAndSend(MessagingConfig.EXCHANGE, MessagingConfig.ROUTING_KEY, notification);
+    }
+
+    public void publishPremiumReview (ReviewPremiumDTO aReview){
+        ReviewPremiumNotification notification = new ReviewPremiumNotification(aReview, "new premium review " );
+        template.convertAndSend(MessagingConfig.EXCHANGE, MessagingConfig.ROUTING_KEY, notification);
     }
 }
