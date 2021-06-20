@@ -14,6 +14,5 @@ import lombok.ToString;
 public class ReviewPremiumNotification {
 
     private ReviewPremiumDTO reviewPremium;
-    //private String status;
     private String message;
 }

@@ -1,9 +1,16 @@
+dist: xenial
+
 language: java
+
 sudo: true
+
+addons:
+  packages:
+    - rabbitmq-server
 
 services:
   - mysql
-
+  - rabbitmq
 before_install:
   - mysql -e 'CREATE DATABASE tpdapp;'
   - chmod +x gradlew
