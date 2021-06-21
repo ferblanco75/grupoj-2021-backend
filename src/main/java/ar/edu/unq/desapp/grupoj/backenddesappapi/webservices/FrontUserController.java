@@ -5,7 +5,7 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.model.AuthenticationResponse;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.FrontUser;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.FrontUserService;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.RegisterDTO;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.util.JwtUtil;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.ResponseEntity;
