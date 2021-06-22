@@ -28,51 +28,50 @@ public class ReviewController {
 
     @CrossOrigin(origins ="*",methods = RequestMethod.GET, allowedHeaders = "*")
     @GetMapping("/review")
-    public List<Review> getAllReviews() {
-        return service.findAll();
+    public ResponseEntity<List<Review>> getAllReviews() {
+        return new ResponseEntity(service.findAll(),HttpStatus.OK);
     }
 
     @PostMapping("/review")
-    public Review saveReview(@RequestBody ReviewDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException, NonExistentTitleException, UserAlreadyReviewTitle {
-        return service.save(aReview);
+    public ResponseEntity<Review> saveReview(@RequestBody ReviewDTO aReview) throws NonExistentSourceException, NonExistentLocationException, NonExistentLanguageException, NonExistentTitleException, UserAlreadyReviewTitle {
+        return new ResponseEntity(service.save(aReview),HttpStatus.CREATED);
     }
 
     @GetMapping("/review/{idTitle}")
-    public List <Review> getReviewPorId(@PathVariable(value = "idTitle") Integer idTitle) throws NonExistentTitleException {
-        return service.findAllByIdTitle(idTitle);
+    public ResponseEntity<List<Review>> getReviewPorId(@PathVariable(value = "idTitle") Integer idTitle) throws NonExistentTitleException {
+        return new ResponseEntity(service.findAllByIdTitle(idTitle)
+                                ,HttpStatus.OK);
     }
 
     @PostMapping("/review/premium")
-    public Review savePremiumReview(@RequestBody ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentLanguageException, NonExistentTitleException, UserAlreadyReviewTitle, NonExistentLocationException, NonExistentCriticException {
-        return service.savePremium(aReview);
+    public ResponseEntity<Review> savePremiumReview(@RequestBody ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentLanguageException, NonExistentTitleException, UserAlreadyReviewTitle, NonExistentLocationException, NonExistentCriticException {
+        return new ResponseEntity(service.savePremium(aReview),HttpStatus.CREATED);
     }
 
     @PutMapping("/review/rate")
-    public Rates rate(@RequestBody RateDTO rateDto) throws NonExistentReviewException, NonExistentLocationException, NonExistentSourceException, NonExistentUserException {
-        return service.rate(rateDto);
+    public ResponseEntity<Rates> rate(@RequestBody RateDTO rateDto) throws NonExistentReviewException, NonExistentLocationException, NonExistentSourceException, NonExistentUserException {
+        return new ResponseEntity(
+                                service.rate(rateDto)
+                                ,HttpStatus.CREATED);
     }
 
     @PutMapping("/review/report")
-    public ReviewReport rate(@RequestBody ReportDTO jsonReport) throws NonExistentReviewException, NonExistentLocationException, NonExistentSourceException {
-        return service.report(jsonReport);
+    public ResponseEntity<ReviewReport> rate(@RequestBody ReportDTO jsonReport) throws NonExistentReviewException, NonExistentLocationException, NonExistentSourceException {
+        return new ResponseEntity(
+                service.report(jsonReport)
+                ,HttpStatus.CREATED);
     }
 
 
     @GetMapping("/review/report")
-    public List<ReviewReport> reviewReports(){
-        return service.findAllReports();
+    public ResponseEntity<List<ReviewReport>> reviewReports(){
+        return ResponseEntity.ok(service.findAllReports());
     }
 
 
     @GetMapping("/review2")
-    // public Iterable <ReviewDTO> getReviewsByCriteria
     public ResponseEntity<Page<Review>> getReviews(ReviewPage reviewPage, ReviewSearchCriteria reviewSearchCriteria){
-
         return new ResponseEntity<>(service.getReviews(reviewPage,reviewSearchCriteria),HttpStatus.OK);
     }
-
-
-
-
 
 }
