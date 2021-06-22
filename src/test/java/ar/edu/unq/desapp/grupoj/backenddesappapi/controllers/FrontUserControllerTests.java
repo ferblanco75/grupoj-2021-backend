@@ -72,7 +72,7 @@ public class FrontUserControllerTests {
         MockHttpServletResponse response= mvc.perform(post("/register")
                 .content(asJsonString(user))
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()).andReturn().getResponse();
+                .andExpect(status().isCreated()).andReturn().getResponse();
 
         assertEquals(
                 "{\"id\":null,\"password\":\"123456\",\"name\":\"alonso.em@gmail.com\",\"active\":true,\"roles\":\"USER\",\"username\":\"quique\"}",
