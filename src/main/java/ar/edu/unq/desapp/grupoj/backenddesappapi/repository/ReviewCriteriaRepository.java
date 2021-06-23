@@ -52,7 +52,6 @@ public class ReviewCriteriaRepository {
 
     private Predicate getPredicate(ReviewSearchCriteria reviewSearchCriteria, Root<Review> reviewRoot) {
         List<Predicate> predicates = new ArrayList<>();
-        System.out.println(reviewSearchCriteria.isSpoilerAlert());
         if (Objects.nonNull(reviewSearchCriteria.isSpoilerAlert())) {
             predicates.add(
                     criteriaBuilder.equal(reviewRoot.get("spoilerAlert"), reviewSearchCriteria.isSpoilerAlert()

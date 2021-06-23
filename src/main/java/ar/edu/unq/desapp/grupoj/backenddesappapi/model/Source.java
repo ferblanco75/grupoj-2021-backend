@@ -35,7 +35,11 @@ public class Source {
 
     @RabbitListener(queues = MessagingConfig.QUEUE)
     public void consumeMessageFromQueue(ReviewNotification reviewNotification) {
-        System.out.println("Message recieved from queue : " + reviewNotification);
+
+        //aca en vez de hacer el systemOut tiene que levantar todas las subscripciones que haya
+        //para ese titleId
+       // System.out.println("Message recieved from queue : " + reviewNotification);
+
     }
 
 }

@@ -123,7 +123,7 @@ public class ReviewService {
         reviewRepo.save(review);
 
         titleService.addReviewToTitle(review,aReview.titleId);
-
+        publishPremiumReview(aReview);
         return review;
 
     }
