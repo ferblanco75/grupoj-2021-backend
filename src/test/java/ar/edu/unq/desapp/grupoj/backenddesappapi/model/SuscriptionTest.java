@@ -11,11 +11,11 @@ public class SuscriptionTest {
 
     @Test
     public void suscription(){
-        Source source = Mockito.mock(Source.class);
+        String url = "/api/character/random";
         Integer titleId= 10;
-        Suscription suscription = new Suscription(titleId,source);
+        Suscription suscription = new Suscription(titleId,url);
 
-        assertEquals(source,suscription.getSource());
+        assertEquals(url,suscription.getUrl());
         assertEquals(titleId,suscription.getTitleId());
     }
 }
