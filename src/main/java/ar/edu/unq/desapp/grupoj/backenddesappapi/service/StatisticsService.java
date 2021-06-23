@@ -1,6 +1,6 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Estatistics;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Statistics;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.EstatisticsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,21 +10,21 @@ import java.util.List;
 
 
 @Service
-public class EstatisticsService {
+public class StatisticsService {
 
     @Autowired
     private EstatisticsRepository repo;
 
     @Transactional
-    public List<Estatistics> getAllEstatistics() {
+    public List<Statistics> getAllStatistics() {
         return repo.findAll();
     }
 
     @Transactional
     public void update(String methodName){
-        Estatistics methodData = repo
+        Statistics methodData = repo
                 .findById(methodName)
-                .orElse(new Estatistics(methodName));
+                .orElse(new Statistics(methodName));
 
         methodData.update();
         repo.save(methodData);

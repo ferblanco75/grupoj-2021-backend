@@ -2,7 +2,6 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.Aspect;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
@@ -22,7 +21,7 @@ public class LogExecutionWebServiceAspect {
 	static Logger logger = LoggerFactory.getLogger(LogExecutionWebServiceAspect.class);
 	private ObjectMapper mapper = new ObjectMapper();
 
-	@Around("execution(* ar.edu.unq.desapp.grupoj.backenddesappapi.webservices..*(..))")
+	//@Around("execution(* ar.edu.unq.desapp.grupoj.backenddesappapi.webservices..*(..))")
 
 	public Object logWebServiceAspect(ProceedingJoinPoint joinPoint) throws Throwable {
 		long start = System.currentTimeMillis();
