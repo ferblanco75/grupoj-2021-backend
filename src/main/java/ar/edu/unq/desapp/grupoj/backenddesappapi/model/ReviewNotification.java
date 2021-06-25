@@ -15,4 +15,5 @@ public class ReviewNotification {
     private ReviewDTO review;
     //private String status;
     private String message;
+
 }

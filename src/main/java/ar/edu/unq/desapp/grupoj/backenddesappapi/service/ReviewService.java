@@ -179,7 +179,7 @@ public class ReviewService {
 
     public void publishReview (ReviewDTO aReview){
         ReviewNotification notification = new ReviewNotification(aReview, "new review " );
-        template.convertAndSend(MessagingConfig.EXCHANGE, MessagingConfig.ROUTING_KEY, notification);
+        template.convertAndSend(MessagingConfig.EXCHANGE, MessagingConfig.ROUTING_KEY, aReview.getTitleId());
     }
 
     public void publishPremiumReview (ReviewPremiumDTO aReview){
