@@ -1,26 +1,29 @@
-package ar.edu.unq.desapp.grupoj.backenddesappapi.webservices;
+package ar.edu.unq.desapp.grupoj.backenddesappapi.webservices.errorHandling;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.*;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.webservices.errorHandling.ApiError;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.webservices.errorHandling.ResponseEntityBuilder;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@ControllerAdvice
+@RestControllerAdvice
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class ControllersExceptionHandler {
 
-    @ExceptionHandler({NullPointerException.class, HttpMessageNotReadableException.class})
+    //@ExceptionHandler({NullPointerException.class, HttpMessageNotReadableException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ResponseEntity<Object> NullPointerAndOtherExceptions
@@ -39,7 +42,7 @@ public class ControllersExceptionHandler {
 
 
 
-    @ExceptionHandler({NonExistentTitleException.class, NonExistentUserException.class, NonExistentSourceException.class, NonExistentLocationException.class, NonExistentLanguageException.class})
+    @ExceptionHandler({NonExistentReviewException.class,UserAlreadyReviewTitle.class,NonExistentTitleException.class, NonExistentUserException.class, NonExistentSourceException.class, NonExistentLocationException.class, NonExistentLanguageException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ResponseEntity<Object> NonExistentExceptions
@@ -52,6 +55,30 @@ public class ControllersExceptionHandler {
                 "Validation Errors" ,
                 details);
 
+        return ResponseEntityBuilder.build(err);
+
+    }
+
+    @ExceptionHandler({BadCredentialsException.class})
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseBody
+    public ResponseEntity<Object> badCredentialsHandler(Exception ex) {
+        ApiError err = new ApiError(
+                LocalDateTime.now(),
+                HttpStatus.UNAUTHORIZED,
+                "Wrong Username or password", Collections.emptyList());
+        return ResponseEntityBuilder.build(err);
+
+    }
+
+    @ExceptionHandler({SQLIntegrityConstraintViolationException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ResponseEntity<Object> duplicateEntryHandler(Exception ex) {
+        ApiError err = new ApiError(
+                LocalDateTime.now(),
+                HttpStatus.BAD_REQUEST,
+                "Duplicate Entry", Collections.emptyList());
         return ResponseEntityBuilder.build(err);
 
     }

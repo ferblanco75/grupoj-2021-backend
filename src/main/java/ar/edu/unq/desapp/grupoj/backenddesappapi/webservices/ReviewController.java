@@ -48,19 +48,19 @@ public class ReviewController {
     }
 
     @PostMapping("/review/premium")
-    public ResponseEntity<Review> savePremiumReview(@RequestBody ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentLanguageException, NonExistentTitleException, UserAlreadyReviewTitle, NonExistentLocationException, NonExistentCriticException {
+    public ResponseEntity<Review> savePremiumReview(@Valid @RequestBody ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentLanguageException, NonExistentTitleException, UserAlreadyReviewTitle, NonExistentLocationException, NonExistentCriticException {
         return new ResponseEntity(service.savePremium(aReview),HttpStatus.CREATED);
     }
 
     @PutMapping("/review/rate")
-    public ResponseEntity<Rates> rate(@RequestBody RateDTO rateDto) throws NonExistentReviewException, NonExistentLocationException, NonExistentSourceException, NonExistentUserException {
+    public ResponseEntity<Rates> rateReview(@Valid @RequestBody RateDTO rateDto) throws NonExistentReviewException, NonExistentLocationException, NonExistentSourceException, NonExistentUserException {
         return new ResponseEntity(
                                 service.rate(rateDto)
                                 ,HttpStatus.CREATED);
     }
 
     @PutMapping("/review/report")
-    public ResponseEntity<?> rate(@RequestBody ReportDTO jsonReport) throws NonExistentReviewException, NonExistentLocationException, NonExistentSourceException {
+    public ResponseEntity<?> reportReview(@Valid @RequestBody ReportDTO jsonReport) throws NonExistentReviewException, NonExistentLocationException, NonExistentSourceException {
         return new ResponseEntity(service.report(jsonReport), HttpStatus.CREATED);
     }
 

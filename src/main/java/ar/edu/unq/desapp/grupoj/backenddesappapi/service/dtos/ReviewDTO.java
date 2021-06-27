@@ -22,7 +22,6 @@ import java.util.Date;
 public class ReviewDTO {
 
     private Integer id;
-
     @NotNull(message = "Title Id cannot be null")
     private Integer titleId;
     @NotBlank(message = "Text cannot be null")
