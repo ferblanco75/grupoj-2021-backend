@@ -29,8 +29,8 @@ public class SuscriptionService {
         return repo.getAllByTitleId(titleId);
     }
 
-    public List<Suscription> getAllByUrl(String url) {
-        return repo.getAllByUrl(url);
+    public Suscription getByUrl(String url) {
+        return repo.getByUrl(url);
     }
 
     @Transactional
