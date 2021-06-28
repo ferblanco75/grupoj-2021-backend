@@ -19,7 +19,7 @@ public class SuscriptionService {
 
     @EventListener
     public void appReady(ApplicationReadyEvent event) {
-        repo.save(new Suscription(1,"http://notification.netflix.com"));
+        repo.save(new Suscription(1,"http://netflix.com/notification"));
         repo.save(new Suscription(1,"http://notification.disney.com"));
         repo.save(new Suscription(2,"http://notification.netflix.com"));
         repo.save(new Suscription(1,"http://notify.paramount.com"));
@@ -29,9 +29,15 @@ public class SuscriptionService {
         return repo.getAllByTitleId(titleId);
     }
 
+    public List<Suscription> getAllByUrl(String url) {
+        return repo.getAllByUrl(url);
+    }
+
     @Transactional
     public Suscription save(Suscription suscription) {
         repo.save(suscription);
         return suscription;
     }
+
+
 }
