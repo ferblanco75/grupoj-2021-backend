@@ -1,7 +1,7 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.webservices;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Estatistics;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.EstatisticsService;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Statistics;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +17,12 @@ import java.util.List;
 public class EstatisticsController {
 
     @Autowired
-    private EstatisticsService service;
+    private StatisticsService service;
 
 
-    @GetMapping("/estatistics")
-    public ResponseEntity<List<Estatistics>> getAllEstatistics() {
-        return ResponseEntity.ok(service.getAllEstatistics());
+    @GetMapping("/statistics")
+    public ResponseEntity<List<Statistics>> getAllStatistics() {
+        return ResponseEntity.ok(service.getAllStatistics());
 
     }
 

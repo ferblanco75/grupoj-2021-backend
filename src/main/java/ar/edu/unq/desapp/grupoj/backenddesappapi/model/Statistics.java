@@ -4,16 +4,16 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Estatistics {
+public class Statistics {
 
     @Id
     String id="";
 
     Integer invocations=0;
 
-    protected Estatistics(){}
+    protected Statistics(){}
 
-    public Estatistics(String methodName){
+    public Statistics(String methodName){
         this.id=methodName;
     }
 

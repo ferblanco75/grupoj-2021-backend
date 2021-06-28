@@ -2,6 +2,7 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.FrontUser;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.FrontUserService;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.UserAlreadyExistsException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,7 +25,7 @@ class BackendDesappApiFronUserTests {
         }
 
         @Test
-        void retrieveAllUsersAndGetOne() {
+        void retrieveAllUsersAndGetOne() throws UserAlreadyExistsException {
             FrontUser user = new FrontUser("UNQUIFLIX","alonso.em@gmail.com","123456");
             userService.save(user);
             List<FrontUser> users = userService.findAll();
