@@ -4,8 +4,6 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.service.SuscriptionService;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.SuscriptionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -23,9 +21,9 @@ public class SuscriptionController {
         return service.save(suscriptionDTO.toModel(suscriptionDTO.getTitleId(), suscriptionDTO.getUrl()));
     }
 
-    @PostMapping("/suscription/{url}")
-    public ResponseEntity callUrl(@PathVariable(value = "url") String url) {
-            return new ResponseEntity("message sent", HttpStatus.OK);
+    @GetMapping("/suscription/demo/{idTitle}")
+    public void showActivity(@PathVariable(value = "idTitle") Integer idTitle) {
+        System.out.print("RECIBI UNA NOTIFICACION PARA TITLEID = " + idTitle);
     }
 
 
