@@ -26,10 +26,10 @@ public class RabbitMQConsumer {
     @RabbitListener(queues = MessagingConfig.QUEUE)
     public void consumeMessageFromQueue(Integer titleId) {
         //Aca agarro todos las suscripciones con titleId y les hago una llamada a las url de esas suscripciones con getURL
-        service.getAllByTitleId(titleId).forEach(suscription -> this.callUrl(suscription.getUrl(),titleId));
+        service.getAllByTitleId(titleId).forEach(suscription -> this.callUrl(suscription.getUrl()));
     }
 
-    private void callUrl(String url,Integer titleId) {
+    private void callUrl(String url) {
         try {
             URL target = new URL(url);
             HttpURLConnection con = (HttpURLConnection) target.openConnection();
