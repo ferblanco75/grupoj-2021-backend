@@ -112,7 +112,7 @@ public class ReviewService {
 
 
     @Transactional
-    public Review  savePremium(ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentTitleException, NonExistentLanguageException, UserAlreadyReviewTitle, NonExistentLocationException, NonExistentCriticException {
+    public Review savePremium(ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentTitleException, NonExistentLanguageException, UserAlreadyReviewTitle, NonExistentLocationException, NonExistentCriticException {
         Language language= checkLanguage(aReview.languageId);
 
         Critic critic = criticService.getBySourceAndCriticId(aReview.critic.getSourceId(),aReview.critic.getUserId(),aReview.critic.getLocationId());
@@ -160,8 +160,6 @@ public class ReviewService {
         reviewRepo.save(aReview);
         return report;
     }
-
-
 
 
     private Language checkLanguage(Integer languageId) throws NonExistentLanguageException {

@@ -1,12 +1,20 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+@Validated
 public class UserDTO {
-
+    @NotNull (message = "Source ID cannot be null")
     private Integer sourceId;
+    @NotBlank(message = "User ID cannot be null")
     private String userId;
+    @NotBlank(message = "User Nick cannot be null")
     private String userNick;
+    @NotNull (message = "Location ID cannot be null")
     private Integer locationId;
 
     protected UserDTO(){}

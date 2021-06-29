@@ -21,14 +21,18 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation "io.jsonwebtoken:jjwt:0.9.1"
 	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+	//implementation "io.jsonwebtoken:jjwt:0.9.1"
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	
+	//runtimeOnly 'org.apache.logging.log4j:log4j-1.2-api:2.11.2'
 	testImplementation 'org.springframework.security:spring-security-test'
 	runtimeOnly 'mysql:mysql-connector-java'
 	//testImplementation 'org.mockito:mockito-core:1.10.19'
+	compile 'org.hibernate.validator:hibernate-validator:6.0.13.Final'
 	testImplementation 'org.mockito:mockito-core:3.2.4'
 	testImplementation 'com.tngtech.archunit:archunit:0.19.0'
 	testCompile 'junit:junit:4.12'

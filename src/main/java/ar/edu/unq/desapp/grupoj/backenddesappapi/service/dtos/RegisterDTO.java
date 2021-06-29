@@ -2,10 +2,18 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.FrontUser;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class RegisterDTO {
+
+    @NotBlank(message = "Email address must be provided")
     private String email;
+    @NotBlank(message = "password must be provided")
     private String password;
+    @NotBlank(message = "Name must be provided")
     private String name;
+    @NotNull(message = "Source Id cannot be null")
     private Integer sourceId;
 
     public RegisterDTO(Integer source,String email, String name, String password) {
@@ -19,7 +27,7 @@ public class RegisterDTO {
     public RegisterDTO() { }
 
     public FrontUser toModel(){
-        return new FrontUser(email,name, password);
+        return new FrontUser(email, name, password);
     }
     public String getEmail() {
         return email;

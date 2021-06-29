@@ -1,11 +1,10 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.controllers;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.FrontUser;
-
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.FrontUserService;
-
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.RegisterDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.UserAlreadyExistsException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.webservices.FrontUserController;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,8 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -64,18 +61,20 @@ public class FrontUserControllerTests {
     }
 
     @Test
-    public void registerFrontUserControllerTest() throws Exception {
+    public void registerFrontUserControllerTest() throws Exception, UserAlreadyExistsException {
         mvc = MockMvcBuilders.standaloneSetup(controller).build();
-        FrontUser user= new FrontUser("quique","alonso.em@gmail.com","123456");
+        FrontUser user= new FrontUser("quique@gmail.com","quique","123456");
         when(service.save(Mockito.any())).thenReturn(user);
 
+
+        RegisterDTO dtoRegister= new RegisterDTO(1,"quique@gmail.com","quique","123456");
         MockHttpServletResponse response= mvc.perform(post("/register")
-                .content(asJsonString(user))
+                .content(asJsonString(dtoRegister))
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()).andReturn().getResponse();
+                .andExpect(status().isCreated()).andReturn().getResponse();
 
         assertEquals(
-                "{\"id\":null,\"password\":\"123456\",\"name\":\"alonso.em@gmail.com\",\"active\":true,\"roles\":\"USER\",\"username\":\"quique\"}",
+                "{\"id\":null,\"password\":\"123456\",\"name\":\"quique\",\"active\":true,\"roles\":\"USER\",\"username\":\"quique@gmail.com\"}",
                 response.getContentAsString());
     }
 

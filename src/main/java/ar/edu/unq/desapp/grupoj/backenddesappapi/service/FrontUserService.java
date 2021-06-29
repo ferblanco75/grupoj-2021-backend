@@ -3,9 +3,11 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.FrontUser;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.MyUserDetails;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.FrontUserRepository;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.UserAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -31,9 +33,13 @@ public class FrontUserService implements UserDetailsService {
     }
 
     @Transactional
-    public FrontUser save(FrontUser frontuser) {
-        frontUserRepo.save(frontuser);
-        return frontuser;
+    public FrontUser save(FrontUser frontuser) throws UserAlreadyExistsException {
+        try {
+            frontUserRepo.save(frontuser);
+            return frontuser;
+        }catch(DuplicateKeyException e){
+            throw new UserAlreadyExistsException();
+        }
     }
 
     @Override
