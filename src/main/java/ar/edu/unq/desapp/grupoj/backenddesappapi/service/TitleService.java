@@ -1,5 +1,6 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
 
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReviewDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentTitleException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.cast.Job;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.cast.Person;
@@ -12,6 +13,7 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.titlesRepository.Tit
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.InverseReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,8 @@ public class    TitleService {
     @Autowired
     private TitleRepository titleRepo;
 
+    @Autowired
+    private ReviewService reviewService;
 
 
     @EventListener
@@ -61,6 +65,7 @@ public class    TitleService {
         titleRepo.save(title3);
 
     }
+
     public Title getByTitleId(Integer id) throws NonExistentTitleException {
         return this.titleRepo.getByTitleId(id).orElseThrow(() -> new NonExistentTitleException(id));
     }
@@ -79,6 +84,21 @@ public class    TitleService {
         List<Decade> decades= decadeRepo.getAllByIdIn(req.decade);
         return titleRepoQ.inverseQuery(req,decades);
     }
+
+    @Cacheable(value = "titleInfo")
+    public Title getTitleInfo(Integer id) throws NonExistentTitleException {
+        Optional<Title> optionalTitle = titleRepo.findById(id);
+        if (optionalTitle.isPresent()){
+            Title title = optionalTitle.get();
+            //Title title = new Title();
+            List <Review> reviews = reviewService.findAllByIdTitle(title.getTitleId());
+            title.setReviewCount(reviews.size());
+            //title.setAverageRating(getAverageRating(content.getReviews()));
+            return title;
+        }
+        throw new NonExistentTitleException(id);
+    }
+
 
 
 }

@@ -6,13 +6,14 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.model.cast.Person;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name="titles")
 
-public class Title {
+public class Title implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +24,7 @@ public class Title {
     private Integer startYear;
     private Integer endYear;
     private Integer duration;
-
+    private Integer reviewCount;
 
     @ElementCollection(fetch = FetchType.EAGER, targetClass = Genre.class)
     @Enumerated(EnumType.STRING)
@@ -49,6 +50,8 @@ public class Title {
         this.genres=genres;
 
     }
+
+    
 
     public Title(){}
 
@@ -92,6 +95,9 @@ public class Title {
         return startYear;
     }
 
+    public void setReviewCount(Integer count) {
+        this.reviewCount = count;
+    }
 
 
 }

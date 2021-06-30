@@ -1,5 +1,7 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.config;
 
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -19,10 +21,10 @@ public class RedisConfig {
     }
 
     @Bean
-    public RedisTemplate<String, Object> redisTemplate() {
-        final RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
+    public RedisTemplate<String, Review> redisTemplate() {
+        final RedisTemplate<String, Review> template = new RedisTemplate<>();
         template.setConnectionFactory(jedisConnectionFactory());
-        template.setValueSerializer(new GenericToStringSerializer<Object>(Object.class));
+        template.setValueSerializer(new GenericToStringSerializer<Review>(Review.class));
         return template;
     }
 }

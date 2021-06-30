@@ -48,6 +48,15 @@ public class TitleController {
                 , HttpStatus.OK);
     }
 
+    @GetMapping("/title/cached/{id}")
+    public ResponseEntity<TitleDTO> getCachedTitleInfoById(@PathVariable(value = "id") Integer id) throws NonExistentTitleException {
+        return ResponseEntity
+                .ok(
+                        TitleDTO.fromModel(titleService.getTitleInfo(id))
+                );
+    }
+
+
 
 }
 
