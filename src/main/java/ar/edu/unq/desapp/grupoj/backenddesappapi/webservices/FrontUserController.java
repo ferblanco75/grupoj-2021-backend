@@ -3,12 +3,12 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.webservices;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.Aspect.ExcludeFromMetrics;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.AuthenticationRequest;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.AuthenticationResponse;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.FrontUser;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.FrontUserDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.FrontUserService;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.RegisterDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentSourceException;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.service.util.JwtUtil;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.UserAlreadyExistsException;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins ="*")
 @RestController
@@ -38,8 +39,8 @@ public class FrontUserController {
     private FrontUserService service;
 
     @GetMapping("/frontusers")
-    public ResponseEntity<List<FrontUser>> getAllFrontUsers() {
-        return ResponseEntity.ok(service.findAll());
+    public ResponseEntity<List<FrontUserDTO>> getAllFrontUsers() {
+        return ResponseEntity.ok(service.findAll().stream().map(user->FrontUserDTO.fromModel(user)).collect(Collectors.toList()));
     }
 
     @PostMapping("/register")

@@ -1,6 +1,8 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.controllers;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.FrontUser;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.FrontUserDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.FrontUserService;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.RegisterDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.UserAlreadyExistsException;
@@ -51,19 +53,22 @@ public class FrontUserControllerTests {
     public void frontUserControllerTest() throws Exception {
         mvc = MockMvcBuilders.standaloneSetup(controller).build();
         List<FrontUser> list= new ArrayList<>();
-        FrontUser user= new FrontUser("quique","alonso.em@gmail.com","123456");
+        Source source = new Source("Test");
+        FrontUser user= new FrontUser("quique","alonso.em@gmail.com","123456",source);
         list.add(user);
         when(service.findAll()).thenReturn(list);
 
         MockHttpServletResponse response= mvc.perform(get("/frontusers")).andExpect(status().isOk()).andReturn().getResponse();
 
-        assertEquals("[{\"id\":null,\"password\":\"123456\",\"name\":\"alonso.em@gmail.com\",\"active\":true,\"roles\":\"USER\",\"username\":\"quique\"}]",response.getContentAsString());
+        assertEquals("[{\"username\":\"quique\",\"name\":\"alonso.em@gmail.com\",\"active\":true}]",response.getContentAsString());
+
     }
 
     @Test
     public void registerFrontUserControllerTest() throws Exception, UserAlreadyExistsException {
         mvc = MockMvcBuilders.standaloneSetup(controller).build();
-        FrontUser user= new FrontUser("quique@gmail.com","quique","123456");
+        Source source = new Source("Test");
+        FrontUserDTO user= new FrontUserDTO("quique@gmail.com","quique",true);
         when(service.save(Mockito.any())).thenReturn(user);
 
 
@@ -74,7 +79,8 @@ public class FrontUserControllerTests {
                 .andExpect(status().isCreated()).andReturn().getResponse();
 
         assertEquals(
-                "{\"id\":null,\"password\":\"123456\",\"name\":\"quique\",\"active\":true,\"roles\":\"USER\",\"username\":\"quique@gmail.com\"}",
+                "{\"username\":\"quique@gmail.com\",\"name\":\"quique\",\"active\":true}",
+
                 response.getContentAsString());
     }
 

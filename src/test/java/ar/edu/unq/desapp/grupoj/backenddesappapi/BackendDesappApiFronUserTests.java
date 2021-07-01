@@ -2,6 +2,8 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.FrontUser;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.FrontUserService;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.RegisterDTO;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentSourceException;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.UserAlreadyExistsException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +27,8 @@ class BackendDesappApiFronUserTests {
         }
 
         @Test
-        void retrieveAllUsersAndGetOne() throws UserAlreadyExistsException {
-            FrontUser user = new FrontUser("UNQUIFLIX","alonso.em@gmail.com","123456");
+        void retrieveAllUsersAndGetOne() throws UserAlreadyExistsException, NonExistentSourceException {
+            RegisterDTO user = new RegisterDTO(1,"alonso.em2@gmail.com","quique","123");
             userService.save(user);
             List<FrontUser> users = userService.findAll();
             assertEquals(2,users.size());

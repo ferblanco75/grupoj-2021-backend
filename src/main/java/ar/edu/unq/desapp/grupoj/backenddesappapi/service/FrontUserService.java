@@ -26,11 +26,6 @@ public class FrontUserService implements UserDetailsService {
     @Autowired
     private SourceService sourceService;
 
-
-    public List<FrontUser> findAll() {
-        return frontUserRepo.findAll();
-    }
-
     @EventListener
     public void appReady(ApplicationReadyEvent event) throws NonExistentSourceException {
 
@@ -38,12 +33,18 @@ public class FrontUserService implements UserDetailsService {
     }
 
     @Transactional
-    public FrontUser save(RegisterDTO frontuser) throws UserAlreadyExistsException, NonExistentSourceException {
+    public List<FrontUser> findAll() {
+
+        return frontUserRepo.findAll();
+    }
+
+    @Transactional
+    public FrontUserDTO save(RegisterDTO frontuser) throws UserAlreadyExistsException, NonExistentSourceException {
         Source source = sourceService.getById(frontuser.getSourceId());
         try {
             FrontUser user = frontuser.toModel(source);
             frontUserRepo.save(user);
-            return user;
+            return FrontUserDTO.fromModel(user);
         }catch(DuplicateKeyException e){
             throw new UserAlreadyExistsException();
         }
