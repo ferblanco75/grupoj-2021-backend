@@ -9,6 +9,7 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 import org.springframework.data.redis.serializer.GenericToStringSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
 @ComponentScan("ar.edu.unq.desapp.grupoj.backenddesappapi")
@@ -21,10 +22,11 @@ public class RedisConfig {
     }
 
     @Bean
-    public RedisTemplate<String, Review> redisTemplate() {
-        final RedisTemplate<String, Review> template = new RedisTemplate<>();
+    public RedisTemplate<String, Title> redisTemplate() {
+        final RedisTemplate<String, Title> template = new RedisTemplate<>();
         template.setConnectionFactory(jedisConnectionFactory());
-        template.setValueSerializer(new GenericToStringSerializer<Review>(Review.class));
+        //template.setHashValueSerializer(new StringRedisSerializer());
+        template.setValueSerializer(new GenericToStringSerializer<Title>(Title.class));
         return template;
     }
 }

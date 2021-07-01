@@ -15,6 +15,8 @@ import java.util.List;
 
 public class Title implements Serializable {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer titleId;
@@ -25,6 +27,7 @@ public class Title implements Serializable {
     private Integer endYear;
     private Integer duration;
     private Integer reviewCount;
+    private static final long serialVersionUID = 0L;
 
     @ElementCollection(fetch = FetchType.EAGER, targetClass = Genre.class)
     @Enumerated(EnumType.STRING)
@@ -39,7 +42,7 @@ public class Title implements Serializable {
     private List<Cast> cast= new ArrayList<Cast>();
 
 
-    public Title(Integer id,TitleType type, String title, Boolean isAdult, Integer startYear,Integer endYear,Integer duration, List<Genre> genres){
+    public Title(Integer id,TitleType type, String title, Boolean isAdult, Integer startYear,Integer endYear,Integer duration, List<Genre> genres, Integer reviewCount){
         this.titleId=id;
         this.titleType=type;
         this.title=title;
@@ -48,10 +51,10 @@ public class Title implements Serializable {
         this.endYear=endYear;
         this.duration=duration;
         this.genres=genres;
-
+        this.reviewCount = reviewCount;
     }
 
-    
+
 
     public Title(){}
 
@@ -97,6 +100,10 @@ public class Title implements Serializable {
 
     public void setReviewCount(Integer count) {
         this.reviewCount = count;
+    }
+
+    public Integer getReviewCount(){
+        return this.reviewCount;
     }
 
 

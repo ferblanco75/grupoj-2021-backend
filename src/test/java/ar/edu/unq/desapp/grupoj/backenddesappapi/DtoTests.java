@@ -12,7 +12,7 @@ public class DtoTests {
 
     @Test
     void createTitleDTO(){
-        TitleDTO title= new TitleDTO(1,"titulo",60, TitleType.MOVIE,2021,2021,true);
+        TitleDTO title= new TitleDTO(1,"titulo",60, TitleType.MOVIE,2021,2021,true,5);
         assertEquals(1,title.getTitleId());
         assertEquals(true,title.getAdult());
         assertEquals(2021,title.getEndYear());
@@ -20,6 +20,7 @@ public class DtoTests {
         assertEquals("titulo",title.getTitle());
         assertEquals(TitleType.MOVIE,title.getType());
         assertEquals(60,title.getDuration());
+        assertEquals(5,title.getReviewCount());
     }
 
 

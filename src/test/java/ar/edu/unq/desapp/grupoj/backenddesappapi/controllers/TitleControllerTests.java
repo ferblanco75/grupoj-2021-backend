@@ -58,9 +58,9 @@ public class TitleControllerTests {
         genres.add(Genre.DRAMA);
 
         List<Title> list= new ArrayList<>();
-        Title title= new Title(9, TitleType.MOVIE,"Die Hard",false,1985,1985,90,genres);
+        Title title= new Title(9, TitleType.MOVIE,"Die Hard",false,1985,1985,90,genres,2);
         list.add(title);
-        Title title2= new Title(2, TitleType.SHORT,"SNOOPY",false,1978,1979,30,genres);
+        Title title2= new Title(2, TitleType.SHORT,"SNOOPY",false,1978,1979,30,genres,0);
         list.add(title2);
 
 
@@ -80,7 +80,7 @@ public class TitleControllerTests {
         genres.add(Genre.ACTION);
         genres.add(Genre.DRAMA);
 
-        Title title2= new Title(2, TitleType.SHORT,"SNOOPY",false,1978,1979,30,genres);
+        Title title2= new Title(2, TitleType.SHORT,"SNOOPY",false,1978,1979,30,genres,3);
 
         when(service.getByTitleId(any())).thenReturn(title2);
 
@@ -98,9 +98,9 @@ public class TitleControllerTests {
         genres.add(Genre.THRILLER);
 
         List<Title> list= new ArrayList<>();
-        Title title= new Title(7, TitleType.MOVIE,"Terminator 2",true,1985,1985,10,genres);
+        Title title= new Title(7, TitleType.MOVIE,"Terminator 2",true,1985,1985,10,genres,3);
         list.add(title);
-        Title title2= new Title(6, TitleType.MOVIE,"Rambo",true,1978,1979,20,genres);
+        Title title2= new Title(6, TitleType.MOVIE,"Rambo",true,1978,1979,20,genres,3);
         list.add(title2);
 
         when(service.inverseQuery(any(InverseReq.class))).thenReturn(list);
