@@ -2,6 +2,9 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.model.user;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Location;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -12,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.CascadeType;
+import java.util.Collection;
 
 
 @Entity
@@ -19,7 +23,7 @@ import javax.persistence.CascadeType;
         name = "critic",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"source","critic_id"})}
 )
-public class Critic {
+public class Critic  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,10 +42,13 @@ public class Critic {
     protected Critic(){}
 
     public Critic(Source source, String userId, Location location){
+
         this.source=source;
         this.userId=userId;
         this.location=location;
     }
+
+
 
     public Source getSource() {
         return source;

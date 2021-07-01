@@ -1,6 +1,7 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos;
 
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.FrontUser;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -26,8 +27,8 @@ public class RegisterDTO {
 
     public RegisterDTO() { }
 
-    public FrontUser toModel(){
-        return new FrontUser(email, name, password);
+    public FrontUser toModel(Source source){
+        return new FrontUser(email, name, password,source);
     }
     public String getEmail() {
         return email;

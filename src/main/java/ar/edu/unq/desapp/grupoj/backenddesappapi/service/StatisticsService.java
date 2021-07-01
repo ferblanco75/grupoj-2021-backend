@@ -16,15 +16,15 @@ public class StatisticsService {
     private EstatisticsRepository repo;
 
     @Transactional
-    public List<Statistics> getAllStatistics() {
-        return repo.findAll();
+    public List<Statistics> getAllStatisticsByPlatform(Integer platformId) {
+        return repo.findAllByPlatformId(platformId);
     }
 
     @Transactional
-    public void update(String methodName){
+    public void update(String methodName,Integer platformId){
         Statistics methodData = repo
-                .findById(methodName)
-                .orElse(new Statistics(methodName));
+                .findByMethodNameAndPlatformId(methodName,platformId)
+                .orElse(new Statistics(methodName,platformId));
 
         methodData.update();
         repo.save(methodData);

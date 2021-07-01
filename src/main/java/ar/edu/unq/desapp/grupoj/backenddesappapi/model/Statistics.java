@@ -2,19 +2,26 @@ package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 
 @Entity
+@IdClass(MetricId.class)
 public class Statistics {
 
     @Id
-    String id="";
+    String methodName="";
+
+    @Id
+    Integer platformId;
 
     Integer invocations=0;
 
     protected Statistics(){}
 
-    public Statistics(String methodName){
-        this.id=methodName;
+    public Statistics(String methodName,Integer sourceId){
+
+        this.methodName=methodName;
+        this.platformId=sourceId;
     }
 
     public void update(){
@@ -25,7 +32,12 @@ public class Statistics {
         return invocations;
     }
 
-    public String getId() {
-        return id;
+    public Integer getPlatformId() {
+        return platformId;
     }
+
+    public String getMethodName() {
+        return methodName;
+    }
+    public String getId(){return methodName;}
 }

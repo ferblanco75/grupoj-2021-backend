@@ -1,5 +1,6 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.webservices;
 
+import ar.edu.unq.desapp.grupoj.backenddesappapi.Aspect.ExcludeFromMetrics;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.SourceService;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.SourceDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentSourceException;
@@ -25,6 +26,7 @@ public class SourceController {
 
 
     @GetMapping("/sources")
+    @ExcludeFromMetrics
     public ResponseEntity<List<SourceDTO>> getAllSources() {
         return new ResponseEntity<List<SourceDTO>>(
                 sourceService.findAll()
@@ -35,6 +37,7 @@ public class SourceController {
     }
 
     @GetMapping("/sources/{id}")
+    @ExcludeFromMetrics
     public ResponseEntity<SourceDTO> getSourceById(@PathVariable(value = "id") Integer id) throws NonExistentSourceException {
         return new ResponseEntity<SourceDTO>(
                 SourceDTO.fromModel(sourceService.getById(id)),

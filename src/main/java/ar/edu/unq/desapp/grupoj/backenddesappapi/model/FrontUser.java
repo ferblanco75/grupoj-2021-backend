@@ -1,12 +1,12 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(
@@ -14,7 +14,7 @@ import javax.persistence.UniqueConstraint;
         uniqueConstraints = {@UniqueConstraint(columnNames = {"userName"})}
 )
 
-public class FrontUser  {
+public class FrontUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -23,14 +23,26 @@ public class FrontUser  {
     private String name;
     private boolean active=true;
     private String roles="USER";
-    //private Source source;
+
+    @Transient
+    private List<GrantedAuthority> authorities;
+
+    @ManyToOne
+    private Source source;
 
     protected FrontUser(){}
 
-    public FrontUser(String email, String name, String password){
+    public FrontUser(String email, String name, String password, Source source){
         this.userName=email;
         this.name=name;
         this.password=password;
+        this.source=source;
+    }
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
     }
 
 
@@ -39,26 +51,31 @@ public class FrontUser  {
     }
 //    public void setSource(Source source) { this.source = source;}
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
 
     public String getUsername() {
         return userName;
     }
 
-    public boolean isActive() {
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
         return active;
     }
 
-    public String getRoles() {
-        return roles;
-    }
 
     public Integer getId() {
         return id;
@@ -70,5 +87,11 @@ public class FrontUser  {
 
     public String getName() {  return name;   }
 
+    public String getPlatform() {
+        return source.getName();
+    }
+    public Integer getPlatformId(){
+        return source.getId();
+    }
 }
 
