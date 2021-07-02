@@ -20,7 +20,7 @@ public class EstatisticsController {
     private StatisticsService service;
 
 
-    @GetMapping("/statistics/")
+    @GetMapping("/statistics")
     public ResponseEntity<List<Statistics>> getAllStatistics() {
         return ResponseEntity.ok(service.getAllStatisticsByPlatform());
 

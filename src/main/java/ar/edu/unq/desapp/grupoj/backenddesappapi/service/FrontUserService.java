@@ -29,7 +29,7 @@ public class FrontUserService implements UserDetailsService {
     @EventListener
     public void appReady(ApplicationReadyEvent event) throws NonExistentSourceException {
 
-        frontUserRepo.save(new FrontUser("alonso.em@gmail.com","Enrique Alonso","123456",sourceService.getById(1)));
+        frontUserRepo.save(new FrontUser("alonso.em@gmail.com","Enrique Alonso","4a7d1ed414474e4033ac29ccb8653d9b",sourceService.getById(1)));
     }
 
     @Transactional
