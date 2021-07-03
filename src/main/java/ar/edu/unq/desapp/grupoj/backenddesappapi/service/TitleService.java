@@ -90,7 +90,6 @@ public class    TitleService {
         Optional<Title> optionalTitle = titleRepo.findById(id);
         if (optionalTitle.isPresent()){
             Title title = optionalTitle.get();
-            //Title title = new Title();
             List <Review> reviews = reviewService.findAllByIdTitle(title.getTitleId());
             title.setReviewCount(reviews.size());
             //title.setAverageRating(getAverageRating(content.getReviews()));
