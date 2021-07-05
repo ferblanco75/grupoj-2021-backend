@@ -1,9 +1,13 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles;
 
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Language;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Source;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.cast.Cast;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.cast.Job;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.cast.Person;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
+import org.yaml.snakeyaml.util.ArrayUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -27,6 +31,7 @@ public class Title implements Serializable {
     private Integer endYear;
     private Integer duration;
     private Integer reviewCount;
+    private Double averageRating;
     private static final long serialVersionUID = 0L;
 
     @ElementCollection(fetch = FetchType.EAGER, targetClass = Genre.class)
@@ -36,13 +41,13 @@ public class Title implements Serializable {
     private List<Genre> genres;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Review> reviews;
+    private List<Review> reviews = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Cast> cast= new ArrayList<Cast>();
 
 
-    public Title(Integer id,TitleType type, String title, Boolean isAdult, Integer startYear,Integer endYear,Integer duration, List<Genre> genres, Integer reviewCount){
+    public Title(Integer id, TitleType type, String title, Boolean isAdult, Integer startYear, Integer endYear, Integer duration, List<Genre> genres, Integer reviewCount, Double averageRating){
         this.titleId=id;
         this.titleType=type;
         this.title=title;
@@ -51,7 +56,8 @@ public class Title implements Serializable {
         this.endYear=endYear;
         this.duration=duration;
         this.genres=genres;
-        this.reviewCount = reviewCount;
+        this.reviewCount=reviewCount;
+        this.averageRating=averageRating;
     }
 
 
@@ -61,10 +67,10 @@ public class Title implements Serializable {
     public void addReview(Review review){
         reviews.add(review);
     }
+
     public void addCast(Person person, Job job){
         cast.add(new Cast(person,job));
     }
-
 
     public Integer getTitleId() {
         return titleId;
@@ -106,5 +112,24 @@ public class Title implements Serializable {
         return this.reviewCount;
     }
 
+    public List<Review> getReviews(){
+        return reviews;
+    }
 
+    public Double getAverageRating() {
+        Double rating = 0.0;
+        if (  reviews.size() == 0 ) {
+            averageRating = 0.00;
+        } else {
+            for (Review review:reviews) {
+                rating += review.getRating();
+            }
+            averageRating = rating/this.getReviewCount();
+        }
+        return averageRating;
+    }
+
+
+    public void setAverageRating(double averageRating) {
+    }
 }

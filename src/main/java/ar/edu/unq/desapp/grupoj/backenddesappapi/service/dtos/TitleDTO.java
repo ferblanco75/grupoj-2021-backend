@@ -13,9 +13,10 @@ public class TitleDTO {
     private Integer startYear;
     private Integer endYear;
     private Integer reviewCount;
+    private double averageRating;
 
 
-    public TitleDTO(Integer id,String title, Integer time, TitleType type, Integer startYear, Integer endYear,Boolean forAdult, Integer reviewCount){
+    public TitleDTO(Integer id,String title, Integer time, TitleType type, Integer startYear, Integer endYear,Boolean forAdult, Integer reviewCount, Double averageRating){
         this.title=title;
         this.titleId=id;
         this.duration=time;
@@ -24,6 +25,7 @@ public class TitleDTO {
         this.endYear = endYear;
         this.isAdult=forAdult;
         this.reviewCount = reviewCount;
+        this.averageRating = averageRating;
     }
 
 
@@ -35,7 +37,8 @@ public class TitleDTO {
                             title.getStartYear(),
                             title.getEndYear(),
                             title.getAdult(),
-                            title.getReviewCount());
+                            title.getReviewCount(),
+                            title.getAverageRating());
 
     }
     protected TitleDTO(){}
@@ -69,5 +72,7 @@ public class TitleDTO {
     }
 
     public Integer getReviewCount() { return  reviewCount;}
+
+    public Double getAverageRating() { return  averageRating;}
 
 }

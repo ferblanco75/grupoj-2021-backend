@@ -58,9 +58,9 @@ public class TitleControllerTests {
         genres.add(Genre.DRAMA);
 
         List<Title> list= new ArrayList<>();
-        Title title= new Title(9, TitleType.MOVIE,"Die Hard",false,1985,1985,90,genres,2);
+        Title title= new Title(9, TitleType.MOVIE,"Die Hard",false,1985,1985,90,genres,2,0.00);
         list.add(title);
-        Title title2= new Title(2, TitleType.SHORT,"SNOOPY",false,1978,1979,30,genres,0);
+        Title title2= new Title(2, TitleType.SHORT,"SNOOPY",false,1978,1979,30,genres,0,0.00);
         list.add(title2);
 
 
@@ -68,7 +68,7 @@ public class TitleControllerTests {
 
         MockHttpServletResponse response= mvc.perform(get("/title")).andExpect(status().isOk()).andReturn().getResponse();
 
-        String expectedResponse="[{\"titleId\":9,\"title\":\"Die Hard\",\"duration\":90,\"type\":\"MOVIE\",\"startYear\":1985,\"endYear\":1985,\"adult\":false},{\"titleId\":2,\"title\":\"SNOOPY\",\"duration\":30,\"type\":\"SHORT\",\"startYear\":1978,\"endYear\":1979,\"adult\":false}]";
+        String expectedResponse="[{\"titleId\":9,\"title\":\"Die Hard\",\"duration\":90,\"type\":\"MOVIE\",\"startYear\":1985,\"endYear\":1985,\"reviewCount\":2,\"averageRating\":0.0,\"adult\":false},{\"titleId\":2,\"title\":\"SNOOPY\",\"duration\":30,\"type\":\"SHORT\",\"startYear\":1978,\"endYear\":1979,\"reviewCount\":0,\"averageRating\":0.0,\"adult\":false}]";
         assertEquals(expectedResponse,response.getContentAsString());
     }
 
@@ -80,13 +80,13 @@ public class TitleControllerTests {
         genres.add(Genre.ACTION);
         genres.add(Genre.DRAMA);
 
-        Title title2= new Title(2, TitleType.SHORT,"SNOOPY",false,1978,1979,30,genres,3);
+        Title title2= new Title(2, TitleType.SHORT,"SNOOPY",false,1978,1979,30,genres,3,0.00);
 
         when(service.getByTitleId(any())).thenReturn(title2);
 
         MockHttpServletResponse response= mvc.perform(get("/title/2")).andExpect(status().isOk()).andReturn().getResponse();
 
-        String expectedResponse="{\"titleId\":2,\"title\":\"SNOOPY\",\"duration\":30,\"type\":\"SHORT\",\"startYear\":1978,\"endYear\":1979,\"adult\":false}";
+        String expectedResponse="{\"titleId\":2,\"title\":\"SNOOPY\",\"duration\":30,\"type\":\"SHORT\",\"startYear\":1978,\"endYear\":1979,\"reviewCount\":3,\"averageRating\":0.0,\"adult\":false}";
         assertEquals(expectedResponse,response.getContentAsString());
     }
 
@@ -98,9 +98,9 @@ public class TitleControllerTests {
         genres.add(Genre.THRILLER);
 
         List<Title> list= new ArrayList<>();
-        Title title= new Title(7, TitleType.MOVIE,"Terminator 2",true,1985,1985,10,genres,3);
+        Title title= new Title(7, TitleType.MOVIE,"Terminator 2",true,1985,1985,10,genres,3,new Double(0.00));
         list.add(title);
-        Title title2= new Title(6, TitleType.MOVIE,"Rambo",true,1978,1979,20,genres,3);
+        Title title2= new Title(6, TitleType.MOVIE,"Rambo",true,1978,1979,20,genres,3,0.00);
         list.add(title2);
 
         when(service.inverseQuery(any(InverseReq.class))).thenReturn(list);
@@ -124,7 +124,7 @@ public class TitleControllerTests {
                 .content(asJsonString(inverseRequest))
                 .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andReturn().getResponse();
 
-        String expectedResponse="[{\"titleId\":7,\"title\":\"Terminator 2\",\"duration\":10,\"type\":\"MOVIE\",\"startYear\":1985,\"endYear\":1985,\"adult\":true},{\"titleId\":6,\"title\":\"Rambo\",\"duration\":20,\"type\":\"MOVIE\",\"startYear\":1978,\"endYear\":1979,\"adult\":true}]";
+        String expectedResponse="[{\"titleId\":7,\"title\":\"Terminator 2\",\"duration\":10,\"type\":\"MOVIE\",\"startYear\":1985,\"endYear\":1985,\"reviewCount\":3,\"averageRating\":0.0,\"adult\":true},{\"titleId\":6,\"title\":\"Rambo\",\"duration\":20,\"type\":\"MOVIE\",\"startYear\":1978,\"endYear\":1979,\"reviewCount\":3,\"averageRating\":0.0,\"adult\":true}]";
         assertEquals(expectedResponse,response.getContentAsString());
     }
 

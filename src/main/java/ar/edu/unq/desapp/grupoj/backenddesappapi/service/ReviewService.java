@@ -59,18 +59,18 @@ public class ReviewService {
 
     @EventListener
     public void appReady(ApplicationReadyEvent event) {
+/*
+        save(new ReviewDTO(1, "Maso, para un domingo zafa","pochoclera",3,true,language));
+        User user = new User (source,"fernando.test@gmail.com","Fernando",location);
+        user.addReview(new Review(1, "Maso, para un domingo zafa","pochoclera",3,true,language));
+        Language language2 = new Language("English");
 
-        //save(new ReviewDTO());
-        //User user = new User (source,"fernando.test@gmail.com","Fernando",location);
-        //user.addReview(new Review(1, "Maso, para un domingo zafa","pochoclera",3,true,language));
-        /*
         user.addReview(new Review(3, "Muy mala pelicula","No la entendi",1,true,language));
         user.addReview(new Review(5, "Pectacular, alta peli pero muy larga!","Increibles efecto especiales",3,false,language));
-        */
+
         //userRepository.save(user);
 
-/*
-        Language language2 = new Language("English");
+
         Critic critic = new Critic(3,"criticoEspecialista@yahoo.com");
         critic.addReview(new ReviewPremium(4, "La mas pior!","Terriblemente aburrida.",5,true, language2));
         criticRepository.save(critic);
