@@ -6,6 +6,7 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.ReviewDTO;
 import jdk.jfr.Name;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 
@@ -17,7 +18,7 @@ import java.util.List;
         name = "reviews",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"titleId","user_id"})}
 )
-public class Review {
+public class Review  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
