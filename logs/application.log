@@ -186,3 +186,37 @@
 2021-07-06T19:03:01.805-0300 INFO METHOD: saveUser
 2021-07-06T19:03:01.805-0300 INFO USER CREDENTIAL: ANONYMOUS
 2021-07-06T19:03:01.805-0300 INFO EXECUTED IN: 55 ms.
+2021-07-06T19:17:15.888-0300 INFO Starting BackendDesappApiApplication using Java 1.8.0_292 on ko-3 with PID 7377 (/home/quique/repoDAPP/grupoj-2021-backend/out/production/classes started by quique in /home/quique/repoDAPP/grupoj-2021-backend)
+2021-07-06T19:17:15.897-0300 DEBUG Running with Spring Boot v2.4.4, Spring v5.3.5
+2021-07-06T19:17:15.898-0300 INFO No active profile set, falling back to default profiles: default
+2021-07-06T19:17:51.180-0300 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-07-06T19:17:58.180-0300 INFO Started BackendDesappApiApplication in 43.753 seconds (JVM running for 46.942)
+2021-07-06T19:18:40.447-0300 INFO ========================================
+2021-07-06T19:18:40.456-0300 INFO Tue Jul 06 19:18:40 ART 2021
+2021-07-06T19:18:40.476-0300 INFO ARGUMENTS: registerRequest: {"email":"pa@pa.com","password":"1234567","name":"QuiqueA","sourceId":6}, 
+2021-07-06T19:18:40.478-0300 INFO METHOD: saveUser
+2021-07-06T19:18:40.479-0300 INFO USER CREDENTIAL: ANONYMOUS
+2021-07-06T19:18:40.479-0300 INFO EXECUTED IN: 51 ms.
+2021-07-06T19:19:23.413-0300 INFO ========================================
+2021-07-06T19:19:23.429-0300 INFO Tue Jul 06 19:19:23 ART 2021
+2021-07-06T19:19:23.430-0300 INFO ARGUMENTS: registerRequest: {"email":"pa@aa.com","password":"1234567","name":"QuiqueA","sourceId":6}, 
+2021-07-06T19:19:23.430-0300 INFO METHOD: saveUser
+2021-07-06T19:19:23.430-0300 INFO USER CREDENTIAL: ANONYMOUS
+2021-07-06T19:19:23.431-0300 INFO EXECUTED IN: 46 ms.
+2021-07-06T19:25:07.696-0300 INFO Starting BackendDesappApiApplication using Java 1.8.0_292 on ko-3 with PID 9337 (/home/quique/repoDAPP/grupoj-2021-backend/out/production/classes started by quique in /home/quique/repoDAPP/grupoj-2021-backend)
+2021-07-06T19:25:07.755-0300 DEBUG Running with Spring Boot v2.4.4, Spring v5.3.5
+2021-07-06T19:25:07.756-0300 INFO No active profile set, falling back to default profiles: default
+2021-07-06T19:25:36.368-0300 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-07-06T19:25:41.022-0300 INFO Started BackendDesappApiApplication in 34.728 seconds (JVM running for 37.416)
+2021-07-06T19:31:11.885-0300 INFO ========================================
+2021-07-06T19:31:11.886-0300 INFO Tue Jul 06 19:31:11 ART 2021
+2021-07-06T19:31:11.936-0300 INFO ARGUMENTS: 
+2021-07-06T19:31:11.937-0300 INFO METHOD: getAllSources
+2021-07-06T19:31:11.939-0300 INFO USER CREDENTIAL: ANONYMOUS
+2021-07-06T19:31:11.939-0300 INFO EXECUTED IN: 114 ms.
+2021-07-06T19:31:33.100-0300 INFO ========================================
+2021-07-06T19:31:33.157-0300 INFO Tue Jul 06 19:31:33 ART 2021
+2021-07-06T19:31:33.167-0300 INFO ARGUMENTS: registerRequest: {"email":"pa@pa.com","password":"1234567","name":"QuiqueA","sourceId":6}, 
+2021-07-06T19:31:33.168-0300 INFO METHOD: saveUser
+2021-07-06T19:31:33.168-0300 INFO USER CREDENTIAL: ANONYMOUS
+2021-07-06T19:31:33.168-0300 INFO EXECUTED IN: 83 ms.
