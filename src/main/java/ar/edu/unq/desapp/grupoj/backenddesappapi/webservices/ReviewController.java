@@ -36,7 +36,7 @@ public class ReviewController {
     }
 
     @PostMapping("/review")
-    public ResponseEntity<?> saveReview(@Valid @RequestBody ReviewDTO aReview) throws NonExistentSourceException, UserAlreadyReviewTitle, NonExistentLanguageException, NonExistentTitleException, NonExistentLocationException {
+        public ResponseEntity<?> saveReview(@Valid @RequestBody ReviewDTO aReview) throws NonExistentSourceException, UserAlreadyReviewTitle, NonExistentLanguageException, NonExistentTitleException, NonExistentLocationException {
         return new ResponseEntity(service.save(aReview),HttpStatus.CREATED);
     }
 
