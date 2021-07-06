@@ -175,13 +175,21 @@ public class ReviewService {
         return reportRepo.findAll();
     }
 
-    public void publishReview (ReviewDTO aReview){
-        ReviewNotification notification = new ReviewNotification(aReview, "new review " );
-        template.convertAndSend(MessagingConfig.EXCHANGE, MessagingConfig.ROUTING_KEY, aReview.getTitleId());
-    }
 
+    public void publishReview (ReviewDTO aReview){
+        try{
+                ReviewNotification notification = new ReviewNotification(aReview, "new review " );
+                template.convertAndSend(MessagingConfig.EXCHANGE, MessagingConfig.ROUTING_KEY, aReview.getTitleId());
+        }catch (Exception e){
+            //nothing to do
+        }
+    }
     public void publishPremiumReview (ReviewPremiumDTO aReview){
-        ReviewPremiumNotification notification = new ReviewPremiumNotification(aReview, "new premium review " );
-        template.convertAndSend(MessagingConfig.EXCHANGE, MessagingConfig.ROUTING_KEY, notification);
+        try{
+            ReviewPremiumNotification notification = new ReviewPremiumNotification(aReview, "new premium review " );
+            template.convertAndSend(MessagingConfig.EXCHANGE, MessagingConfig.ROUTING_KEY, notification);
+        }catch (Exception e){
+            //nothing to do
+        }
     }
 }
