@@ -25,10 +25,5 @@ public class SuscriptionController {
         return new ResponseEntity<Suscription>(suscription, HttpStatus.OK);
     }
 
-    @GetMapping("/suscription/demo/{idTitle}")
-    public void showActivity(@PathVariable(value = "idTitle") Integer idTitle) {
-        //System.out.print("RECIBI UNA NOTIFICACION PARA TITLEID = " + idTitle);
-    }
-
 
 }
