@@ -11,6 +11,7 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.UserAlreadyE
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.Description;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,6 +40,7 @@ public class FrontUserController {
     private FrontUserService service;
 
     @GetMapping("/frontusers")
+    @Description("All FrontUsers list")
     public ResponseEntity<List<FrontUserDTO>> getAllFrontUsers() {
         return ResponseEntity.ok(service.findAll().stream().map(user->FrontUserDTO.fromModel(user)).collect(Collectors.toList()));
     }

@@ -78,7 +78,7 @@ public class ControllersExceptionHandler {
         ApiError err = new ApiError(
                 LocalDateTime.now(),
                 HttpStatus.BAD_REQUEST,
-                "Duplicate Entry", Collections.emptyList());
+                "User already exists", Collections.emptyList());
         return ResponseEntityBuilder.build(err);
 
     }

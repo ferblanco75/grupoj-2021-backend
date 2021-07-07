@@ -1,6 +1,5 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.FrontUser;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Suscription;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.SuscriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;

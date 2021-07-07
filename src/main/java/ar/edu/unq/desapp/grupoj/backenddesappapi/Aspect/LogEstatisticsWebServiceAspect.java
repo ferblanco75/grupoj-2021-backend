@@ -7,10 +7,13 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Description;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+
+import static java.util.Objects.isNull;
 
 @Aspect
 @Component
@@ -29,8 +32,12 @@ public class LogEstatisticsWebServiceAspect {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		FrontUser userDetails = (FrontUser) auth.getPrincipal();
+		Description myAnnotation = methodSignature.getMethod().getAnnotation(Description.class);
+		service.update(
+				isNull(myAnnotation)?methodSignature.getMethod().getName():myAnnotation.value()
+				,userDetails.getPlatformId());
 
-		service.update(methodSignature.getMethod().getName(),userDetails.getPlatformId());
+
 		return proceed;
 	}
 }

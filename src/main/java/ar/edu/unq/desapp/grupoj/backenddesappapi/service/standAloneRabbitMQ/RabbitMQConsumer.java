@@ -1,6 +1,5 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service.standAloneRabbitMQ;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.Aspect.LogExecutionWebServiceAspect;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.config.MessagingConfig;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.SuscriptionService;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.webservices.SuscriptionController;
@@ -31,6 +30,7 @@ public class RabbitMQConsumer {
     @RabbitListener(queues = MessagingConfig.QUEUE)
     public void consumeMessageFromQueue(Integer titleId) {
         service.getAllByTitleId(titleId).forEach(suscription -> this.callUrl(suscription.getUrl()));
+
     }
 
     private void callUrl(String url) {
