@@ -1,27 +1,18 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.repository.titlesRepository;
 
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.cast.Cast;
-import ar.edu.unq.desapp.grupoj.backenddesappapi.model.cast.Person;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Decade;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.Review;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.cast.Cast;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.model.cast.Person;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Genre;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.InverseReq;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Subquery;
-import javax.persistence.criteria.Path;
-
+import javax.persistence.criteria.*;
 import java.util.List;
 
 @Repository
@@ -86,7 +77,8 @@ public class TitleRepositoryQueries {
             subqueryActors.select(idPathToTitle)
                     .where(predicateD)
                     .groupBy(idPathToTitle)
-                    .having(cb.gt(idCount, 0));
+                    .having(cb.gt(idCount, 0))
+                    .distinct(true);
 
 
 
@@ -99,7 +91,8 @@ public class TitleRepositoryQueries {
         subQueryEstrellas.select(idPath)
                 .where(cb.lt(join.get("rating"),req.minStars))
                 .groupBy(idPath)
-                .having(cb.gt(idCountExp, 0));
+                .having(cb.gt(idCountExp, 0))
+                .distinct(true);
 
 
         //Subquery para filtrar los calificados positivamente
@@ -111,7 +104,8 @@ public class TitleRepositoryQueries {
         Predicate predicate = cb.lessThan(rateDiff,(long) 0);
         subQueryRatedUp.select(idPath2)
                 .where(predicate)
-                .groupBy(idPath2);
+                .groupBy(idPath2)
+                .distinct(true);
 
         Predicate finalConjunction = cb.conjunction();
 

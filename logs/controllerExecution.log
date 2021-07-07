@@ -844,3 +844,621 @@
 2021-07-07T02:05:38.126-0300 INFO METHOD: saveReview
 2021-07-07T02:05:38.126-0300 INFO USER CREDENTIAL: {pee@paacom, Netflix}
 2021-07-07T02:05:38.126-0300 INFO EXECUTED IN: 106 ms.
+2021-07-07T18:26:53.860-0300 INFO ========================================
+2021-07-07T18:26:53.861-0300 INFO Wed Jul 07 18:26:53 ART 2021
+2021-07-07T18:26:53.931-0300 INFO ARGUMENTS: registerRequest: {"email":"user@unq.edu.ar","password":"1234567","name":"QuiqueA","sourceId":1}, 
+2021-07-07T18:26:53.931-0300 INFO METHOD: saveUser
+2021-07-07T18:26:53.932-0300 INFO USER CREDENTIAL: ANONYMOUS
+2021-07-07T18:26:53.932-0300 INFO EXECUTED IN: 31 ms.
+2021-07-07T18:27:38.422-0300 INFO ========================================
+2021-07-07T18:27:38.422-0300 INFO Wed Jul 07 18:27:38 ART 2021
+2021-07-07T18:27:38.423-0300 INFO ARGUMENTS: authenticationRequest: {"username":"user@unq.edu.ar","password":"1234567"}, 
+2021-07-07T18:27:38.423-0300 INFO METHOD: createAuthenticationToken
+2021-07-07T18:27:38.423-0300 INFO USER CREDENTIAL: ANONYMOUS
+2021-07-07T18:27:38.423-0300 INFO EXECUTED IN: 241 ms.
+2021-07-07T18:27:54.864-0300 INFO ========================================
+2021-07-07T18:27:54.864-0300 INFO Wed Jul 07 18:27:54 ART 2021
+2021-07-07T18:27:54.867-0300 INFO ARGUMENTS: suscriptionDTO: {"titleId":2,"url":"http://localhost:8080/suscription/demo/1"}, 
+2021-07-07T18:27:54.867-0300 INFO METHOD: saveSuscription
+2021-07-07T18:27:54.867-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T18:27:54.867-0300 INFO EXECUTED IN: 164 ms.
+2021-07-07T18:28:07.593-0300 INFO ========================================
+2021-07-07T18:28:07.593-0300 INFO Wed Jul 07 18:28:07 ART 2021
+2021-07-07T18:28:07.611-0300 INFO ARGUMENTS: aReview: {"id":null,"titleId":1,"text":"a","textExtended":"Bochornoso como Coppolo","rating":5,"spoilerAlert":false,"date":1625693287282,"languageId":3,"type":"NORMAL","user":{"sourceId":2,"userId":"alumno21@alu.unq.edu.ar","userNick":"Jsose","locationId":2}}, 
+2021-07-07T18:28:07.611-0300 INFO METHOD: saveReview
+2021-07-07T18:28:07.611-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T18:28:07.611-0300 INFO EXECUTED IN: 298 ms.
+2021-07-07T18:29:01.716-0300 INFO ========================================
+2021-07-07T18:29:01.717-0300 INFO Wed Jul 07 18:29:01 ART 2021
+2021-07-07T18:29:01.717-0300 INFO ARGUMENTS: aReview: {"id":null,"titleId":2,"text":"De terror...","textExtended":"De terror de lo mala que es...","rating":5,"spoilerAlert":false,"date":1625693341614,"languageId":3,"type":"NORMAL","user":{"sourceId":2,"userId":"alumno21@alu.unq.edu.ar","userNick":"Jsose","locationId":2}}, 
+2021-07-07T18:29:01.717-0300 INFO METHOD: saveReview
+2021-07-07T18:29:01.717-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T18:29:01.718-0300 INFO EXECUTED IN: 100 ms.
+2021-07-07T18:29:31.021-0300 INFO ========================================
+2021-07-07T18:29:31.021-0300 INFO Wed Jul 07 18:29:31 ART 2021
+2021-07-07T18:29:31.022-0300 INFO ARGUMENTS: aReview: {"id":null,"titleId":3,"text":"De terror...","textExtended":"De terror de lo mala que es...","rating":5,"spoilerAlert":false,"date":1625693370940,"languageId":3,"type":"NORMAL","user":{"sourceId":2,"userId":"alumno21@alu.unq.edu.ar","userNick":"Jsose","locationId":2}}, 
+2021-07-07T18:29:31.022-0300 INFO METHOD: saveReview
+2021-07-07T18:29:31.022-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T18:29:31.022-0300 INFO EXECUTED IN: 80 ms.
+2021-07-07T18:30:03.561-0300 INFO ========================================
+2021-07-07T18:30:03.561-0300 INFO Wed Jul 07 18:30:03 ART 2021
+2021-07-07T18:30:03.561-0300 INFO ARGUMENTS: 
+2021-07-07T18:30:03.561-0300 INFO METHOD: getAllLanguages
+2021-07-07T18:30:03.561-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T18:30:03.561-0300 INFO EXECUTED IN: 63 ms.
+2021-07-07T18:30:06.875-0300 INFO ========================================
+2021-07-07T18:30:06.876-0300 INFO Wed Jul 07 18:30:06 ART 2021
+2021-07-07T18:30:06.876-0300 INFO ARGUMENTS: 
+2021-07-07T18:30:06.876-0300 INFO METHOD: getAllSources
+2021-07-07T18:30:06.876-0300 INFO USER CREDENTIAL: ANONYMOUS
+2021-07-07T18:30:06.876-0300 INFO EXECUTED IN: 17 ms.
+2021-07-07T18:30:15.350-0300 INFO ========================================
+2021-07-07T18:30:15.350-0300 INFO Wed Jul 07 18:30:15 ART 2021
+2021-07-07T18:30:15.350-0300 INFO ARGUMENTS: 
+2021-07-07T18:30:15.350-0300 INFO METHOD: getAllStatistics
+2021-07-07T18:30:15.350-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T18:30:15.350-0300 INFO EXECUTED IN: 39 ms.
+2021-07-07T18:30:36.703-0300 INFO ========================================
+2021-07-07T18:30:36.703-0300 INFO Wed Jul 07 18:30:36 ART 2021
+2021-07-07T18:30:36.703-0300 INFO ARGUMENTS: 
+2021-07-07T18:30:36.703-0300 INFO METHOD: getAllSources
+2021-07-07T18:30:36.703-0300 INFO USER CREDENTIAL: ANONYMOUS
+2021-07-07T18:30:36.703-0300 INFO EXECUTED IN: 6 ms.
+2021-07-07T18:43:44.129-0300 INFO ========================================
+2021-07-07T18:43:44.130-0300 INFO Wed Jul 07 18:43:44 ART 2021
+2021-07-07T18:43:44.175-0300 INFO ARGUMENTS: registerRequest: {"email":"user@unq.edu.ar","password":"1234567","name":"Quique","sourceId":1}, 
+2021-07-07T18:43:44.181-0300 INFO METHOD: saveUser
+2021-07-07T18:43:44.182-0300 INFO USER CREDENTIAL: ANONYMOUS
+2021-07-07T18:43:44.182-0300 INFO EXECUTED IN: 43 ms.
+2021-07-07T18:43:46.075-0300 INFO ========================================
+2021-07-07T18:43:46.075-0300 INFO Wed Jul 07 18:43:46 ART 2021
+2021-07-07T18:43:46.076-0300 INFO ARGUMENTS: authenticationRequest: {"username":"user@unq.edu.ar","password":"1234567"}, 
+2021-07-07T18:43:46.076-0300 INFO METHOD: createAuthenticationToken
+2021-07-07T18:43:46.076-0300 INFO USER CREDENTIAL: ANONYMOUS
+2021-07-07T18:43:46.076-0300 INFO EXECUTED IN: 54 ms.
+2021-07-07T18:43:49.489-0300 INFO ========================================
+2021-07-07T18:43:49.489-0300 INFO Wed Jul 07 18:43:49 ART 2021
+2021-07-07T18:43:49.497-0300 INFO ARGUMENTS: aReview: {"id":null,"titleId":3,"text":"De terror...","textExtended":"De terror de lo mala que es...","rating":5,"spoilerAlert":false,"date":1625694229156,"languageId":3,"type":"NORMAL","user":{"sourceId":2,"userId":"alumno21@alu.unq.edu.ar","userNick":"Jsose","locationId":2}}, 
+2021-07-07T18:43:49.497-0300 INFO METHOD: saveReview
+2021-07-07T18:43:49.497-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T18:43:49.497-0300 INFO EXECUTED IN: 310 ms.
+2021-07-07T18:44:20.150-0300 INFO ========================================
+2021-07-07T18:44:20.150-0300 INFO Wed Jul 07 18:44:20 ART 2021
+2021-07-07T18:44:20.157-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":0,"actors":["Quique"],"genres":["COMEDY"]}, 
+2021-07-07T18:44:20.157-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T18:44:20.157-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T18:44:20.157-0300 INFO EXECUTED IN: 169 ms.
+2021-07-07T18:44:33.088-0300 INFO ========================================
+2021-07-07T18:44:33.088-0300 INFO Wed Jul 07 18:44:33 ART 2021
+2021-07-07T18:44:33.088-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":0,"actors":[],"genres":["COMEDY"]}, 
+2021-07-07T18:44:33.089-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T18:44:33.089-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T18:44:33.089-0300 INFO EXECUTED IN: 66 ms.
+2021-07-07T18:45:07.095-0300 INFO ========================================
+2021-07-07T18:45:07.095-0300 INFO Wed Jul 07 18:45:07 ART 2021
+2021-07-07T18:45:07.096-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":0,"actors":["Quique"],"genres":["ACTION"]}, 
+2021-07-07T18:45:07.096-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T18:45:07.096-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T18:45:07.096-0300 INFO EXECUTED IN: 30 ms.
+2021-07-07T18:45:51.135-0300 INFO ========================================
+2021-07-07T18:45:51.135-0300 INFO Wed Jul 07 18:45:51 ART 2021
+2021-07-07T18:45:51.135-0300 INFO ARGUMENTS: 
+2021-07-07T18:45:51.136-0300 INFO METHOD: getAllReviews
+2021-07-07T18:45:51.136-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T18:45:51.136-0300 INFO EXECUTED IN: 90 ms.
+2021-07-07T18:47:17.806-0300 INFO ========================================
+2021-07-07T18:47:17.807-0300 INFO Wed Jul 07 18:47:17 ART 2021
+2021-07-07T18:47:17.807-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":0,"actors":["Quique"],"genres":["ACTION"]}, 
+2021-07-07T18:47:17.807-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T18:47:17.807-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T18:47:17.808-0300 INFO EXECUTED IN: 32 ms.
+2021-07-07T18:50:49.737-0300 INFO ========================================
+2021-07-07T18:50:49.738-0300 INFO Wed Jul 07 18:50:49 ART 2021
+2021-07-07T18:50:49.738-0300 INFO ARGUMENTS: idTitle: 3, 
+2021-07-07T18:50:49.738-0300 INFO METHOD: getReviewPorId
+2021-07-07T18:50:49.738-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T18:50:49.738-0300 INFO EXECUTED IN: 136 ms.
+2021-07-07T18:52:23.090-0300 INFO ========================================
+2021-07-07T18:52:23.091-0300 INFO Wed Jul 07 18:52:23 ART 2021
+2021-07-07T18:52:23.131-0300 INFO ARGUMENTS: registerRequest: {"email":"user@unq.edu.ar","password":"1234567","name":"Quique","sourceId":1}, 
+2021-07-07T18:52:23.132-0300 INFO METHOD: saveUser
+2021-07-07T18:52:23.133-0300 INFO USER CREDENTIAL: ANONYMOUS
+2021-07-07T18:52:23.133-0300 INFO EXECUTED IN: 187 ms.
+2021-07-07T18:52:25.201-0300 INFO ========================================
+2021-07-07T18:52:25.201-0300 INFO Wed Jul 07 18:52:25 ART 2021
+2021-07-07T18:52:25.204-0300 INFO ARGUMENTS: authenticationRequest: {"username":"user@unq.edu.ar","password":"1234567"}, 
+2021-07-07T18:52:25.204-0300 INFO METHOD: createAuthenticationToken
+2021-07-07T18:52:25.204-0300 INFO USER CREDENTIAL: ANONYMOUS
+2021-07-07T18:52:25.204-0300 INFO EXECUTED IN: 108 ms.
+2021-07-07T18:52:29.201-0300 INFO ========================================
+2021-07-07T18:52:29.201-0300 INFO Wed Jul 07 18:52:29 ART 2021
+2021-07-07T18:52:29.201-0300 INFO ARGUMENTS: 
+2021-07-07T18:52:29.201-0300 INFO METHOD: getAllTitles
+2021-07-07T18:52:29.201-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T18:52:29.201-0300 INFO EXECUTED IN: 57 ms.
+2021-07-07T18:52:37.327-0300 INFO ========================================
+2021-07-07T18:52:37.327-0300 INFO Wed Jul 07 18:52:37 ART 2021
+2021-07-07T18:52:37.340-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":0,"actors":["Quique"],"genres":["ACTION"]}, 
+2021-07-07T18:52:37.340-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T18:52:37.340-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T18:52:37.340-0300 INFO EXECUTED IN: 319 ms.
+2021-07-07T18:52:41.880-0300 INFO ========================================
+2021-07-07T18:52:41.881-0300 INFO Wed Jul 07 18:52:41 ART 2021
+2021-07-07T18:52:41.882-0300 INFO ARGUMENTS: 
+2021-07-07T18:52:41.882-0300 INFO METHOD: getAllTitles
+2021-07-07T18:52:41.882-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T18:52:41.882-0300 INFO EXECUTED IN: 23 ms.
+2021-07-07T18:53:13.997-0300 INFO ========================================
+2021-07-07T18:53:13.997-0300 INFO Wed Jul 07 18:53:13 ART 2021
+2021-07-07T18:53:13.998-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":0,"actors":[],"genres":["ACTION"]}, 
+2021-07-07T18:53:13.998-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T18:53:13.998-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T18:53:13.998-0300 INFO EXECUTED IN: 55 ms.
+2021-07-07T18:53:19.232-0300 INFO ========================================
+2021-07-07T18:53:19.232-0300 INFO Wed Jul 07 18:53:19 ART 2021
+2021-07-07T18:53:19.240-0300 INFO ARGUMENTS: aReview: {"id":null,"titleId":3,"text":"De terror...","textExtended":"De terror de lo mala que es...","rating":5,"spoilerAlert":false,"date":1625694798940,"languageId":3,"type":"NORMAL","user":{"sourceId":2,"userId":"alumno21@alu.unq.edu.ar","userNick":"Jsose","locationId":2}}, 
+2021-07-07T18:53:19.240-0300 INFO METHOD: saveReview
+2021-07-07T18:53:19.240-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T18:53:19.240-0300 INFO EXECUTED IN: 247 ms.
+2021-07-07T18:53:35.390-0300 INFO ========================================
+2021-07-07T18:53:35.390-0300 INFO Wed Jul 07 18:53:35 ART 2021
+2021-07-07T18:53:35.390-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":0,"actors":["Quique"],"genres":["ACTION"]}, 
+2021-07-07T18:53:35.390-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T18:53:35.390-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T18:53:35.390-0300 INFO EXECUTED IN: 31 ms.
+2021-07-07T18:55:45.049-0300 INFO ========================================
+2021-07-07T18:55:45.049-0300 INFO Wed Jul 07 18:55:45 ART 2021
+2021-07-07T18:55:45.075-0300 INFO ARGUMENTS: registerRequest: {"email":"user@unq.edu.ar","password":"1234567","name":"Quique","sourceId":1}, 
+2021-07-07T18:55:45.075-0300 INFO METHOD: saveUser
+2021-07-07T18:55:45.075-0300 INFO USER CREDENTIAL: ANONYMOUS
+2021-07-07T18:55:45.075-0300 INFO EXECUTED IN: 92 ms.
+2021-07-07T18:55:48.777-0300 INFO ========================================
+2021-07-07T18:55:48.777-0300 INFO Wed Jul 07 18:55:48 ART 2021
+2021-07-07T18:55:48.778-0300 INFO ARGUMENTS: authenticationRequest: {"username":"user@unq.edu.ar","password":"1234567"}, 
+2021-07-07T18:55:48.778-0300 INFO METHOD: createAuthenticationToken
+2021-07-07T18:55:48.778-0300 INFO USER CREDENTIAL: ANONYMOUS
+2021-07-07T18:55:48.778-0300 INFO EXECUTED IN: 83 ms.
+2021-07-07T18:55:53.663-0300 INFO ========================================
+2021-07-07T18:55:53.664-0300 INFO Wed Jul 07 18:55:53 ART 2021
+2021-07-07T18:55:53.672-0300 INFO ARGUMENTS: aReview: {"id":null,"titleId":3,"text":"De terror...","textExtended":"De terror de lo mala que es...","rating":5,"spoilerAlert":false,"date":1625694953384,"languageId":3,"type":"NORMAL","user":{"sourceId":2,"userId":"alumno21@alu.unq.edu.ar","userNick":"Jsose","locationId":2}}, 
+2021-07-07T18:55:53.672-0300 INFO METHOD: saveReview
+2021-07-07T18:55:53.672-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T18:55:53.672-0300 INFO EXECUTED IN: 263 ms.
+2021-07-07T18:55:58.778-0300 INFO ========================================
+2021-07-07T18:55:58.778-0300 INFO Wed Jul 07 18:55:58 ART 2021
+2021-07-07T18:55:58.778-0300 INFO ARGUMENTS: aReview: {"id":null,"titleId":1,"text":"De terror...","textExtended":"De terror de lo mala que es...","rating":5,"spoilerAlert":false,"date":1625694958431,"languageId":3,"type":"NORMAL","user":{"sourceId":2,"userId":"alumno21@alu.unq.edu.ar","userNick":"Jsose","locationId":2}}, 
+2021-07-07T18:55:58.778-0300 INFO METHOD: saveReview
+2021-07-07T18:55:58.778-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T18:55:58.778-0300 INFO EXECUTED IN: 346 ms.
+2021-07-07T18:56:02.702-0300 INFO ========================================
+2021-07-07T18:56:02.704-0300 INFO Wed Jul 07 18:56:02 ART 2021
+2021-07-07T18:56:02.712-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":0,"actors":[],"genres":["ACTION"]}, 
+2021-07-07T18:56:02.712-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T18:56:02.712-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T18:56:02.712-0300 INFO EXECUTED IN: 186 ms.
+2021-07-07T19:03:21.162-0300 INFO ========================================
+2021-07-07T19:03:21.163-0300 INFO Wed Jul 07 19:03:21 ART 2021
+2021-07-07T19:03:21.197-0300 INFO ARGUMENTS: registerRequest: {"email":"user@unq.edu.ar","password":"1234567","name":"Quique","sourceId":1}, 
+2021-07-07T19:03:21.197-0300 INFO METHOD: saveUser
+2021-07-07T19:03:21.197-0300 INFO USER CREDENTIAL: ANONYMOUS
+2021-07-07T19:03:21.197-0300 INFO EXECUTED IN: 54 ms.
+2021-07-07T19:03:24.209-0300 INFO ========================================
+2021-07-07T19:03:24.209-0300 INFO Wed Jul 07 19:03:24 ART 2021
+2021-07-07T19:03:24.210-0300 INFO ARGUMENTS: authenticationRequest: {"username":"user@unq.edu.ar","password":"1234567"}, 
+2021-07-07T19:03:24.210-0300 INFO METHOD: createAuthenticationToken
+2021-07-07T19:03:24.210-0300 INFO USER CREDENTIAL: ANONYMOUS
+2021-07-07T19:03:24.210-0300 INFO EXECUTED IN: 41 ms.
+2021-07-07T19:03:27.864-0300 INFO ========================================
+2021-07-07T19:03:27.865-0300 INFO Wed Jul 07 19:03:27 ART 2021
+2021-07-07T19:03:27.875-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":0,"actors":[],"genres":["ACTION"]}, 
+2021-07-07T19:03:27.875-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:03:27.875-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:03:27.875-0300 INFO EXECUTED IN: 110 ms.
+2021-07-07T19:03:33.435-0300 INFO ========================================
+2021-07-07T19:03:33.435-0300 INFO Wed Jul 07 19:03:33 ART 2021
+2021-07-07T19:03:33.439-0300 INFO ARGUMENTS: aReview: {"id":null,"titleId":1,"text":"De terror...","textExtended":"De terror de lo mala que es...","rating":5,"spoilerAlert":false,"date":1625695413124,"languageId":3,"type":"NORMAL","user":{"sourceId":2,"userId":"alumno21@alu.unq.edu.ar","userNick":"Jsose","locationId":2}}, 
+2021-07-07T19:03:33.440-0300 INFO METHOD: saveReview
+2021-07-07T19:03:33.440-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:03:33.440-0300 INFO EXECUTED IN: 281 ms.
+2021-07-07T19:03:35.939-0300 INFO ========================================
+2021-07-07T19:03:35.939-0300 INFO Wed Jul 07 19:03:35 ART 2021
+2021-07-07T19:03:35.940-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":0,"actors":[],"genres":["ACTION"]}, 
+2021-07-07T19:03:35.940-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:03:35.940-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:03:35.940-0300 INFO EXECUTED IN: 33 ms.
+2021-07-07T19:03:46.204-0300 INFO ========================================
+2021-07-07T19:03:46.204-0300 INFO Wed Jul 07 19:03:46 ART 2021
+2021-07-07T19:03:46.204-0300 INFO ARGUMENTS: 
+2021-07-07T19:03:46.204-0300 INFO METHOD: getAllTitles
+2021-07-07T19:03:46.204-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:03:46.204-0300 INFO EXECUTED IN: 47 ms.
+2021-07-07T19:04:26.166-0300 INFO ========================================
+2021-07-07T19:04:26.166-0300 INFO Wed Jul 07 19:04:26 ART 2021
+2021-07-07T19:04:26.166-0300 INFO ARGUMENTS: aReview: {"id":null,"titleId":1,"text":"De terror...","textExtended":"De terror de lo mala que es...","rating":2,"spoilerAlert":false,"date":1625695466035,"languageId":3,"type":"NORMAL","user":{"sourceId":1,"userId":"alumno21@alu.unq.edu.ar","userNick":"Jsose","locationId":2}}, 
+2021-07-07T19:04:26.166-0300 INFO METHOD: saveReview
+2021-07-07T19:04:26.166-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:04:26.166-0300 INFO EXECUTED IN: 130 ms.
+2021-07-07T19:04:31.474-0300 INFO ========================================
+2021-07-07T19:04:31.475-0300 INFO Wed Jul 07 19:04:31 ART 2021
+2021-07-07T19:04:31.475-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":0,"actors":[],"genres":["ACTION"]}, 
+2021-07-07T19:04:31.475-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:04:31.475-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:04:31.475-0300 INFO EXECUTED IN: 16 ms.
+2021-07-07T19:04:36.753-0300 INFO ========================================
+2021-07-07T19:04:36.754-0300 INFO Wed Jul 07 19:04:36 ART 2021
+2021-07-07T19:04:36.754-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":4,"actors":[],"genres":["ACTION"]}, 
+2021-07-07T19:04:36.754-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:04:36.754-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:04:36.754-0300 INFO EXECUTED IN: 81 ms.
+2021-07-07T19:04:43.688-0300 INFO ========================================
+2021-07-07T19:04:43.688-0300 INFO Wed Jul 07 19:04:43 ART 2021
+2021-07-07T19:04:43.688-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":4,"actors":[],"genres":["DRAMA"]}, 
+2021-07-07T19:04:43.688-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:04:43.688-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:04:43.688-0300 INFO EXECUTED IN: 4 ms.
+2021-07-07T19:05:03.858-0300 INFO ========================================
+2021-07-07T19:05:03.858-0300 INFO Wed Jul 07 19:05:03 ART 2021
+2021-07-07T19:05:03.858-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":4,"actors":[],"genres":["COMEDY"]}, 
+2021-07-07T19:05:03.858-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:05:03.858-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:05:03.858-0300 INFO EXECUTED IN: 17 ms.
+2021-07-07T19:05:09.163-0300 INFO ========================================
+2021-07-07T19:05:09.164-0300 INFO Wed Jul 07 19:05:09 ART 2021
+2021-07-07T19:05:09.164-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":4,"actors":[],"genres":[]}, 
+2021-07-07T19:05:09.164-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:05:09.164-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:05:09.164-0300 INFO EXECUTED IN: 22 ms.
+2021-07-07T19:05:17.610-0300 INFO ========================================
+2021-07-07T19:05:17.610-0300 INFO Wed Jul 07 19:05:17 ART 2021
+2021-07-07T19:05:17.610-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":[],"genres":[]}, 
+2021-07-07T19:05:17.610-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:05:17.610-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:05:17.610-0300 INFO EXECUTED IN: 34 ms.
+2021-07-07T19:05:27.472-0300 INFO ========================================
+2021-07-07T19:05:27.472-0300 INFO Wed Jul 07 19:05:27 ART 2021
+2021-07-07T19:05:27.472-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":[],"genres":["DRAMA"]}, 
+2021-07-07T19:05:27.472-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:05:27.472-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:05:27.472-0300 INFO EXECUTED IN: 40 ms.
+2021-07-07T19:05:38.636-0300 INFO ========================================
+2021-07-07T19:05:38.637-0300 INFO Wed Jul 07 19:05:38 ART 2021
+2021-07-07T19:05:38.637-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":[],"genres":["DRAMA","ACTION"]}, 
+2021-07-07T19:05:38.638-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:05:38.638-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:05:38.638-0300 INFO EXECUTED IN: 46 ms.
+2021-07-07T19:06:03.976-0300 INFO ========================================
+2021-07-07T19:06:03.976-0300 INFO Wed Jul 07 19:06:03 ART 2021
+2021-07-07T19:06:03.977-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":[],"genres":["DRAMA"]}, 
+2021-07-07T19:06:03.977-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:06:03.977-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:06:03.977-0300 INFO EXECUTED IN: 15 ms.
+2021-07-07T19:06:16.343-0300 INFO ========================================
+2021-07-07T19:06:16.343-0300 INFO Wed Jul 07 19:06:16 ART 2021
+2021-07-07T19:06:16.344-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":4,"actors":[],"genres":["COMEDY"]}, 
+2021-07-07T19:06:16.344-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:06:16.344-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:06:16.344-0300 INFO EXECUTED IN: 6 ms.
+2021-07-07T19:06:21.966-0300 INFO ========================================
+2021-07-07T19:06:21.966-0300 INFO Wed Jul 07 19:06:21 ART 2021
+2021-07-07T19:06:21.966-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":4,"actors":[],"genres":["COMEDY","DRAMA"]}, 
+2021-07-07T19:06:21.966-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:06:21.966-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:06:21.966-0300 INFO EXECUTED IN: 29 ms.
+2021-07-07T19:06:26.119-0300 INFO ========================================
+2021-07-07T19:06:26.120-0300 INFO Wed Jul 07 19:06:26 ART 2021
+2021-07-07T19:06:26.120-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":2,"actors":[],"genres":["COMEDY","DRAMA"]}, 
+2021-07-07T19:06:26.120-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:06:26.120-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:06:26.120-0300 INFO EXECUTED IN: 23 ms.
+2021-07-07T19:06:29.970-0300 INFO ========================================
+2021-07-07T19:06:29.970-0300 INFO Wed Jul 07 19:06:29 ART 2021
+2021-07-07T19:06:29.971-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":[],"genres":["COMEDY","DRAMA"]}, 
+2021-07-07T19:06:29.971-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:06:29.971-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:06:29.971-0300 INFO EXECUTED IN: 12 ms.
+2021-07-07T19:06:37.845-0300 INFO ========================================
+2021-07-07T19:06:37.845-0300 INFO Wed Jul 07 19:06:37 ART 2021
+2021-07-07T19:06:37.845-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":[],"genres":["DRAMA"]}, 
+2021-07-07T19:06:37.845-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:06:37.845-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:06:37.845-0300 INFO EXECUTED IN: 15 ms.
+2021-07-07T19:08:13.808-0300 INFO ========================================
+2021-07-07T19:08:13.808-0300 INFO Wed Jul 07 19:08:13 ART 2021
+2021-07-07T19:08:13.808-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":[],"genres":["ACTION"]}, 
+2021-07-07T19:08:13.808-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:08:13.808-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:08:13.809-0300 INFO EXECUTED IN: 18 ms.
+2021-07-07T19:08:19.039-0300 INFO ========================================
+2021-07-07T19:08:19.039-0300 INFO Wed Jul 07 19:08:19 ART 2021
+2021-07-07T19:08:19.039-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":[],"genres":["ACTION","DRAMA"]}, 
+2021-07-07T19:08:19.039-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:08:19.039-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:08:19.039-0300 INFO EXECUTED IN: 22 ms.
+2021-07-07T19:08:30.067-0300 INFO ========================================
+2021-07-07T19:08:30.067-0300 INFO Wed Jul 07 19:08:30 ART 2021
+2021-07-07T19:08:30.067-0300 INFO ARGUMENTS: aReview: {"id":null,"titleId":2,"text":"De terror...","textExtended":"De terror de lo mala que es...","rating":2,"spoilerAlert":false,"date":1625695709982,"languageId":3,"type":"NORMAL","user":{"sourceId":1,"userId":"alumno21@alu.unq.edu.ar","userNick":"Jsose","locationId":2}}, 
+2021-07-07T19:08:30.067-0300 INFO METHOD: saveReview
+2021-07-07T19:08:30.067-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:08:30.067-0300 INFO EXECUTED IN: 84 ms.
+2021-07-07T19:08:33.138-0300 INFO ========================================
+2021-07-07T19:08:33.139-0300 INFO Wed Jul 07 19:08:33 ART 2021
+2021-07-07T19:08:33.139-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":[],"genres":["ACTION","DRAMA"]}, 
+2021-07-07T19:08:33.139-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:08:33.139-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:08:33.139-0300 INFO EXECUTED IN: 14 ms.
+2021-07-07T19:08:35.839-0300 INFO ========================================
+2021-07-07T19:08:35.839-0300 INFO Wed Jul 07 19:08:35 ART 2021
+2021-07-07T19:08:35.839-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":[],"genres":["ACTION","DRAMA"]}, 
+2021-07-07T19:08:35.839-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:08:35.839-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:08:35.839-0300 INFO EXECUTED IN: 14 ms.
+2021-07-07T19:08:51.281-0300 INFO ========================================
+2021-07-07T19:08:51.282-0300 INFO Wed Jul 07 19:08:51 ART 2021
+2021-07-07T19:08:51.282-0300 INFO ARGUMENTS: 
+2021-07-07T19:08:51.282-0300 INFO METHOD: getAllReviews
+2021-07-07T19:08:51.282-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:08:51.282-0300 INFO EXECUTED IN: 76 ms.
+2021-07-07T19:09:46.258-0300 INFO ========================================
+2021-07-07T19:09:46.259-0300 INFO Wed Jul 07 19:09:46 ART 2021
+2021-07-07T19:09:46.259-0300 INFO ARGUMENTS: 
+2021-07-07T19:09:46.259-0300 INFO METHOD: getAllTitles
+2021-07-07T19:09:46.259-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:09:46.259-0300 INFO EXECUTED IN: 28 ms.
+2021-07-07T19:10:07.159-0300 INFO ========================================
+2021-07-07T19:10:07.160-0300 INFO Wed Jul 07 19:10:07 ART 2021
+2021-07-07T19:10:07.160-0300 INFO ARGUMENTS: aReview: {"id":null,"titleId":4,"text":"De terror...","textExtended":"De terror de lo mala que es...","rating":2,"spoilerAlert":false,"date":1625695807078,"languageId":3,"type":"NORMAL","user":{"sourceId":1,"userId":"alumno21@alu.unq.edu.ar","userNick":"Jsose","locationId":2}}, 
+2021-07-07T19:10:07.160-0300 INFO METHOD: saveReview
+2021-07-07T19:10:07.160-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:10:07.160-0300 INFO EXECUTED IN: 80 ms.
+2021-07-07T19:10:12.667-0300 INFO ========================================
+2021-07-07T19:10:12.667-0300 INFO Wed Jul 07 19:10:12 ART 2021
+2021-07-07T19:10:12.667-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":[],"genres":["ACTION","DRAMA"]}, 
+2021-07-07T19:10:12.667-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:10:12.667-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:10:12.667-0300 INFO EXECUTED IN: 14 ms.
+2021-07-07T19:10:20.146-0300 INFO ========================================
+2021-07-07T19:10:20.146-0300 INFO Wed Jul 07 19:10:20 ART 2021
+2021-07-07T19:10:20.147-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":[],"genres":["ACTION","COMEDY"]}, 
+2021-07-07T19:10:20.147-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:10:20.147-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:10:20.147-0300 INFO EXECUTED IN: 8 ms.
+2021-07-07T19:10:25.383-0300 INFO ========================================
+2021-07-07T19:10:25.383-0300 INFO Wed Jul 07 19:10:25 ART 2021
+2021-07-07T19:10:25.383-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":[],"genres":["COMEDY"]}, 
+2021-07-07T19:10:25.383-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:10:25.383-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:10:25.383-0300 INFO EXECUTED IN: 19 ms.
+2021-07-07T19:10:34.870-0300 INFO ========================================
+2021-07-07T19:10:34.870-0300 INFO Wed Jul 07 19:10:34 ART 2021
+2021-07-07T19:10:34.871-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":["Quique"],"genres":["COMEDY"]}, 
+2021-07-07T19:10:34.871-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:10:34.871-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:10:34.871-0300 INFO EXECUTED IN: 35 ms.
+2021-07-07T19:10:39.746-0300 INFO ========================================
+2021-07-07T19:10:39.746-0300 INFO Wed Jul 07 19:10:39 ART 2021
+2021-07-07T19:10:39.746-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":["Quique"],"genres":[]}, 
+2021-07-07T19:10:39.746-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:10:39.746-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:10:39.746-0300 INFO EXECUTED IN: 34 ms.
+2021-07-07T19:10:49.984-0300 INFO ========================================
+2021-07-07T19:10:49.984-0300 INFO Wed Jul 07 19:10:49 ART 2021
+2021-07-07T19:10:49.984-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":["Jose"],"genres":[]}, 
+2021-07-07T19:10:49.984-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:10:49.985-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:10:49.985-0300 INFO EXECUTED IN: 7 ms.
+2021-07-07T19:11:29.716-0300 INFO ========================================
+2021-07-07T19:11:29.717-0300 INFO Wed Jul 07 19:11:29 ART 2021
+2021-07-07T19:11:29.717-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":["Jose"],"genres":["COMEDY"]}, 
+2021-07-07T19:11:29.717-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:11:29.717-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:11:29.717-0300 INFO EXECUTED IN: 8 ms.
+2021-07-07T19:11:41.858-0300 INFO ========================================
+2021-07-07T19:11:41.859-0300 INFO Wed Jul 07 19:11:41 ART 2021
+2021-07-07T19:11:41.859-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":2,"actors":["Jose"],"genres":["COMEDY"]}, 
+2021-07-07T19:11:41.859-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:11:41.859-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:11:41.859-0300 INFO EXECUTED IN: 95 ms.
+2021-07-07T19:11:58.586-0300 INFO ========================================
+2021-07-07T19:11:58.586-0300 INFO Wed Jul 07 19:11:58 ART 2021
+2021-07-07T19:11:58.587-0300 INFO ARGUMENTS: aReview: {"id":null,"titleId":4,"text":"De terror...","textExtended":"De terror de lo mala que es...","rating":1,"spoilerAlert":false,"date":1625695918493,"languageId":3,"type":"NORMAL","user":{"sourceId":2,"userId":"alumno21@alu.unq.edu.ar","userNick":"Jsose","locationId":2}}, 
+2021-07-07T19:11:58.587-0300 INFO METHOD: saveReview
+2021-07-07T19:11:58.587-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:11:58.587-0300 INFO EXECUTED IN: 92 ms.
+2021-07-07T19:12:02.058-0300 INFO ========================================
+2021-07-07T19:12:02.058-0300 INFO Wed Jul 07 19:12:02 ART 2021
+2021-07-07T19:12:02.058-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":2,"actors":["Jose"],"genres":["COMEDY"]}, 
+2021-07-07T19:12:02.058-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:12:02.058-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:12:02.058-0300 INFO EXECUTED IN: 7 ms.
+2021-07-07T19:12:10.431-0300 INFO ========================================
+2021-07-07T19:12:10.432-0300 INFO Wed Jul 07 19:12:10 ART 2021
+2021-07-07T19:12:10.432-0300 INFO ARGUMENTS: 
+2021-07-07T19:12:10.432-0300 INFO METHOD: getAllTitles
+2021-07-07T19:12:10.432-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:12:10.432-0300 INFO EXECUTED IN: 30 ms.
+2021-07-07T19:12:18.215-0300 INFO ========================================
+2021-07-07T19:12:18.215-0300 INFO Wed Jul 07 19:12:18 ART 2021
+2021-07-07T19:12:18.215-0300 INFO ARGUMENTS: 
+2021-07-07T19:12:18.215-0300 INFO METHOD: getAllReviews
+2021-07-07T19:12:18.215-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:12:18.215-0300 INFO EXECUTED IN: 74 ms.
+2021-07-07T19:12:41.674-0300 INFO ========================================
+2021-07-07T19:12:41.675-0300 INFO Wed Jul 07 19:12:41 ART 2021
+2021-07-07T19:12:41.676-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":["Jose"],"genres":["COMEDY"]}, 
+2021-07-07T19:12:41.684-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:12:41.684-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:12:41.684-0300 INFO EXECUTED IN: 74 ms.
+2021-07-07T19:13:12.670-0300 INFO ========================================
+2021-07-07T19:13:12.670-0300 INFO Wed Jul 07 19:13:12 ART 2021
+2021-07-07T19:13:12.670-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":[],"genres":["DRAMA"]}, 
+2021-07-07T19:13:12.670-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:13:12.670-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:13:12.670-0300 INFO EXECUTED IN: 15 ms.
+2021-07-07T19:13:19.292-0300 INFO ========================================
+2021-07-07T19:13:19.292-0300 INFO Wed Jul 07 19:13:19 ART 2021
+2021-07-07T19:13:19.292-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":[],"genres":["ACTION"]}, 
+2021-07-07T19:13:19.292-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:13:19.292-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:13:19.292-0300 INFO EXECUTED IN: 22 ms.
+2021-07-07T19:13:35.316-0300 INFO ========================================
+2021-07-07T19:13:35.316-0300 INFO Wed Jul 07 19:13:35 ART 2021
+2021-07-07T19:13:35.316-0300 INFO ARGUMENTS: 
+2021-07-07T19:13:35.316-0300 INFO METHOD: getAllTitles
+2021-07-07T19:13:35.316-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:13:35.316-0300 INFO EXECUTED IN: 22 ms.
+2021-07-07T19:13:51.629-0300 INFO ========================================
+2021-07-07T19:13:51.629-0300 INFO Wed Jul 07 19:13:51 ART 2021
+2021-07-07T19:13:51.630-0300 INFO ARGUMENTS: aReview: {"id":null,"titleId":2,"text":"De terror...","textExtended":"De terror de lo mala que es...","rating":1,"spoilerAlert":false,"date":1625696031525,"languageId":3,"type":"NORMAL","user":{"sourceId":2,"userId":"alumno21@alu.unq.edu.ar","userNick":"Jsose","locationId":2}}, 
+2021-07-07T19:13:51.630-0300 INFO METHOD: saveReview
+2021-07-07T19:13:51.630-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:13:51.630-0300 INFO EXECUTED IN: 102 ms.
+2021-07-07T19:13:55.984-0300 INFO ========================================
+2021-07-07T19:13:55.984-0300 INFO Wed Jul 07 19:13:55 ART 2021
+2021-07-07T19:13:55.984-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":[],"genres":["ACTION"]}, 
+2021-07-07T19:13:55.984-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:13:55.984-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:13:55.984-0300 INFO EXECUTED IN: 19 ms.
+2021-07-07T19:14:19.290-0300 INFO ========================================
+2021-07-07T19:14:19.291-0300 INFO Wed Jul 07 19:14:19 ART 2021
+2021-07-07T19:14:19.292-0300 INFO ARGUMENTS: req: {"decade":["D2020"],"rating":null,"minStars":1,"actors":[],"genres":[]}, 
+2021-07-07T19:14:19.292-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:14:19.292-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:14:19.292-0300 INFO EXECUTED IN: 25 ms.
+2021-07-07T19:14:27.667-0300 INFO ========================================
+2021-07-07T19:14:27.667-0300 INFO Wed Jul 07 19:14:27 ART 2021
+2021-07-07T19:14:27.667-0300 INFO ARGUMENTS: req: {"decade":["D2020"],"rating":null,"minStars":4,"actors":[],"genres":[]}, 
+2021-07-07T19:14:27.667-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:14:27.667-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:14:27.667-0300 INFO EXECUTED IN: 25 ms.
+2021-07-07T19:14:33.578-0300 INFO ========================================
+2021-07-07T19:14:33.578-0300 INFO Wed Jul 07 19:14:33 ART 2021
+2021-07-07T19:14:33.578-0300 INFO ARGUMENTS: req: {"decade":["D2020"],"rating":null,"minStars":4,"actors":[],"genres":["DRAMA"]}, 
+2021-07-07T19:14:33.578-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:14:33.578-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:14:33.578-0300 INFO EXECUTED IN: 25 ms.
+2021-07-07T19:14:41.017-0300 INFO ========================================
+2021-07-07T19:14:41.017-0300 INFO Wed Jul 07 19:14:41 ART 2021
+2021-07-07T19:14:41.017-0300 INFO ARGUMENTS: req: {"decade":["D2020"],"rating":null,"minStars":4,"actors":[],"genres":["DRAMA","ACTION"]}, 
+2021-07-07T19:14:41.017-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:14:41.017-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:14:41.017-0300 INFO EXECUTED IN: 19 ms.
+2021-07-07T19:14:45.526-0300 INFO ========================================
+2021-07-07T19:14:45.528-0300 INFO Wed Jul 07 19:14:45 ART 2021
+2021-07-07T19:14:45.528-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":4,"actors":[],"genres":["DRAMA","ACTION"]}, 
+2021-07-07T19:14:45.529-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:14:45.529-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:14:45.529-0300 INFO EXECUTED IN: 13 ms.
+2021-07-07T19:14:50.804-0300 INFO ========================================
+2021-07-07T19:14:50.804-0300 INFO Wed Jul 07 19:14:50 ART 2021
+2021-07-07T19:14:50.804-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":2,"actors":[],"genres":["DRAMA","ACTION"]}, 
+2021-07-07T19:14:50.804-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:14:50.804-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:14:50.804-0300 INFO EXECUTED IN: 12 ms.
+2021-07-07T19:14:55.064-0300 INFO ========================================
+2021-07-07T19:14:55.064-0300 INFO Wed Jul 07 19:14:55 ART 2021
+2021-07-07T19:14:55.064-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":4,"actors":[],"genres":["DRAMA","ACTION"]}, 
+2021-07-07T19:14:55.064-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:14:55.064-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:14:55.064-0300 INFO EXECUTED IN: 5 ms.
+2021-07-07T19:20:31.561-0300 INFO ========================================
+2021-07-07T19:20:31.562-0300 INFO Wed Jul 07 19:20:31 ART 2021
+2021-07-07T19:20:31.563-0300 INFO ARGUMENTS: 
+2021-07-07T19:20:31.563-0300 INFO METHOD: getAllSources
+2021-07-07T19:20:31.563-0300 INFO USER CREDENTIAL: ANONYMOUS
+2021-07-07T19:20:31.564-0300 INFO EXECUTED IN: 16 ms.
+2021-07-07T19:20:53.244-0300 INFO ========================================
+2021-07-07T19:20:53.244-0300 INFO Wed Jul 07 19:20:53 ART 2021
+2021-07-07T19:20:53.244-0300 INFO ARGUMENTS: 
+2021-07-07T19:20:53.244-0300 INFO METHOD: getAllSources
+2021-07-07T19:20:53.244-0300 INFO USER CREDENTIAL: ANONYMOUS
+2021-07-07T19:20:53.244-0300 INFO EXECUTED IN: 13 ms.
+2021-07-07T19:21:02.139-0300 INFO ========================================
+2021-07-07T19:21:02.140-0300 INFO Wed Jul 07 19:21:02 ART 2021
+2021-07-07T19:21:02.144-0300 INFO ARGUMENTS: registerRequest: {"email":"user@unq.edu.ar","password":"1234567","name":"Quique","sourceId":1}, 
+2021-07-07T19:21:02.144-0300 INFO METHOD: saveUser
+2021-07-07T19:21:02.144-0300 INFO USER CREDENTIAL: ANONYMOUS
+2021-07-07T19:21:02.144-0300 INFO EXECUTED IN: 44 ms.
+2021-07-07T19:21:04.765-0300 INFO ========================================
+2021-07-07T19:21:04.766-0300 INFO Wed Jul 07 19:21:04 ART 2021
+2021-07-07T19:21:04.767-0300 INFO ARGUMENTS: authenticationRequest: {"username":"user@unq.edu.ar","password":"1234567"}, 
+2021-07-07T19:21:04.768-0300 INFO METHOD: createAuthenticationToken
+2021-07-07T19:21:04.768-0300 INFO USER CREDENTIAL: ANONYMOUS
+2021-07-07T19:21:04.768-0300 INFO EXECUTED IN: 82 ms.
+2021-07-07T19:21:08.159-0300 INFO ========================================
+2021-07-07T19:21:08.159-0300 INFO Wed Jul 07 19:21:08 ART 2021
+2021-07-07T19:21:08.168-0300 INFO ARGUMENTS: aReview: {"id":null,"titleId":2,"text":"De terror...","textExtended":"De terror de lo mala que es...","rating":1,"spoilerAlert":false,"date":1625696467908,"languageId":3,"type":"NORMAL","user":{"sourceId":2,"userId":"alumno21@alu.unq.edu.ar","userNick":"Jsose","locationId":2}}, 
+2021-07-07T19:21:08.168-0300 INFO METHOD: saveReview
+2021-07-07T19:21:08.168-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:21:08.168-0300 INFO EXECUTED IN: 233 ms.
+2021-07-07T19:21:11.158-0300 INFO ========================================
+2021-07-07T19:21:11.158-0300 INFO Wed Jul 07 19:21:11 ART 2021
+2021-07-07T19:21:11.162-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":4,"actors":[],"genres":["DRAMA","ACTION"]}, 
+2021-07-07T19:21:11.162-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:21:11.162-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:21:11.162-0300 INFO EXECUTED IN: 99 ms.
+2021-07-07T19:21:19.820-0300 INFO ========================================
+2021-07-07T19:21:19.820-0300 INFO Wed Jul 07 19:21:19 ART 2021
+2021-07-07T19:21:19.820-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":[],"genres":["DRAMA","ACTION"]}, 
+2021-07-07T19:21:19.820-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:21:19.820-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:21:19.820-0300 INFO EXECUTED IN: 35 ms.
+2021-07-07T19:21:26.660-0300 INFO ========================================
+2021-07-07T19:21:26.661-0300 INFO Wed Jul 07 19:21:26 ART 2021
+2021-07-07T19:21:26.661-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":[],"genres":[]}, 
+2021-07-07T19:21:26.661-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:21:26.662-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:21:26.662-0300 INFO EXECUTED IN: 42 ms.
+2021-07-07T19:21:32.231-0300 INFO ========================================
+2021-07-07T19:21:32.232-0300 INFO Wed Jul 07 19:21:32 ART 2021
+2021-07-07T19:21:32.232-0300 INFO ARGUMENTS: 
+2021-07-07T19:21:32.233-0300 INFO METHOD: getAllReviews
+2021-07-07T19:21:32.233-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:21:32.233-0300 INFO EXECUTED IN: 113 ms.
+2021-07-07T19:21:59.744-0300 INFO ========================================
+2021-07-07T19:21:59.744-0300 INFO Wed Jul 07 19:21:59 ART 2021
+2021-07-07T19:21:59.744-0300 INFO ARGUMENTS: req: {"decade":["D2020"],"rating":null,"minStars":1,"actors":[],"genres":[]}, 
+2021-07-07T19:21:59.744-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:21:59.744-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:21:59.744-0300 INFO EXECUTED IN: 36 ms.
+2021-07-07T19:22:07.243-0300 INFO ========================================
+2021-07-07T19:22:07.243-0300 INFO Wed Jul 07 19:22:07 ART 2021
+2021-07-07T19:22:07.243-0300 INFO ARGUMENTS: aReview: {"id":null,"titleId":1,"text":"De terror...","textExtended":"De terror de lo mala que es...","rating":1,"spoilerAlert":false,"date":1625696527135,"languageId":3,"type":"NORMAL","user":{"sourceId":2,"userId":"alumno21@alu.unq.edu.ar","userNick":"Jsose","locationId":2}}, 
+2021-07-07T19:22:07.243-0300 INFO METHOD: saveReview
+2021-07-07T19:22:07.243-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:22:07.243-0300 INFO EXECUTED IN: 107 ms.
+2021-07-07T19:22:13.221-0300 INFO ========================================
+2021-07-07T19:22:13.221-0300 INFO Wed Jul 07 19:22:13 ART 2021
+2021-07-07T19:22:13.221-0300 INFO ARGUMENTS: req: {"decade":["D2020"],"rating":null,"minStars":1,"actors":[],"genres":[]}, 
+2021-07-07T19:22:13.221-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:22:13.221-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:22:13.221-0300 INFO EXECUTED IN: 27 ms.
+2021-07-07T19:22:16.877-0300 INFO ========================================
+2021-07-07T19:22:16.877-0300 INFO Wed Jul 07 19:22:16 ART 2021
+2021-07-07T19:22:16.877-0300 INFO ARGUMENTS: req: {"decade":["D2010"],"rating":null,"minStars":1,"actors":[],"genres":[]}, 
+2021-07-07T19:22:16.877-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:22:16.877-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:22:16.877-0300 INFO EXECUTED IN: 12 ms.
+2021-07-07T19:22:25.340-0300 INFO ========================================
+2021-07-07T19:22:25.340-0300 INFO Wed Jul 07 19:22:25 ART 2021
+2021-07-07T19:22:25.340-0300 INFO ARGUMENTS: req: {"decade":["D2010","D2020"],"rating":null,"minStars":1,"actors":[],"genres":[]}, 
+2021-07-07T19:22:25.340-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:22:25.340-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:22:25.340-0300 INFO EXECUTED IN: 56 ms.
+2021-07-07T19:22:35.915-0300 INFO ========================================
+2021-07-07T19:22:35.916-0300 INFO Wed Jul 07 19:22:35 ART 2021
+2021-07-07T19:22:35.916-0300 INFO ARGUMENTS: req: {"decade":["D2010","D2020"],"rating":null,"minStars":1,"actors":[],"genres":["ACTION"]}, 
+2021-07-07T19:22:35.916-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:22:35.916-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:22:35.916-0300 INFO EXECUTED IN: 42 ms.
+2021-07-07T19:22:41.600-0300 INFO ========================================
+2021-07-07T19:22:41.600-0300 INFO Wed Jul 07 19:22:41 ART 2021
+2021-07-07T19:22:41.600-0300 INFO ARGUMENTS: req: {"decade":["D2010","D2020"],"rating":null,"minStars":1,"actors":[],"genres":["ACTION","DRAMA"]}, 
+2021-07-07T19:22:41.600-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:22:41.600-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:22:41.600-0300 INFO EXECUTED IN: 46 ms.
+2021-07-07T19:22:47.706-0300 INFO ========================================
+2021-07-07T19:22:47.706-0300 INFO Wed Jul 07 19:22:47 ART 2021
+2021-07-07T19:22:47.707-0300 INFO ARGUMENTS: req: {"decade":["D2010","D2020"],"rating":null,"minStars":4,"actors":[],"genres":["ACTION","DRAMA"]}, 
+2021-07-07T19:22:47.707-0300 INFO METHOD: getAllTitlesMatching
+2021-07-07T19:22:47.707-0300 INFO USER CREDENTIAL: {user@unq.edu.ar, Netflix-2}
+2021-07-07T19:22:47.707-0300 INFO EXECUTED IN: 33 ms.

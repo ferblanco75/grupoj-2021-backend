@@ -1,5 +1,6 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.webservices;
 
+import ar.edu.unq.desapp.grupoj.backenddesappapi.Aspect.ExcludeFromMetrics;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.TitleService;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.InverseReq;
@@ -25,6 +26,7 @@ public class TitleController {
 
     @GetMapping("/title")
     @Description("Full title list")
+    @ExcludeFromMetrics
     public ResponseEntity<List<TitleDTO>> getAllTitles() {
         return ResponseEntity.ok(titleService.findAll()
                 .stream()
@@ -34,6 +36,7 @@ public class TitleController {
 
     @GetMapping("/title/{id}")
     @Description("Title by Id")
+    @ExcludeFromMetrics
     public ResponseEntity<TitleDTO> getTitleById(@PathVariable(value = "id") Integer id) throws NonExistentTitleException {
         return ResponseEntity
                 .ok(
@@ -43,6 +46,7 @@ public class TitleController {
 
     @PostMapping("/title/inverse")
     @Description("Inverse Search")
+    @ExcludeFromMetrics
     public ResponseEntity<List<TitleDTO>> getAllTitlesMatching(@RequestBody InverseReq req) {
         List<Title> titles = titleService.inverseQuery(req);
         return new ResponseEntity(
@@ -54,6 +58,7 @@ public class TitleController {
 
     @GetMapping("/title/cached/{id}")
     @Description("Cache search")
+    @ExcludeFromMetrics
     public ResponseEntity<TitleDTO> getCachedTitleInfoById(@PathVariable(value = "id") Integer id) throws NonExistentTitleException {
         return ResponseEntity
                 .ok(
