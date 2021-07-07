@@ -13,6 +13,7 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.titlesRepository.Tit
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.InverseReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
@@ -85,7 +86,7 @@ public class    TitleService {
         return titleRepoQ.inverseQuery(req,decades);
     }
 
-    @Cacheable(value = "titleInfo")
+    @CacheEvict(value = "titleInfo",allEntries = true)
     public Title getTitleInfo(Integer id) throws NonExistentTitleException {
         Optional<Title> optionalTitle = titleRepo.findById(id);
         if (optionalTitle.isPresent()){
