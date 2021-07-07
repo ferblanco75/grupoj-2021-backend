@@ -1,5 +1,5 @@
-====== RELEASE NOTE  ==========
 ---------------------------------------------------------------------
+
 TAG 3.0
 ---------------------------------------------------------------------
 NEW FEATURES
@@ -11,3 +11,22 @@ NEW FEATURES
 * Se implementa un servicio performante con Redis
 * El Front permite visualizar las estadisticas de uso
 
+TAG 2.0
+---------------------------------------------------------------------
+NEW FEATURES 
+* Implementacion i18_us_es
+* Implementacion de formatters
+* Implmentacion de Swagger
+* Busqueda de reseñas filtradas por plataforma, spoiler alert, tipo, idioma y pais
+* Reportar y listar reportes de reseñas.
+* Busqueda inversa de titulos mediante atributos de reviews y de titulos
+* Registracion en front end
+* Login en front end con api token
+* consulta de reviews desde front end on api token
+* Se incrementa la cobertura y calidad de codigo
+
+
+KNOWN ISSUES 
+* Las excepciones podrian ser mas claras
+* Al filtrar reviews si no se indica spoilerAlert True o False toma por defecto False
+* Falta mejorar el deploy en Heroku
