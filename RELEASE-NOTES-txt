@@ -1,26 +1,13 @@
 ====== RELEASE NOTE  ==========
 ---------------------------------------------------------------------
-TAG 1.0
+TAG 3.0
 ---------------------------------------------------------------------
 NEW FEATURES
-
-Todos los servicios disponibles permiten:
-* Agregar una review Publica
-* Agregar una review Premium
-* Valorar una review de cualquier tipo
-* Obtener listados auxiliares como:
-        * Sources (Netflix, Amazon Prime Video, etc)
-        * Locations (por pais y ciudad)
-        * Languages (idiomas)
-* Listar las reviews de una pelicula dada
-* Obtener una review por Id
-* Listar todos los titulos
-* Obtener un titulo por Id
-
-
-NOTES
-* Las excepciones podrian ser mas claras.
-
-KNOWN ISSUES
-* tiene problemas en la persistencia. Faltaria un objeto de sesion que permita la persistencia en mas de una entidad.
+* Se implemento un front responsive
+* Se implementaron tests de arquitectura
+* Se implemento la auditoria de Webservices en archivo log separado.
+* Se validan los formularios desde el front y desde el back.
+* Se incluye un servicio de suscripciones para que las plataformas puedan solicitar notificaciones
+* Se implementa un servicio performante con Redis
+* El Front permite visualizar las estadisticas de uso
 
