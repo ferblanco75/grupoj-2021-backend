@@ -7,6 +7,9 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.TitleDTO;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.NonExistentTitleException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.Description;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,28 +24,45 @@ public class TitleController {
     private TitleService titleService;
 
     @GetMapping("/title")
-    public List<TitleDTO> getAll() {
-        return titleService.findAll()
+    @Description("Full title list")
+    public ResponseEntity<List<TitleDTO>> getAllTitles() {
+        return ResponseEntity.ok(titleService.findAll()
                 .stream()
                 .map(i->TitleDTO.fromModel(i))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     @GetMapping("/title/{id}")
-    public TitleDTO getById(@PathVariable(value = "id") Integer id) throws NonExistentTitleException {
-        return TitleDTO.fromModel(titleService.getByTitleId(id));
+    @Description("Title by Id")
+    public ResponseEntity<TitleDTO> getTitleById(@PathVariable(value = "id") Integer id) throws NonExistentTitleException {
+        return ResponseEntity
+                .ok(
+                    TitleDTO.fromModel(titleService.getByTitleId(id))
+                    );
     }
 
     @PostMapping("/title/inverse")
-    public List<TitleDTO> getAllMatching(@RequestBody InverseReq req) {
+    @Description("Inverse Search")
+    public ResponseEntity<List<TitleDTO>> getAllTitlesMatching(@RequestBody InverseReq req) {
         List<Title> titles = titleService.inverseQuery(req);
-
-        return titles.stream()
+        return new ResponseEntity(
+                titles.stream()
                 .map(i -> TitleDTO.fromModel(i))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList())
+                , HttpStatus.OK);
     }
 
-    //return ResponseEntity.ok().body(resultado);
+    @GetMapping("/title/cached/{id}")
+    @Description("Cache search")
+    public ResponseEntity<TitleDTO> getCachedTitleInfoById(@PathVariable(value = "id") Integer id) throws NonExistentTitleException {
+        return ResponseEntity
+                .ok(
+                        TitleDTO.fromModel(titleService.getTitleInfo(id))
+                );
+    }
+
+
+
 }
 
 

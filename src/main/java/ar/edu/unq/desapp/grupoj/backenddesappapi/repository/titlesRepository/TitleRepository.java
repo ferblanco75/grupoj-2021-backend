@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface TitleRepository extends CrudRepository<Title, Integer> {
+
     List<Title> findAll();
     Optional<Title> getByTitleId(Integer id);
 

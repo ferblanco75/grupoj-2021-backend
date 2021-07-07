@@ -4,6 +4,9 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.service.LanguageService;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.LanguageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.Description;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,11 +28,14 @@ public class LanguageController {
     }
 
     @GetMapping("/language")
-    public List<LanguageDTO> getAll() {
-        return service.findAll()
-                .stream()
-                .map(i->LanguageDTO.fromModel(i))
-                .collect(Collectors.toList());
+    @Description("All language list")
+    public ResponseEntity<List<LanguageDTO>> getAllLanguages() {
+        return new ResponseEntity<List<LanguageDTO>>(
+                service.findAll()
+                        .stream()
+                        .map(i->LanguageDTO.fromModel(i))
+                        .collect(Collectors.toList())
+                , HttpStatus.OK);
     }
 
 

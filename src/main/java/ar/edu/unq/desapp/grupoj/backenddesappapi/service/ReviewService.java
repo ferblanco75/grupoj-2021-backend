@@ -1,4 +1,5 @@
 package ar.edu.unq.desapp.grupoj.backenddesappapi.service;
+import ar.edu.unq.desapp.grupoj.backenddesappapi.config.MessagingConfig;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.titles.Title;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.Critic;
@@ -6,6 +7,7 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.model.user.User;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.repository.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.*;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.exceptions.*;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -49,23 +51,26 @@ public class ReviewService {
     @Autowired
     private ReviewCriteriaRepository reviewCriteriaRepository;
 
+    @Autowired
+    private RabbitTemplate template;
+
 
     public ReviewService(){ }
 
     @EventListener
     public void appReady(ApplicationReadyEvent event) {
+/*
+        save(new ReviewDTO(1, "Maso, para un domingo zafa","pochoclera",3,true,language));
+        User user = new User (source,"fernando.test@gmail.com","Fernando",location);
+        user.addReview(new Review(1, "Maso, para un domingo zafa","pochoclera",3,true,language));
+        Language language2 = new Language("English");
 
-        //save(new ReviewDTO());
-        //User user = new User (source,"fernando.test@gmail.com","Fernando",location);
-        //user.addReview(new Review(1, "Maso, para un domingo zafa","pochoclera",3,true,language));
-        /*
         user.addReview(new Review(3, "Muy mala pelicula","No la entendi",1,true,language));
         user.addReview(new Review(5, "Pectacular, alta peli pero muy larga!","Increibles efecto especiales",3,false,language));
-        */
+
         //userRepository.save(user);
 
-/*
-        Language language2 = new Language("English");
+
         Critic critic = new Critic(3,"criticoEspecialista@yahoo.com");
         critic.addReview(new ReviewPremium(4, "La mas pior!","Terriblemente aburrida.",5,true, language2));
         criticRepository.save(critic);
@@ -94,6 +99,7 @@ public class ReviewService {
         reviewRepo.save(review);
 
         titleService.addReviewToTitle(review,aReview.getTitleId());
+        publishReview(aReview);
 
         return review;
     }
@@ -106,7 +112,7 @@ public class ReviewService {
 
 
     @Transactional
-    public Review  savePremium(ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentTitleException, NonExistentLanguageException, UserAlreadyReviewTitle, NonExistentLocationException, NonExistentCriticException {
+    public Review savePremium(ReviewPremiumDTO aReview) throws NonExistentSourceException, NonExistentTitleException, NonExistentLanguageException, UserAlreadyReviewTitle, NonExistentLocationException, NonExistentCriticException {
         Language language= checkLanguage(aReview.languageId);
 
         Critic critic = criticService.getBySourceAndCriticId(aReview.critic.getSourceId(),aReview.critic.getUserId(),aReview.critic.getLocationId());
@@ -117,7 +123,7 @@ public class ReviewService {
         reviewRepo.save(review);
 
         titleService.addReviewToTitle(review,aReview.titleId);
-
+        publishPremiumReview(aReview);
         return review;
 
     }
@@ -156,8 +162,6 @@ public class ReviewService {
     }
 
 
-
-
     private Language checkLanguage(Integer languageId) throws NonExistentLanguageException {
         return languageSrvc.getById(languageId);
     }
@@ -169,5 +173,23 @@ public class ReviewService {
 
     public List<ReviewReport> findAllReports() {
         return reportRepo.findAll();
+    }
+
+
+    public void publishReview (ReviewDTO aReview){
+        try{
+                ReviewNotification notification = new ReviewNotification(aReview, "new review " );
+                template.convertAndSend(MessagingConfig.EXCHANGE, MessagingConfig.ROUTING_KEY, aReview.getTitleId());
+        }catch (Exception e){
+            //nothing to do
+        }
+    }
+    public void publishPremiumReview (ReviewPremiumDTO aReview){
+        try{
+            ReviewPremiumNotification notification = new ReviewPremiumNotification(aReview, "new premium review " );
+            template.convertAndSend(MessagingConfig.EXCHANGE, MessagingConfig.ROUTING_KEY, notification);
+        }catch (Exception e){
+            //nothing to do
+        }
     }
 }

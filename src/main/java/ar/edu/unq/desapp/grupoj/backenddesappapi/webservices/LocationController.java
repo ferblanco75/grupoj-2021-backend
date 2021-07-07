@@ -4,6 +4,9 @@ import ar.edu.unq.desapp.grupoj.backenddesappapi.service.LocationService;
 import ar.edu.unq.desapp.grupoj.backenddesappapi.service.dtos.LocationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.Description;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,12 +23,18 @@ public class LocationController {
     private LocationService service;
 
     @GetMapping("/location")
-    public List<LocationDTO> getAll() {
-        return service.findAll()
-                .stream()
-                .map(i->LocationDTO.fromModel(i))
-                .collect(Collectors.toList());
+    @Description("All Locations list")
+    public ResponseEntity<List<LocationDTO>> getAllLocations() {
+        return new ResponseEntity<List<LocationDTO>>(
+                service.findAll()
+                        .stream()
+                        .map(i->LocationDTO.fromModel(i))
+                        .collect(Collectors.toList())
+                , HttpStatus.OK
+        );
     }
+
+
 
 
 }

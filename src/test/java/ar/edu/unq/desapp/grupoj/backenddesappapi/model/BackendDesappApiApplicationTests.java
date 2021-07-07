@@ -84,7 +84,7 @@ class BackendDesappApiApplicationTests {
 
 	@Test
 	void userServiceTest1() throws NonExistentLocationException, NonExistentSourceException {
-		Source source = Mockito.mock(Source.class);
+		;Source source = Mockito.mock(Source.class);
 		Location location = Mockito.mock(Location.class);
 		User user = new User(source,"testUser","test1",location);
 		User retrievedUser= userSrvc.getBySourceAndUserIdAndNickId(1,"testUser","test1",1);

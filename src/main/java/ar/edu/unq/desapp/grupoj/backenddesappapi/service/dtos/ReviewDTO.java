@@ -10,6 +10,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.Instant;
 import java.util.Date;
 
@@ -18,19 +22,23 @@ import java.util.Date;
 public class ReviewDTO {
 
     private Integer id;
+    @NotNull(message = "Title Id cannot be null")
     private Integer titleId;
+    @NotBlank(message = "Text cannot be null")
     private String text;
     private String textExtended;
+    @Min(value=0,message = "Rating must be between 0..5")
+    @Max(value=5,message="Rating must be between 0..5")
     private Integer rating;
     private Boolean spoilerAlert=false;
     private Date date=Date.from(Instant.now());
+
+    @NotNull(message = "Language Id must be valid")
     private Integer languageId;
     private ReviewType type=ReviewType.NORMAL;
 
+    @NotNull(message="User must be valid")
     private UserDTO user;
-
-    //TODO Se deberia ir
-    //public Language language;
 
     public ReviewDTO(Integer titleId,String text, String textExtended, Integer rating, Boolean spoilerAlert,Integer languageId, UserDTO user){
         this.titleId=titleId;

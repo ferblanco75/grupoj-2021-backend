@@ -1,4 +1,16 @@
 ---------------------------------------------------------------------
+
+TAG 3.0
+---------------------------------------------------------------------
+NEW FEATURES
+* Se implemento un front responsive
+* Se implementaron tests de arquitectura
+* Se implemento la auditoria de Webservices en archivo log separado.
+* Se validan los formularios desde el front y desde el back.
+* Se incluye un servicio de suscripciones para que las plataformas puedan solicitar notificaciones
+* Se implementa un servicio performante con Redis
+* El Front permite visualizar las estadisticas de uso
+
 TAG 2.0
 ---------------------------------------------------------------------
 NEW FEATURES 
@@ -12,6 +24,7 @@ NEW FEATURES
 * Login en front end con api token
 * consulta de reviews desde front end on api token
 * Se incrementa la cobertura y calidad de codigo
+
 
 KNOWN ISSUES 
 * Las excepciones podrian ser mas claras
